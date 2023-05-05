@@ -1,0 +1,35 @@
+{
+  "name": "arcenciel",
+  "version": "1.0.0",
+  "description": "Gestor de hoteles",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IN6AV-ThePA-s/AEC.git"
+  },
+  "author": "ThePAs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IN6AV-ThePA-s/AEC/issues"
+  },
+  "homepage": "https://github.com/IN6AV-ThePA-s/AEC#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "connect-multiparty": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "helmet": "^6.1.5",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.1.0",
+    "morgan": "^1.10.0",
+    "sweetalert2": "^11.7.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
