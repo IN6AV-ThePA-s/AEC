@@ -3,8 +3,10 @@
 const User = require('./user.model')
 const { encrypt, validateData, check, sensitiveData } = require('../utils/validate')
 const { createToken } = require('../services/jwt')
+const fs = require('fs')
+const path = require('path')
 
-const ROLES = { admin: 'ADMIN', master: 'MASTER', client: 'CLIENT' }
+const ROLES = Object.freeze({ admin: 'ADMIN', master: 'MASTER', client: 'CLIENT' })
 
 exports.test = (req, res) => {
     res.send({ message: 'Test users' })
@@ -128,7 +130,7 @@ exports.getUser = async(req, res) => {
         let user = await User.findOne({ _id: id })
         if(!user) return res.status(404).send({ message: 'User not found :(' })
 
-        let data = sensitiveData(user)
+        let data = sensitiveData([user])
 
         return res.send({ message: 'User found!', data })
 
@@ -231,7 +233,7 @@ exports.save = async(req, res) => {
         data.password = await encrypt(data.password)
         data.role = data.role.toUpperCase()
 
-        let user = new User()
+        let user = new User(data)
         await user.save()
 
         return res.send({ message: 'Account created successfully!', user: user })
@@ -243,7 +245,7 @@ exports.save = async(req, res) => {
 }
 
 /* -----UPDATE ACCOUNT ----- */
-exports.update = async(req, res) => {
+exports.updateUser = async(req, res) => {
     try {
         let id = req.params.id
         let data = req.body
@@ -253,6 +255,9 @@ exports.update = async(req, res) => {
         if (data.password) return res.status(401).send({ message: 'Cannot update password!' })
         if (user.role === ROLES.master) return res.status(401).send({ message: 'Cannot update "MASTER"' })
 
+        data.role = data.role.toUpperCase()
+        if (data.role !== ROLES.admin && data.role !== ROLES.client) return res.status(400).send({ message: 'Role not authorized :(' })
+        
         let upUser = await User.findOneAndUpdate(
             { _id: id },
             data,
@@ -283,5 +288,64 @@ exports.delUser = async(req, res) => {
     } catch (err) {
         console.error(err)
         return res.status(500).send({ message: 'Error while deleting account :(', error: err })
+    }
+}
+
+/* -----UPLOAD PHOTO ----- */
+exports.uploadImg = async(req, res) => {
+    try {
+        const user = req.user
+        const id = req.params.id
+        const alreadyImg = await User.findOne({ _id: id })
+        let pathFile = './src/uploads/users/'
+
+        if (alreadyImg.photo) fs.unlinkSync(`${pathFile}${alreadyImg.photo}`)
+        if (!req.files.image || !req.files.image.type) return res.status(400).send({ message: 'Have not sent an image :(' })
+
+        const filePath = req.files.image.path
+
+        const fileSplit = filePath.split('\\')
+        const fileName = fileSplit[3]
+
+        const extension = fileName.split('\.')
+        const fileExt = extension[1]
+
+        if (
+            fileExt !== 'png' &&
+            fileExt !== 'jpg' &&
+            fileExt !== 'jpeg'
+        ) {
+            fs.unlinkSync(filePath)
+            return res.status(400).send({ message: 'File extension not admited' })
+        } 
+
+        const upUser = await User.findOneAndUpdate(
+            { _id: id },
+            { photo: fileName },
+            { new: true }
+        )
+        if (!upUser) return res.status(404).send({ message: 'User not found!' })
+        return res.send({ message: 'Photo added successfully' })
+        
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send({ message: 'Error while uploading img :(', error: err })
+    }
+}
+
+/* -----GET PHOTO ----- */
+exports.getImg = async(req, res) => {
+    try {
+        const fileName = req.params.file
+        const pathFile = `./src/uploads/users/${fileName}`
+        const img = fs.existsSync(pathFile)
+
+        if (!img) return res.status(404).send({ message: 'Image not found :(' })
+
+        return res.sendFile(path.resolve(pathFile))
+
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send({ message: 'Error getting img :(', error: err })
     }
 }
