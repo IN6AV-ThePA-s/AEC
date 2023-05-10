@@ -36,7 +36,7 @@ exports.validateData = (data) => {
 
 exports.sensitiveData = (data) => {
     let list = []
-
+    
     for (let a of data) {
         let payload = {
             id: a._id,
