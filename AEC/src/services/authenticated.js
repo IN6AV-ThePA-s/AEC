@@ -21,14 +21,24 @@ exports.ensureAdvance = (req, res, next) => {
     next()
 }
 
-exports.isMaster = (req, res, next) => {
+exports.isAdmin = (req, res, next) => {
     try {
         let user = req.user
-        if (user.role !== 'MASTER') return res.status(404).send({ message: 'Unauthorized :(' })
-
+        if(user.role !== 'ADMIN') return res.status(403).send({message: 'Unauthorized user :('})
         next()
     } catch (err) {
         console.error(err)
-        return res.status(500).send({ message: 'Unauthorized :(' })
+        return res.status(500).send({message: 'Error, unauthorized user :(', error: err})
+    }
+}
+
+exports.isMaster = (req, res, next) => {
+    try {
+        let user = req.user
+        if(user.role !== 'MASTER' && user.role !== 'ADMIN') return res.status(403).send({message: 'Unauthorized user'})
+        next()
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send({message: 'Error, unauthorized user :(', error: err, user: `${req.user.role}`})
     }
 }
