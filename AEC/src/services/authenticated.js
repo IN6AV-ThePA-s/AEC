@@ -20,3 +20,15 @@ exports.ensureAdvance = (req, res, next) => {
     req.user = payload
     next()
 }
+
+exports.isMaster = (req, res, next) => {
+    try {
+        let user = req.user
+        if (user.role !== 'MASTER') return res.status(404).send({ message: 'Unauthorized :(' })
+
+        next()
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send({ message: 'Unauthorized :(' })
+    }
+}
