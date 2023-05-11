@@ -1,8 +1,9 @@
 'use strict'
 
 const api = require('express').Router()
-const { test } = require('./reservation.controller')
+const reservationController = require('./reservation.controller')
 
-api.get('/test', test)
+api.get('/test', reservationController.test)
+api.post('/add',reservationController.addReservation)
 
 module.exports = api

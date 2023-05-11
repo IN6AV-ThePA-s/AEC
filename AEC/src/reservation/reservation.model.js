@@ -1,32 +1,34 @@
 'use strict'
 
+//const autoIncrement = require('mongoose-auto-increment')
 const mongoose = require('mongoose')
 
 const reservationSchema = mongoose.Schema({
     numberRes:{
-        type:String,
-        required:true
+        type:Number,
+        unique: true 
     },
     client:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',
-        required:ture
+        required:true
     },
-    room:{
+    room:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Room',
         required:true
-    },
-    additionalServices:{
-        type:[mongoose.Schema.Types,ObjectId],
+    }],
+    additionalServices:[{
+        type:mongoose.Schema.Types.ObjectId,
         ref:'Service'
-    },
-    eventos:{
-        type:mongoose.Schema.Types.ObjectId
-    },
+    }],
+    events:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Event'
+    }],
     total:{
         type:Number,
-        required:ture
+        required:true
     },
     status:{
         type:String,
@@ -39,4 +41,6 @@ const reservationSchema = mongoose.Schema({
     versionKey:false    
 })
 
+
 module.exports = mongoose.model('Reservation',reservationSchema)
+////reservationSchema.plugin(autoIncrement.plugin, { model: 'Reservation', field: 'numberRes' });

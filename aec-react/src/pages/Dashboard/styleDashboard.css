@@ -1,0 +1,122 @@
+@font-face {
+    font-family: Azonix;
+    src: url('../../fonts/Azonix.otf');
+}
+
+@font-face {
+    font-family: Coolvetica;
+    src: url('../../fonts/coolvetica rg.otf');
+}
+
+@font-face {
+    font-family: Berlin;
+    src: url('../../fonts/Berlin Email 2.ttf');
+}
+
+@font-face {
+    font-family: Bebas;
+    src: url('../../fonts/BebasNeue-Regular.otf');
+}
+
+@font-face {
+    font-family: Lemon;
+    src: url('../../fonts/LEMONMILK-Regular.otf');
+}
+
+@font-face {
+    font-family: Typo;
+    src: url('../../fonts/TypoSlab Irregular Demo.otf');
+}
+
+/* BOTONES GLOBALES */
+
+.btn-danger {
+    transition: 0.2s;
+    color: #fff;
+    background-color: #ff3e1d;
+    border-color: #ff3e1d;
+    box-shadow: 0 0.125rem 0.25rem 0 rgba(255, 62, 29, 0.4);
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #e6381a;
+    border-color: #e6381a;
+    transform: translateY(-1px);
+}
+
+.btn-check:active {
+    color: #fff;
+    background-color: #e6381a;
+    border-color: #e6381a;
+    transform: translateY(0);
+    box-shadow: none;
+    transition: 1ms;
+}
+
+.btn-primary {
+    transition: 0.2s;
+    color: #fff;
+    background-color: #011684;
+    border-color: #011684;
+    box-shadow: 0 0.125rem 0.25rem 0 rgba(0, 18, 108, 0.4);
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #01105c;
+    border-color: #01105c;
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    color: #fff;
+    background-color: #001a9e;
+    border-color: #001a9e;
+    transform: translateY(0);
+    box-shadow: none;
+    transition: 1ms;
+}
+
+/* ------------------------------------- */
+
+.dashTitle {
+    font-family: Azonix;
+    font-size: calc(2vw + 2vh);
+}
+
+.textAec {
+    color: #c7c6c9;
+    transition: 0.2s;
+}
+
+.textAec:hover {
+    color: #607484;
+
+}
+
+.textMenu {
+    font-family: Coolvetica;
+
+}
+
+.textOption {
+    color: white;
+}
+
+.textAdd {
+    color: #71dd37;
+}
+
+.textUpdate {
+    color: #ffab00;
+}
+
+
+.bgDash {
+    background-color: #04135d;
+}
+
+/* *{
+    color: white;
+} */

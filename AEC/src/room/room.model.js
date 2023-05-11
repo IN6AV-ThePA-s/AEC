@@ -3,7 +3,6 @@
 const mongoose = require('mongoose');
 
 const roomSchema = mongoose.Schema({
-
     cod: {
         type: String,
         required: true,
@@ -24,7 +23,7 @@ const roomSchema = mongoose.Schema({
         required: true
     },
     beds: {
-        type: [{
+        type: {
             name: {
                 type: String,
                 required: true
@@ -37,7 +36,7 @@ const roomSchema = mongoose.Schema({
                 type: String,
                 required: true
             }
-        }],
+        },
         required: true
     },
     hotel: {
