@@ -1,0 +1,49 @@
+.bodyTableEvent {
+    height: 100%;
+}
+
+.tableEvent .tdTE,
+.tableEvent .thTE {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.h1TE{
+    font-family: Azonix;
+}
+
+.thTE{
+    font-family: Lemon;
+}
+
+.tdTE{
+    font-family: Coolvetica;
+}
+
+.tdTEB{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.tHeadTableEvent .thTE {
+    color: #fff;
+}
+
+.card {
+    border-radius: .5rem;
+}
+
+.table-scroll {
+    border-radius: .5rem;
+}
+
+.table-scroll .tableEvent .tHeadTableEvent .thTE {
+    font-size: 1.25rem;
+}
+
+.tHeadTableEvent {
+    top: 0;
+    position: sticky;
+}

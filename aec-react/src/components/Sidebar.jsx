@@ -1,18 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import photo from '../assets/foto.png'
+import logo from '../assets/logo.png'
 
 export const Sidebar = () => {
     return (
         <>
             <div className="sticky-top d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
-
+            
                 <div className='text-center align-items-center ps-auto'>
+                
                     <h1 className="textAec d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none">
-                        <span className="dashTitle d-flex text-center d-sm-inline">Aec</span> {/* d-none */}
+                    
+                        <span className="dashTitle d-flex text-center d-sm-inline">Aec </span> {/* d-none */}
                     </h1>
                 </div>
-                
+
                 <div>
                     <ul className="textMenu nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
 
@@ -109,20 +112,21 @@ export const Sidebar = () => {
                                 <i className="textOption fs-3 bi bi-calendar4-event"></i> <span className="textOption ms-1 d-none d-sm-inline">Event</span>
                             </a>
                             <ul className="collapse nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">
+                                <li>
+
+                                    <Link to='eventsPage' className="nav-link px-0">
+                                        <i className="textUpdate fs-6 bi bi-house-door"></i> <span className="textUpdate ms-1 d-none d-sm-inline">Principal</span>
+                                    </Link>
+
+                                </li>
                                 <li className="w-100">
 
-                                    <Link href="#" className="nav-link px-0">
+                                    <Link to='addEvent' className="nav-link px-0">
                                         <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
                                     </Link>
 
                                 </li>
-                                <li>
 
-                                    <Link href="#" className="nav-link px-0">
-                                        <i className="textUpdate fs-6 bi bi-pencil"></i> <span className="textUpdate ms-1 d-none d-sm-inline">Update</span>
-                                    </Link>
-
-                                </li>
                             </ul>
                         </li>
 
