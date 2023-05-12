@@ -1,0 +1,18 @@
+.titlesHotelPage{
+    font-family: Cereal;
+}
+
+.textNormalHotel{
+    font-family: CerealLight;
+}
+
+.textNight{
+    font-family: Coolvetica;
+    font-size: 1.2rem;
+}
+
+.listInformationHotel{
+    list-style-type:none;
+    column-count: 2;
+    /* text-align: justify; */
+}
