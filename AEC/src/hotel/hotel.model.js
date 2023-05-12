@@ -22,8 +22,8 @@ const hotelSchema = mongoose.Schema({
         required: true,
         lowercase: true
     },
-    photo: {
-        type: String
+    photos: {
+        type: [String]
     },
     admin: {
         type: mongoose.Schema.Types.ObjectId,

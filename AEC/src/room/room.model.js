@@ -39,6 +39,19 @@ const roomSchema = mongoose.Schema({
         },
         required: true
     },
+    services: {
+        type: [{
+            service: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Service',
+                required: true
+            }
+        }],
+        required: true
+    },
+    photos: {
+        type: [String]
+    },
     hotel: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Hotel',
