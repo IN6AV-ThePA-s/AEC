@@ -1,0 +1,27 @@
+.bodySettings {
+    background: rgb(99, 39, 120);
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #011684;
+}
+
+.titleProfile{
+    font-family: Lemon;
+}
+
+.textSUser{
+    font-size: 2rem;
+    font-family: Typo;
+}
+
+.textSEmail{
+    font-family: Bebas;
+    letter-spacing: 1.5px;
+}
+
+.labels {
+    font-size: 1.2rem;
+    font-family: Coolvetica;
+}
