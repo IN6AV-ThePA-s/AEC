@@ -215,7 +215,7 @@ export const Sidebar = () => {
                                 <i className="textOption fs-3 bi bi-journal-text"></i> <span className="textOption d-none d-sm-inline">Bill</span>
                             </a>
                             <ul className="collapse nav flex-column ms-1" id="submenu8" data-bs-parent="#menu">
-                                <li className="w-100">
+                                <li className="container max-width">
 
                                     <Link href="#" className="nav-link px-0">
                                         <div className='container bg-light p-2 rounded-4 shadow'>
@@ -225,7 +225,7 @@ export const Sidebar = () => {
                                     </Link>
 
                                 </li>
-                                <li>
+                                <li className='container max-width'>
 
                                     <Link href="#" className="nav-link px-0">
                                         <div className='container bg-light p-2 rounded-4 shadow'>
