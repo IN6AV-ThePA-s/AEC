@@ -17,10 +17,10 @@ export const Sidebar = () => {
                     <ul className="textMenu nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
 
                         <li>
-                            <a href="#submenu1" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
+                            <a href="#submenu1" data-bs-toggle="collapse"  className="nav-link px-0 align-middle">
                                 <i className="textOption align-middle fs-3 bi bi-person-circle"></i> <span className="textOption align-middle d-none d-sm-inline">User</span>
                             </a>
-                            <ul className="collapse nav col-sm-8 ms-1" id="submenu1" data-bs-parent="#menu">
+                            <ul className="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                 <li className='container max-width'>
 
                                     <Link href="#" className="nav-link px-0">
@@ -47,7 +47,7 @@ export const Sidebar = () => {
                             <a href="#submenu2" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
                                 <i className="textOption fs-3 bi bi-building-fill-gear"></i> <span className="textOption d-none d-sm-inline">Hotel</span>
                             </a>
-                            <ul className="collapse nav col-sm-8 ms-1" id="submenu2" data-bs-parent="#menu">
+                            <ul className="collapse nav flex-column" id="submenu2" data-bs-parent="#menu">
                                 <li className='container max-width'>
 
                                     <Link href="#" className="nav-link px-0">
@@ -74,7 +74,7 @@ export const Sidebar = () => {
                             <a href="#submenu3" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
                                 <i className="textOption fs-3 bi bi-briefcase"></i> <span className="textOption d-none d-sm-inline">Service</span>
                             </a>
-                            <ul className="collapse nav col-sm-8 ms-1" id="submenu3" data-bs-parent="#menu">
+                            <ul className="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                                 <li className='container max-width'>
 
                                     <Link href="#" className="nav-link px-0">
@@ -101,7 +101,7 @@ export const Sidebar = () => {
                             <a href="#submenu4" data-bs-toggle="collapse" className="nav-link px-0 align-middle ">
                                 <i className="textOption fs-3 bi bi-moon-stars"></i> <span className="textOption d-none d-sm-inline">Room</span>
                             </a>
-                            <ul className="collapse nav col-sm-8 ms-1" id="submenu4" data-bs-parent="#menu">
+                            <ul className="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
                                 <li className='container max-width'>
 
                                     <Link href="#" className="nav-link px-0">
@@ -128,7 +128,7 @@ export const Sidebar = () => {
                             <a href="#submenu5" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
                                 <i className="textOption fs-3 bi bi-calendar4-event"></i> <span className="textOption d-none d-sm-inline">Event</span>
                             </a>
-                            <ul className="collapse nav col-sm-8 ms-1" id="submenu5" data-bs-parent="#menu">
+                            <ul className="collapse nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">
                                 <li className='container max-width'>
 
                                     <Link href="#" className="nav-link px-0">
@@ -155,7 +155,7 @@ export const Sidebar = () => {
                             <a href="#submenu6" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
                                 <i className="textOption fs-3 bi bi-cart3"></i> <span className="textOption d-none d-sm-inline">Consumables</span>
                             </a>
-                            <ul className="collapse nav col-sm-8 ms-1" id="submenu6" data-bs-parent="#menu">
+                            <ul className="collapse nav flex-column ms-1" id="submenu6" data-bs-parent="#menu">
                                 <li className='container max-width'>
 
                                     <Link href="#" className="nav-link px-0">
@@ -182,7 +182,7 @@ export const Sidebar = () => {
                             <a href="#submenu7" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
                                 <i className="textOption fs-3 bi bi-telephone-outbound"></i> <span className="textOption d-none d-sm-inline">Reservation</span>
                             </a>
-                            <ul className="collapse nav col-sm-8 ms-1" id="submenu7" data-bs-parent="#menu">
+                            <ul className="collapse nav flex-column ms-1" id="submenu7" data-bs-parent="#menu">
                                 <li className='container max-width'>
 
                                     <Link href="#" className="nav-link px-0">
@@ -211,7 +211,7 @@ export const Sidebar = () => {
                             <a href="#submenu8" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
                                 <i className="textOption fs-3 bi bi-journal-text"></i> <span className="textOption d-none d-sm-inline">Bill</span>
                             </a>
-                            <ul className="collapse nav col-sm-8 ms-1" id="submenu8" data-bs-parent="#menu">
+                            <ul className="collapse nav flex-column ms-1" id="submenu8" data-bs-parent="#menu">
                                 <li className="w-100">
 
                                     <Link href="#" className="nav-link px-0">
