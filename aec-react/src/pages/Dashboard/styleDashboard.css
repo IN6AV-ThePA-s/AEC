@@ -28,6 +28,22 @@
     src: url('../../fonts/TypoSlab Irregular Demo.otf');
 }
 
+@font-face {
+    font-family: Avenue;
+    src: url('../../fonts//Avenue.otf');
+}
+
+@font-face {
+    font-family: Cereal;
+    src: url('../../fonts/Cereal.otf');
+}
+
+@font-face {
+    font-family: CerealLight;
+    src: url('../../fonts/CerealLight.otf');
+}
+
+
 /* BOTONES GLOBALES */
 
 .btn-success {

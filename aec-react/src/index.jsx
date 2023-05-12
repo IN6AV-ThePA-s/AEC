@@ -7,6 +7,7 @@ import { Settings } from './pages/Settings/Settings'
 import { EventsPage } from './pages/Events/EventsPage'
 import { UpdateEvent } from './pages/Events/UpdateEvent'
 import { AddEvent } from './pages/Events/AddEvent'
+import { HotelPage } from './pages/Hotel/HotelPage'
 
 export const AuthContext = createContext();
 
@@ -43,6 +44,10 @@ export const Index = () => {
                         {
                             path: 'updateEvent/:id',
                             element: <UpdateEvent/>
+                        },
+                        {
+                            path: 'hotelPage',
+                            element: <HotelPage/>
                         }
                     ]
                 }

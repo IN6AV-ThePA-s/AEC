@@ -12,7 +12,7 @@ export const Sidebar = () => {
                 
                     <h1 className="textAec d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none">
                     
-                        <span className="dashTitle d-flex text-center d-sm-inline">Aec </span> {/* d-none */}
+                        <span className="dashTitle d-flex text-center d-sm-inline">AEC </span> {/* d-none */}
                     </h1>
                 </div>
 
