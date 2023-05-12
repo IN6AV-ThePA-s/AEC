@@ -3,7 +3,9 @@
 const Room = require("./room.model");
 const Hotel = require("../hotel/hotel.model");
 const Reservation = require('../reservation/reservation.model');
-const { validateData } = require("../utils/validate");
+const { validateData, isImg } = require("../utils/validate");
+const fs = require('fs');
+const path = require('path');
 
 /* ----- ADD ----- */
 exports.add = async(req, res) => {
@@ -16,7 +18,7 @@ exports.add = async(req, res) => {
             return res.status(418).send({ message: `Hotel not found` });
         const room = new Room(data);
         await room.save();
-        return res.send({ message: `The room has been added` })
+        return res.send({ message: `The room has been added`, RI: room._id });
     } catch (err) {
         console.error(err);
         return res.status(500).send({ message: `Error adding room`, error: err.message });
@@ -95,6 +97,78 @@ exports.upda = async(req, res) => {
     } catch (err) {
         console.error(err);
         return res.status(500).send({ message: `Error updating room` });
+    }
+}
+
+/* ----- UPLOAD IMGs ----- */
+exports.uploadImgs = async(req, res) => {
+    try {
+        if (!req.files.images)
+            return res.status(400).send({ message: 'Have not sent an images' });
+        const imgs = req.files.images;
+        let names = [];
+        const roomId = req.params.id;
+        const url = './src/uploads/hotels/';
+        const room = await Room.findOne({ _id: roomId });
+        if (room) {
+            if (room.photos) {
+                for (let photo of room.photos)
+                    fs.unlinkSync(`${url}${photo}`);
+            }
+            let fP, fN, fE, fS, e;
+            if (Array.isArray(imgs)) {
+                for (let img of imgs) {
+                    fP = img.path;
+                    fS = fP.split('\\');
+                    fN = fS[3];
+                    e = fN.split('\.');
+                    fE = e[3];
+                    if (isImg(e))
+                        fs.unlinkSync(fP);
+                    names.push(fN);
+                }
+            } else {
+                fP = imgs.path;
+                fS = fP.split('\\');
+                fN = fS[3];
+                e = fN.split('\.');
+                fE = e[3];
+                if (isImg(e))
+                    fs.unlinkSync(fP);
+                names.push(fN);
+            }
+            await Room.updateOne({ _id: roomId }, { photos: names });
+            return res.send({ message: `Photos added successfully` });
+        } else {
+            if (Array.isArray(imgs)) {
+                for (let img of imgs) {
+                    const fp = img.path;
+                    fs.unlinkSync(fp);
+                }
+            } else {
+                const fp = imgs.path;
+                fs.unlinkSync(fp);
+            }
+            return res.status(404).send({ message: `Room not found` });
+        }
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: `Error uploading imgs` });
+    }
+}
+
+/* ----- GET PHOTO ----- */
+exports.getImg = async(req, res) => {
+    try {
+        const { file } = req.params;
+        const url = `./src/uploads/rooms/${file}`
+        const img = fs.existsSync(url)
+        if (!img)
+            return res.status(404).send({ message: 'Image not found' });
+        return res.sendFile(path.resolve(url));
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send({ message: 'Error getting img', error: err })
     }
 }
 

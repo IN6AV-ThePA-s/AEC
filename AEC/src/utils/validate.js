@@ -21,7 +21,8 @@ exports.check = async(pass, hash) => {
 }
 
 exports.validateData = (data) => {
-    let keys = Object.keys(data), msg = ''
+    let keys = Object.keys(data),
+        msg = ''
 
     for (let key of keys) {
         if (data[key] !== null &&
@@ -36,7 +37,7 @@ exports.validateData = (data) => {
 
 exports.sensitiveData = (data) => {
     let list = []
-    
+
     for (let a of data) {
         let payload = {
             id: a._id,
@@ -51,4 +52,12 @@ exports.sensitiveData = (data) => {
     }
 
     return list
+}
+
+exports.isImg = (extension) => {
+    if (
+        extension !== 'png' &&
+        extension !== 'jpg' &&
+        extension !== 'jpeg'
+    ) return false
 }
