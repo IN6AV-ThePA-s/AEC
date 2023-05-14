@@ -6,12 +6,19 @@ import room1 from '../../assets/room1.jpg'
 import room2 from '../../assets/room2.jpg'
 import room3 from '../../assets/room3.jpg'
 import '../../pages/Hotel/styleCardHotelPage.css'
+import { ModalUpdateRoom } from '../../components/ModalUpdateRoom'
 import { Link } from 'react-router-dom'
+import { CardRoomPage } from '../../components/CardRoomPage'
+import { CardHotelServices } from '../../components/CardHotelServices'
+import { CardHotelEvents } from '../../components/CardHotelEvents'
+import { ModalAddRoom } from '../../components/ModalAddRoom'
+import { ModalCheckServices } from '../../components/ModalCheckServices'
+import { ModalAddService } from '../../components/ModalAddService'
+import { ModalAddEvent } from '../../components/ModalAddEvent'
+import { ModalAddServiceHotel } from '../../components/ModalAddServiceHotel'
 
 export const CheckHotelPage = () => {
     return (
-
-
 
         <div className="main-content">
             <div className="container">
@@ -30,19 +37,19 @@ export const CheckHotelPage = () => {
 
                                 <div className=" align-items-center mb-2">
 
-                                    <h5 className=" mr-2">Name</h5>
+                                    <h5 className="mr-2 mt-3">Name</h5>
                                     <input type="text" className="form-control" />
 
-                                    <h5 className=" mr-2">Address</h5>
+                                    <h5 className="mr-2 mt-3">Address</h5>
                                     <input type="text" className="form-control" />
 
-                                    <h5 className=" mr-2">Phone</h5>
+                                    <h5 className="mr-2 mt-3">Phone</h5>
                                     <input type="text" className="form-control" />
 
-                                    <h5 className=" mr-2">Email</h5>
+                                    <h5 className="mr-2 mt-3">Email</h5>
                                     <input type="text" className="form-control" />
 
-                                    <h5 className=" mr-2">Photos</h5>
+                                    <h5 className="mr-2 mt-3">Photos</h5>
                                     <div className='d-flex'>
 
                                         <input type="file" className="form-control" />
@@ -53,8 +60,8 @@ export const CheckHotelPage = () => {
 
                                 </div>
 
-                                <button className="btn btn-warning me-1 mt-4">Update Hotel</button>
-                                <button className="btn btn-danger me-1 mt-4">Delete Hotel</button>
+                                <button className="btn btn-warning me-1 mt-4 bi bi-pencil"> Update</button>
+                                <button className="btn btn-danger me-1 mt-4 bi bi-trash"> Delete</button>
 
                             </div>
                         </div>
@@ -66,39 +73,17 @@ export const CheckHotelPage = () => {
                             <div className="hotel-card_info p-4">
                                 <h1 className='text-center'>Services</h1>
 
-                                <div className=" align-items-center mb-2">
+                                <div className=" align-items-center">
 
-                                    <div className="d-flex flex-column text-center p-3">
+                                    <div className="d-flex flex-column text-center mb-1">
 
+                                        <ModalAddServiceHotel/>
 
-                                        <div className="card mb-3">
-                                            <div className="row g-0">
-                                                <div className="">
-                                                    <div className="card-body">
-                                                        <h3 className='text-center'>Name</h3>
-                                                        <h4 className='text-center'>Price</h4>
-                                                        <p className="card-text textNormalHotel">Descripcion de lo que trata el servicio asd asdas dasdas</p>
-                                                        <button className="btn btn-warning bi bi-pencil me-1" type="button"> Update</button>
-                                                        <button className="btn btn-danger bi bi-trash ms-1" type="button"> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <CardHotelServices />
+                                        <CardHotelServices />
 
-                                        <div className="card mb-3">
-                                            <div className="row g-0">
-                                                <div className="">
-                                                    <div className="card-body">
-                                                        <h3 className='text-center'>Name</h3>
-                                                        <h4 className='text-center'>Price</h4>
-                                                        <p className="card-text textNormalHotel">Descripcion de lo que trata el servicio asd asdas dasdas</p>
-                                                        <button className="btn btn-warning bi bi-pencil me-1" type="button"> Update</button>
-                                                        <button className="btn btn-danger bi bi-trash ms-1" type="button"> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button className="btn btn-success me-1" type="button">Add Service</button>
+                                        <button className="btn btn-success me-1" type="button" data-bs-toggle="modal" data-bs-target="#modalAddServiceHotel">Add Service</button>
+
                                     </div>
 
                                 </div>
@@ -117,90 +102,11 @@ export const CheckHotelPage = () => {
 
                                     <div className="d-flex flex-column text-center p-3">
 
+                                        <ModalAddEvent/>
+                                        <CardHotelEvents />
 
-                                        <div className="card mb-3">
-                                            <div className="row g-0">
-                                                <div className="">
-                                                    <div className="card-body">
-                                                        <h3 className='text-center'>Name</h3>
-                                                        <h5 className='text-center'>Type</h5>
-                                                        <h5 className='text-center'>Capacity Persons</h5>
-                                                        <h5 className='text-center'>Price</h5>
-                                                        <p className="card-text textNormalHotel">Descripcion de lo que trata el evento asd asdas dasdas</p>
-                                                        <button className="btn btn-warning bi bi-pencil me-1" type="button"> Update</button>
-                                                        <button className="btn btn-danger bi bi-trash ms-1" type="button"> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <button className="btn btn-success me-1" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEvent">Add Event</button>
 
-                                        <div className="card mb-3">
-                                            <div className="row g-0">
-                                                <div className="">
-                                                    <div className="card-body">
-                                                        <h3 className='text-center'>Name</h3>
-                                                        <h5 className='text-center'>Type</h5>
-                                                        <h5 className='text-center'>Capacity Persons</h5>
-                                                        <h5 className='text-center'>Price</h5>
-                                                        <p className="card-text textNormalHotel">Descripcion de lo que trata el evento asd asdas dasdas</p>
-                                                        <button className="btn btn-warning bi bi-pencil me-1" type="button"> Update</button>
-                                                        <button className="btn btn-danger bi bi-trash ms-1" type="button"> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button className="btn btn-success me-1" type="button">Add Event</button>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="row justify-content-center mt-4">
-                    <div className="col-sm-9 col-md-9 col-lg-9">
-                        <div className="hotel-card bg-white rounded-lg shadow-lg overflow-hidden d-block d-lg-flex">
-                            <div className="hotel-card_info p-4">
-                                <h1 className='text-center'>Events</h1>
-
-                                <div className=" align-items-center mb-2">
-
-                                    <div className="d-flex flex-column text-center p-3">
-
-
-                                        <div className="card mb-3">
-                                            <div className="row g-0">
-                                                <div className="">
-                                                    <div className="card-body">
-                                                        <h3 className='text-center'>Name</h3>
-                                                        <h5 className='text-center'>Type</h5>
-                                                        <h5 className='text-center'>Capacity Persons</h5>
-                                                        <h5 className='text-center'>Price</h5>
-                                                        <p className="card-text textNormalHotel">Descripcion de lo que trata el evento asd asdas dasdas</p>
-                                                        <button className="btn btn-warning bi bi-pencil me-1" type="button"> Update</button>
-                                                        <button className="btn btn-danger bi bi-trash ms-1" type="button"> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="card mb-3">
-                                            <div className="row g-0">
-                                                <div className="">
-                                                    <div className="card-body">
-                                                        <h3 className='text-center'>Name</h3>
-                                                        <h5 className='text-center'>Type</h5>
-                                                        <h5 className='text-center'>Capacity Persons</h5>
-                                                        <h5 className='text-center'>Price</h5>
-                                                        <p className="card-text textNormalHotel">Descripcion de lo que trata el evento asd asdas dasdas</p>
-                                                        <button className="btn btn-warning bi bi-pencil me-1" type="button"> Update</button>
-                                                        <button className="btn btn-danger bi bi-trash ms-1" type="button"> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button className="btn btn-success me-1" type="button">Add Event</button>
                                     </div>
 
                                 </div>
@@ -216,7 +122,7 @@ export const CheckHotelPage = () => {
 
                         <h1 className='text-center'>Rooms</h1>
 
-                        <div className='row justify-content-start mb-4 mt-3'>
+                        <div className='row justify-content-start mt-3'>
 
                             <div className='col-md-5'>
 
@@ -234,242 +140,29 @@ export const CheckHotelPage = () => {
 
                             </div>
 
+                            <div className='mt-3'>
+                                <button className="btn btn-success col-md-12" type="button" data-bs-toggle="modal" data-bs-target="#modalAddRoom">Add Room</button>
+                            </div>
 
                         </div>
 
-                        <div className="hotel-card bg-white rounded-lg shadow overflow-hidden d-block d-lg-flex">
-
-                            <div className="hotel-card_images">
-
-                                <div id="bootstrapCarousel" className="carousel slide h-100" data-ride="carousel">
-                                    <div className="carousel-inner h-100">
-                                        <div className="carousel-item h-100 active">
-                                            <img src={room1} className="d-block w-100" alt="Hotel Image" />
-                                        </div>
-                                        <div className="carousel-item h-100">
-                                            <img src={hotel1} className="d-block w-100" alt="Hotel Image" />
-                                        </div>
-                                        <div className="carousel-item h-100">
-                                            <img src={room2} className="d-block w-100" alt="Hotel Image" />
-                                        </div>
-                                    </div>
-                                    <a className="carousel-control-prev" href="#bootstrapCarousel" role="button" data-slide="prev">
-                                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span className="sr-only">Previous</span>
-                                    </a>
-                                    <a className="carousel-control-next" href="#bootstrapCarousel" role="button" data-slide="next">
-                                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span className="sr-only">Next</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div className="hotel-card_info p-4">
-                                <div className="d-flex align-items-center mb-2">
-
-                                    <h5 className="mb-0 mr-2">Id Room</h5>
-
-                                </div>
-                                <div className="d-flex justify-content-between align-items-end">
-                                    <div className="hotel-card_details">
-                                        <div className="text-muted mb-2"><i className="fas fa-bed"></i> Beds: (name, cant, capacity)</div>
-
-                                        <div className='d-flex'>
-                                            <div className="mb-2 me-1">
-                                                <span className="badge badge-success">Status</span>
-
-                                            </div>
-                                            <div className="mb-2 ms-1">
-                                                <span className="badge badge-secondary">Type</span>
-
-                                            </div>
-                                        </div>
-
-                                        
-                                        <div className="amnities d-flex mb-3 mt-3">
-                                            <Link>
-                                                <button className="btn btn-primary me-1 mt-4">Check Services</button>
-                                            </Link>
-                                        </div>
-
-
-                                    </div>
-                                    <div className="hotel-card_pricing text-center">
-                                        <h3>Q1,300</h3>
-                                        {/* <div className="d-flex">
-                                            <h6 className="text-striked text-muted mr-2">Q1,999</h6>
-                                            <h6 className="text-success">32% off</h6>
-                                        </div>
-                                        <button className="btn btn-primary">Check Rooms</button> */}
-                                    </div>
-
-                                </div>
-                                <Link>
-                                    <button className="btn btn-warning me-1 mt-4">Update Room</button>
-                                </Link>
-                                <Link>
-                                    <button className="btn btn-danger me-1 mt-4">Delete Room</button>
-                                </Link>
-                            </div>
-                        </div>
                     </div>
 
                     <div className="col-sm-9 col-md-9 col-lg-9 mt-2">
 
-                        <div className="hotel-card bg-white rounded-lg shadow overflow-hidden d-block d-lg-flex">
+                        <ModalAddRoom />
+                        <ModalUpdateRoom />
 
-                            <div className="hotel-card_images">
+                        <ModalCheckServices />
+                        <ModalAddService />
 
-                                <div id="bootstrapCarousel" className="carousel slide h-100" data-ride="carousel">
-                                    <div className="carousel-inner h-100">
-                                        <div className="carousel-item h-100 active">
-                                            <img src={room1} className="d-block w-100" alt="Hotel Image" />
-                                        </div>
-                                        <div className="carousel-item h-100">
-                                            <img src={hotel1} className="d-block w-100" alt="Hotel Image" />
-                                        </div>
-                                        <div className="carousel-item h-100">
-                                            <img src={room2} className="d-block w-100" alt="Hotel Image" />
-                                        </div>
-                                    </div>
-                                    <a className="carousel-control-prev" href="#bootstrapCarousel" role="button" data-slide="prev">
-                                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span className="sr-only">Previous</span>
-                                    </a>
-                                    <a className="carousel-control-next" href="#bootstrapCarousel" role="button" data-slide="next">
-                                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span className="sr-only">Next</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div className="hotel-card_info p-4">
-                                <div className="d-flex align-items-center mb-2">
+                        <CardRoomPage />
 
-                                    <h5 className="mb-0 mr-2">Id Room</h5>
-
-                                </div>
-                                <div className="d-flex justify-content-between align-items-end">
-                                    <div className="hotel-card_details">
-                                        <div className="text-muted mb-2"><i className="fas fa-bed"></i> Beds: (name, cant, capacity)</div>
-
-                                        <div className='d-flex'>
-                                            <div className="mb-2 me-1">
-                                                <span className="badge badge-success">Avaliable</span>
-
-                                            </div>
-                                            <div className="mb-2 ms-1">
-                                                <span className="badge badge-secondary">Suite</span>
-
-                                            </div>
-                                        </div>
-
-                                        <div className="amnities d-flex mb-3 mt-3">
-                                            <Link>
-                                                <button className="btn btn-primary me-1 mt-4">Check Services</button>
-                                            </Link>
-                                        </div>
-
-                                    </div>
-                                    <div className="hotel-card_pricing text-center">
-                                        <h3>Q1,900</h3>
-                                        {/* <div className="d-flex">
-                                            <h6 className="text-striked text-muted mr-2">Q1,999</h6>
-                                            <h6 className="text-success">32% off</h6>
-                                        </div>
-                                        <button className="btn btn-primary">Check Rooms</button> */}
-                                    </div>
-
-                                </div>
-                                <Link>
-                                    <button className="btn btn-warning me-1 mt-4">Update Room</button>
-                                </Link>
-                                <Link>
-                                    <button className="btn btn-danger me-1 mt-4">Delete Room</button>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-sm-9 col-md-9 col-lg-9 mt-2">
-
-                        <div className="hotel-card bg-white rounded-lg shadow overflow-hidden d-block d-lg-flex">
-
-                            <div className="hotel-card_images">
-
-                                <div id="bootstrapCarousel" className="carousel slide h-100" data-ride="carousel">
-                                    <div className="carousel-inner h-100">
-                                        <div className="carousel-item h-100 active">
-                                            <img src={room1} className="d-block w-100" alt="Hotel Image" />
-                                        </div>
-                                        <div className="carousel-item h-100">
-                                            <img src={hotel1} className="d-block w-100" alt="Hotel Image" />
-                                        </div>
-                                        <div className="carousel-item h-100">
-                                            <img src={room2} className="d-block w-100" alt="Hotel Image" />
-                                        </div>
-                                    </div>
-                                    <a className="carousel-control-prev" href="#bootstrapCarousel" role="button" data-slide="prev">
-                                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span className="sr-only">Previous</span>
-                                    </a>
-                                    <a className="carousel-control-next" href="#bootstrapCarousel" role="button" data-slide="next">
-                                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span className="sr-only">Next</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div className="hotel-card_info p-4">
-                                <div className="d-flex align-items-center mb-2">
-
-                                    <h5 className="mb-0 mr-2">Id Room</h5>
-
-                                </div>
-                                <div className="d-flex justify-content-between align-items-end">
-                                    <div className="hotel-card_details">
-                                        <div className="text-muted mb-2"><i className="fas fa-bed"></i> Beds: (name, cant, capacity)</div>
-
-                                        <div className='d-flex'>
-                                            <div className="mb-2 me-1">
-                                                <span className="badge badge-warning">Occupied</span>
-
-                                            </div>
-                                            <div className="mb-2 ms-1">
-                                                <span className="badge badge-secondary">Presidential</span>
-
-                                            </div>
-                                        </div>
-
-                                        <div className="amnities d-flex mb-3 mt-3">
-                                            <Link>
-                                                <button className="btn btn-primary me-1 mt-4">Check Services</button>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                    <div className="hotel-card_pricing text-center">
-                                        <h3>Q1,300</h3>
-                                        {/* <div className="d-flex">
-                                            <h6 className="text-striked text-muted mr-2">Q1,999</h6>
-                                            <h6 className="text-success">32% off</h6>
-                                        </div>
-                                        <button className="btn btn-primary">Check Rooms</button> */}
-                                    </div>
-
-                                </div>
-                                <Link>
-                                    <button className="btn btn-warning me-1 mt-4">Update Room</button>
-                                </Link>
-                                <Link>
-                                    <button className="btn btn-danger me-1 mt-4">Delete Room</button>
-                                </Link>
-                            </div>
-                        </div>
                     </div>
 
                 </div>
             </div>
         </div>
-
-
-
 
     )
 }

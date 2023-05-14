@@ -19,25 +19,25 @@ export const UpdateUserPage = () => {
 
                                 <div className=" align-items-center mb-2">
 
-                                    <h5 className=" mr-2">Name</h5>
+                                    <h5 className="mr-2 mt-3">Name</h5>
                                     <input type="text" className="form-control" />
 
-                                    <h5 className=" mr-2">Surname</h5>
+                                    <h5 className="mr-2 mt-3">Surname</h5>
                                     <input type="text" className="form-control" />
 
-                                    <h5 className=" mr-2">Phone</h5>
+                                    <h5 className="mr-2 mt-3">Phone</h5>
                                     <input type="text" className="form-control" />
 
-                                    <h5 className=" mr-2">Email</h5>
+                                    <h5 className="mr-2 mt-3">Email</h5>
                                     <input type="text" className="form-control" />
 
-                                    <h5 className=" mr-2">Username</h5>
+                                    <h5 className="mr-2 mt-3">Username</h5>
                                     <input type="text" className="form-control" />
 
-                                    <h5 className=" mr-2">Password</h5>
+                                    <h5 className="mr-2 mt-3">Password</h5>
                                     <input type="password" className="form-control" />
 
-                                    <h5 className=" mr-2">Role</h5>
+                                    <h5 className="mr-2 mt-3">Role</h5>
                                     <select name="state" className='form-select'>
 
                                         <option value={null}>ADMIN</option>
@@ -45,7 +45,7 @@ export const UpdateUserPage = () => {
 
                                     </select>
 
-                                    <h5 className=" mr-2">Photo</h5>
+                                    <h5 className="mr-2 mt-3">Photo</h5>
                                     <input type="file" className="form-control" />
 
 

@@ -10,7 +10,6 @@ import { CardHotelPage } from '../../components/CardHotelPage'
 
 export const HotelPage = () => {
     return (
-
         <>
 
             <div className="main-content">

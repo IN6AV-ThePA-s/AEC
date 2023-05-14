@@ -19,24 +19,28 @@ export const AddHotelPage = () => {
 
                                 <div className=" align-items-center mb-2">
 
-                                    <h5 className=" mr-2">Name</h5>
+                                    <h5 className=" mr-2 mt-3">Name</h5>
                                     <input type="text" className="form-control" />
 
-                                    <h5 className=" mr-2">Address</h5>
+                                    <h5 className=" mr-2 mt-3">Address</h5>
                                     <input type="text" className="form-control" />
 
-                                    <h5 className=" mr-2">Phone</h5>
+                                    <h5 className=" mr-2 mt-3">Phone</h5>
                                     <input type="text" className="form-control" />
 
-                                    <h5 className=" mr-2">Email</h5>
+                                    <h5 className=" mr-2 mt-3">Email</h5>
                                     <input type="text" className="form-control" />
 
-                                    <h5 className=" mr-2">Photos</h5>
+                                    <h5 className=" mr-2 mt-3">Admin</h5>
+                                    <input type="text" className="form-control" />
+
+                                    <h5 className=" mr-2 mt-3">Photos</h5>
                                     <div className='d-flex'>
 
                                         <input type="file" className="form-control" />
                                         <input type="file" className="form-control ms-1" />
                                         <input type="file" className="form-control ms-1" />
+                                        
                                     </div>
 
 
