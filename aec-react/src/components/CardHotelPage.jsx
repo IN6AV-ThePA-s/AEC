@@ -97,6 +97,7 @@ export const CardHotelPage = () => {
             </div>
 
 
+
         </>
 
     )

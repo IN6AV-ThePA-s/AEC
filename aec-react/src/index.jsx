@@ -9,6 +9,10 @@ import { UpdateEvent } from './pages/Events/UpdateEvent'
 import { AddEvent } from './pages/Events/AddEvent'
 import { HotelPage } from './pages/Hotel/HotelPage'
 import { CheckHotelPage } from './pages/Hotel/CheckHotelPage'
+import { AddHotelPage } from './pages/Hotel/AddHotelPage'
+import { UserPage } from './pages/User/UserPage'
+import { AddUserPage } from './pages/User/AddUserPage'
+import { UpdateUserPage } from './pages/User/UpdateUserPage'
 
 export const AuthContext = createContext();
 
@@ -53,6 +57,22 @@ export const Index = () => {
                         {
                             path: 'checkHotel',
                             element: <CheckHotelPage/>
+                        },
+                        {
+                            path: 'addHotel',
+                            element: <AddHotelPage/>
+                        },
+                        {
+                            path: 'userPage',
+                            element: <UserPage/>
+                        },
+                        {
+                            path: 'addUser',
+                            element: <AddUserPage/>
+                        },
+                        {
+                            path: 'updateUser',
+                            element: <UpdateUserPage/>
                         }
                     ]
                 }
