@@ -9,9 +9,9 @@ export const Sidebar = () => {
             <div className="sticky-top d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100 shadow-lg">
 
                 <div className='text-center align-items-center ps-auto'>
-                
+
                     <h1 className="textAec d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none">
-                    
+
                         <span className="dashTitle d-flex text-center d-sm-inline">AEC </span> {/* d-none */}
                     </h1>
                 </div>
@@ -26,19 +26,18 @@ export const Sidebar = () => {
                             <ul className="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                 <li className='container max-width'>
 
-                                    <Link href="#" className="nav-link px-0">
+                                    <Link to='userPage' className="nav-link px-0">
                                         <div className='container bg-light p-2 rounded-4 shadow'>
-                                            <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
+                                            <i className="text-info fs-6 bi bi-house"></i> <span className="text-info ms-1 d-none d-sm-inline">Principal</span>
                                         </div>
-                                        
                                     </Link>
 
                                 </li>
                                 <li className='container max-width'>
 
-                                    <Link href="#" className="nav-link px-0">
+                                    <Link to='addUser' className="nav-link px-0">
                                         <div className='container bg-light p-2 rounded-4 shadow'>
-                                            <i className="textUpdate fs-6 bi bi-pencil  "></i> <span className="textUpdate ms-1 d-none d-sm-inline">Update</span>
+                                            <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
                                         </div>
                                     </Link>
 
@@ -50,164 +49,56 @@ export const Sidebar = () => {
                             <a href="#submenu2" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
                                 <i className="textOption fs-3 bi bi-building-fill-gear"></i> <span className="textOption d-none d-sm-inline">Hotel</span>
                             </a>
-                            <ul className="collapse nav flex-column" id="submenu2" data-bs-parent="#menu">
+                            <ul className="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                                 <li className='container max-width'>
 
-                                    <Link href="#" className="nav-link px-0">
+                                    <Link to='hotelPage' className="nav-link px-0">
+                                        <div className='container bg-light p-2 rounded-4 shadow'>
+                                            <i className="text-info fs-6 bi bi-house"></i> <span className="text-info ms-1 d-none d-sm-inline">Principal</span>
+                                        </div>
+                                    </Link>
+
+                                </li>
+                                <li className="container max-width">
+
+                                    <Link to='addHotel' className="nav-link px-0">
                                         <div className='container bg-light p-2 rounded-4 shadow'>
                                             <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
                                         </div>
-                                        
                                     </Link>
 
                                 </li>
-                                <li className='container max-width'>
 
-                                    <Link href="#" className="nav-link px-0">
-                                        <div className='container bg-light p-2 rounded-4 shadow'>
-                                            <i className="textUpdate fs-6 bi bi-pencil  "></i> <span className="textUpdate ms-1 d-none d-sm-inline">Update</span>
-                                        </div>
-                                    </Link>
-
-                                </li>
                             </ul>
                         </li>
 
+
+
                         <li>
                             <a href="#submenu3" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                                <i className="textOption fs-3 bi bi-briefcase"></i> <span className="textOption d-none d-sm-inline">Service</span>
+                                <i className="textOption fs-3 bi bi-telephone-outbound"></i> <span className="textOption ms-1 d-none d-sm-inline">Reservation</span>
                             </a>
                             <ul className="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                                 <li className='container max-width'>
 
-                                    <Link href="#" className="nav-link px-0">
+                                    <Link to='reservationPage' className="nav-link px-0">
                                         <div className='container bg-light p-2 rounded-4 shadow'>
-                                            <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
+                                            <i className="text-info fs-6 bi bi-house"></i> <span className="text-info ms-1 d-none d-sm-inline">Principal</span>
                                         </div>
-                                        
                                     </Link>
 
                                 </li>
                                 <li className='container max-width'>
 
-                                    <Link href="#" className="nav-link px-0">
+                                    <Link to='addReservation' className="nav-link px-0">
                                         <div className='container bg-light p-2 rounded-4 shadow'>
-                                            <i className="textUpdate fs-6 bi bi-pencil  "></i> <span className="textUpdate ms-1 d-none d-sm-inline">Update</span>
+                                            <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
                                         </div>
                                     </Link>
 
                                 </li>
                             </ul>
                         </li>
-
-                        <li>
-                            <a href="#submenu4" data-bs-toggle="collapse" className="nav-link px-0 align-middle ">
-                                <i className="textOption fs-3 bi bi-moon-stars"></i> <span className="textOption d-none d-sm-inline">Room</span>
-                            </a>
-                            <ul className="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
-                                <li className='container max-width'>
-
-                                    <Link href="#" className="nav-link px-0">
-                                        <div className='container bg-light p-2 rounded-4 shadow'>
-                                            <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
-                                        </div>
-                                        
-                                    </Link>
-
-                                </li>
-                                <li className='container max-width'>
-
-                                    <Link href="#" className="nav-link px-0">
-                                        <div className='container bg-light p-2 rounded-4 shadow'>
-                                            <i className="textUpdate fs-6 bi bi-pencil  "></i> <span className="textUpdate ms-1 d-none d-sm-inline">Update</span>
-                                        </div>
-                                    </Link>
-
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="#submenu5" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                                <i className="textOption fs-3 bi bi-calendar4-event"></i> <span className="textOption d-none d-sm-inline">Event</span>
-                            </a>
-                            <ul className="collapse nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">
-                                <li className='container max-width'>
-
-                                    <Link href="#" className="nav-link px-0">
-                                        <div className='container bg-light p-2 rounded-4 shadow'>
-                                            <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
-                                        </div>
-                                        
-                                    </Link>
-
-                                </li>
-                                <li className='container max-width'>
-
-                                    <Link href="#" className="nav-link px-0">
-                                        <div className='container bg-light p-2 rounded-4 shadow'>
-                                            <i className="textUpdate fs-6 bi bi-pencil  "></i> <span className="textUpdate ms-1 d-none d-sm-inline">Update</span>
-                                        </div>
-                                    </Link>
-
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="#submenu6" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                                <i className="textOption fs-3 bi bi-cart3"></i> <span className="textOption d-none d-sm-inline">Consumables</span>
-                            </a>
-                            <ul className="collapse nav flex-column ms-1" id="submenu6" data-bs-parent="#menu">
-                                <li className='container max-width'>
-
-                                    <Link href="#" className="nav-link px-0">
-                                        <div className='container bg-light p-2 rounded-4 shadow'>
-                                            <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
-                                        </div>
-                                        
-                                    </Link>
-
-                                </li>
-                                <li className='container max-width'>
-
-                                    <Link href="#" className="nav-link px-0">
-                                        <div className='container bg-light p-2 rounded-4 shadow'>
-                                            <i className="textUpdate fs-6 bi bi-pencil  "></i> <span className="textUpdate ms-1 d-none d-sm-inline">Update</span>
-                                        </div>
-                                    </Link>
-
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="#submenu7" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                                <i className="textOption fs-3 bi bi-telephone-outbound"></i> <span className="textOption d-none d-sm-inline">Reservation</span>
-                            </a>
-                            <ul className="collapse nav flex-column ms-1" id="submenu7" data-bs-parent="#menu">
-                                <li className='container max-width'>
-
-                                    <Link href="#" className="nav-link px-0">
-                                        <div className='container bg-light p-2 rounded-4 shadow'>
-                                            <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
-                                        </div>
-                                        
-                                    </Link>
-
-                                </li>
-                                <li className='container max-width'>
-
-                                    <Link href="#" className="nav-link px-0">
-                                        <div className='container bg-light p-2 rounded-4 shadow'>
-                                            <i className="textUpdate fs-6 bi bi-pencil  "></i> <span className="textUpdate ms-1 d-none d-sm-inline">Update</span>
-                                        </div>
-                                    </Link>
-
-                                </li>
-                            </ul>
-                        </li>
-
 
 
                         <li>
@@ -215,25 +106,16 @@ export const Sidebar = () => {
                                 <i className="textOption fs-3 bi bi-journal-text"></i> <span className="textOption d-none d-sm-inline">Bill</span>
                             </a>
                             <ul className="collapse nav flex-column ms-1" id="submenu8" data-bs-parent="#menu">
-                                <li className="container max-width">
-
-                                    <Link href="#" className="nav-link px-0">
-                                        <div className='container bg-light p-2 rounded-4 shadow'>
-                                            <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
-                                        </div>
-                                        
-                                    </Link>
-
-                                </li>
                                 <li className='container max-width'>
 
-                                    <Link href="#" className="nav-link px-0">
+                                    <Link to='billPage' className="nav-link px-0">
                                         <div className='container bg-light p-2 rounded-4 shadow'>
-                                            <i className="textUpdate fs-6 bi bi-pencil  "></i> <span className="textUpdate ms-1 d-none d-sm-inline">Update</span>
+                                            <i className="text-info fs-6 bi bi-house"></i> <span className="text-info ms-1 d-none d-sm-inline">Principal</span>
                                         </div>
                                     </Link>
 
                                 </li>
+                                
                             </ul>
                         </li>
 

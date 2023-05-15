@@ -4,10 +4,16 @@ import App from './App'
 import { HomePage } from './pages/Home/HomePage'
 import {Dashboard} from './pages/Dashboard/Dashboard'
 import { Settings } from './pages/Settings/Settings'
-import { LoginPage } from './pages/Home/LoginPage'
-import { NotFound } from './pages/NotFound/NotFound'
-import { RegisterPage} from './pages/Home/RegisterPage'
-import { AboutUsPage } from './pages/Home/AboutUsPage'
+import { EventsPage } from './pages/Events/EventsPage'
+import { UpdateEvent } from './pages/Events/UpdateEvent'
+import { AddEvent } from './pages/Events/AddEvent'
+import { HotelPage } from './pages/Hotel/HotelPage'
+import { CheckHotelPage } from './pages/Hotel/CheckHotelPage'
+import { AddHotelPage } from './pages/Hotel/AddHotelPage'
+import { UserPage } from './pages/User/UserPage'
+import { AddUserPage } from './pages/User/AddUserPage'
+import { UpdateUserPage } from './pages/User/UpdateUserPage'
+
 export const AuthContext = createContext();
 
 export const Index = () => {
@@ -53,6 +59,42 @@ export const Index = () => {
                         },{
                             path: 'settings',
                             element: <Settings/>
+                        },
+                        {
+                            path: 'eventsPage',
+                            element: <EventsPage/>
+                        },
+                        {
+                            path: 'addEvent',
+                            element: <AddEvent/>
+                        },
+                        {
+                            path: 'updateEvent/:id',
+                            element: <UpdateEvent/>
+                        },
+                        {
+                            path: 'hotelPage',
+                            element: <HotelPage/>
+                        },
+                        {
+                            path: 'checkHotel',
+                            element: <CheckHotelPage/>
+                        },
+                        {
+                            path: 'addHotel',
+                            element: <AddHotelPage/>
+                        },
+                        {
+                            path: 'userPage',
+                            element: <UserPage/>
+                        },
+                        {
+                            path: 'addUser',
+                            element: <AddUserPage/>
+                        },
+                        {
+                            path: 'updateUser',
+                            element: <UpdateUserPage/>
                         }
                     ]
                 }

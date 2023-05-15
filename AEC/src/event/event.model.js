@@ -15,6 +15,10 @@ const eventSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    description:{
+        type: String,
+        required: true
+    },
     type:{
         type: String,
         required: true,
@@ -27,6 +31,12 @@ const eventSchema = mongoose.Schema({
     price:{
         type: Number,
         required: true
+    },
+    hotel:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Hotel',
+        required: true
+
     }
 
 },{

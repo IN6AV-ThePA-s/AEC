@@ -14,9 +14,11 @@ exports.addEvent = async (req, res) => {
 
         let params = {
             name: data.name,
+            description: data.description,
             type: data.type,
             maxPersons: data.maxPersons,
-            price: data.price
+            price: data.price,
+            hotel: data.hotel
         }
 
         let validate = validateData(params);
@@ -52,7 +54,7 @@ exports.addEvent = async (req, res) => {
 exports.getEvents = async (req, res) => {
     try {
 
-        let events = await Event.find();
+        let events = await Event.find().populate('hotel');
 
         if (events.length == 0) {
             return res.send({ message: 'There is not any event in the DB' })
@@ -119,9 +121,11 @@ exports.updateEvent = async (req, res) => {
 
         let params = {
             name: data.name,
+            description: data.description,
             type: data.type,
             maxPersons: data.maxPersons,
-            price: data.price
+            price: data.price,
+            hotel: data.hotel
         }
 
         if (data.maxPersons !== '') {
