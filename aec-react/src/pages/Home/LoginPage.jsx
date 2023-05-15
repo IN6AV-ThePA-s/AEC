@@ -81,9 +81,9 @@ export const LoginPage = () => {
                                 <br />
                                 <button className="btnLogin draw-border rounded" onClick={(e)=>{login(e), e.preventDefault()}}>Login</button>
                                 <br />
-                                <Link to={'/register'}>
-                                    <p>Don't have an account? <a className="link-secondary" >Register here</a></p>
-                                </Link>
+                                
+                                <p>Don't have an account? <Link to='/register' className="link-secondary" >Register here</Link></p>
+                                
                             </form>
 
                         </div>
