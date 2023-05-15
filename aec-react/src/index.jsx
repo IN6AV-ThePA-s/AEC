@@ -13,6 +13,10 @@ import { AddHotelPage } from './pages/Hotel/AddHotelPage'
 import { UserPage } from './pages/User/UserPage'
 import { AddUserPage } from './pages/User/AddUserPage'
 import { UpdateUserPage } from './pages/User/UpdateUserPage'
+import { NotFound } from './pages/NotFound/NotFound'
+import { LoginPage } from './pages/Home/LoginPage'
+import { RegisterPage } from './pages/Home/RegisterPage'
+import { AboutUsPage } from './pages/Home/AboutUsPage'
 
 export const AuthContext = createContext();
 
