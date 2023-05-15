@@ -64,117 +64,29 @@ export const Sidebar = () => {
                             </ul>
                         </li>
 
-                        {/* <li>
+
+
+                        <li>
                             <a href="#submenu3" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                                <i className="textOption fs-3 bi bi-briefcase"></i> <span className="textOption ms-1 d-none d-sm-inline">Service</span>
+                                <i className="textOption fs-3 bi bi-telephone-outbound"></i> <span className="textOption ms-1 d-none d-sm-inline">Reservation</span>
                             </a>
                             <ul className="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                                 <li className="w-100">
 
-                                    <Link href="#" className="nav-link px-0">
-                                        <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
+                                    <Link to='reservationPage' className="nav-link px-0">
+                                        <i className="text-info fs-6 bi bi-house"></i> <span className="text-info ms-1 d-none d-sm-inline">Principal</span>
                                     </Link>
 
                                 </li>
                                 <li>
 
-                                    <Link href="#" className="nav-link px-0">
-                                        <i className="textUpdate fs-6 bi bi-pencil"></i> <span className="textUpdate ms-1 d-none d-sm-inline">Update</span>
+                                    <Link to='addReservation' className="nav-link px-0">
+                                        <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
                                     </Link>
 
                                 </li>
                             </ul>
                         </li>
-
-                        <li>
-                            <a href="#submenu4" data-bs-toggle="collapse" className="nav-link px-0 align-middle ">
-                                <i className="textOption fs-3 bi bi-moon-stars"></i> <span className="textOption ms-1 d-none d-sm-inline">Room</span>
-                            </a>
-                            <ul className="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
-                                <li className="w-100">
-
-                                    <Link href="#" className="nav-link px-0">
-                                        <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
-                                    </Link>
-
-                                </li>
-                                <li>
-
-                                    <Link href="#" className="nav-link px-0">
-                                        <i className="textUpdate fs-6 bi bi-pencil"></i> <span className="textUpdate ms-1 d-none d-sm-inline">Update</span>
-                                    </Link>
-
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="#submenu5" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                                <i className="textOption fs-3 bi bi-calendar4-event"></i> <span className="textOption ms-1 d-none d-sm-inline">Event</span>
-                            </a>
-                            <ul className="collapse nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">
-                                <li>
-
-                                    <Link to='eventsPage' className="nav-link px-0">
-                                        <i className="textUpdate fs-6 bi bi-house-door"></i> <span className="textUpdate ms-1 d-none d-sm-inline">Principal</span>
-                                    </Link>
-
-                                </li>
-                                <li className="w-100">
-
-                                    <Link to='addEvent' className="nav-link px-0">
-                                        <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
-                                    </Link>
-
-                                </li>
-
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="#submenu6" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                                <i className="textOption fs-3 bi bi-cart3"></i> <span className="textOption ms-1 d-none d-sm-inline">Consumables</span>
-                            </a>
-                            <ul className="collapse nav flex-column ms-1" id="submenu6" data-bs-parent="#menu">
-                                <li className="w-100">
-
-                                    <Link href="#" className="nav-link px-0">
-                                        <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
-                                    </Link>
-
-                                </li>
-                                <li>
-
-                                    <Link href="#" className="nav-link px-0">
-                                        <i className="textUpdate fs-6 bi bi-pencil"></i> <span className="textUpdate ms-1 d-none d-sm-inline">Update</span>
-                                    </Link>
-
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="#submenu7" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                                <i className="textOption fs-3 bi bi-telephone-outbound"></i> <span className="textOption ms-1 d-none d-sm-inline">Reservation</span>
-                            </a>
-                            <ul className="collapse nav flex-column ms-1" id="submenu7" data-bs-parent="#menu">
-                                <li className="w-100">
-
-                                    <Link href="#" className="nav-link px-0">
-                                        <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
-                                    </Link>
-
-                                </li>
-                                <li>
-
-                                    <Link href="#" className="nav-link px-0">
-                                        <i className="textUpdate fs-6 bi bi-pencil"></i> <span className="textUpdate ms-1 d-none d-sm-inline">Update</span>
-                                    </Link>
-
-                                </li>
-                            </ul>
-                        </li>*/}
-
 
 
                         <li>
@@ -182,20 +94,14 @@ export const Sidebar = () => {
                                 <i className="textOption fs-3 bi bi-journal-text"></i> <span className="textOption ms-1 d-none d-sm-inline">Bill</span>
                             </a>
                             <ul className="collapse nav flex-column ms-1" id="submenu8" data-bs-parent="#menu">
-                                <li className="w-100">
-
-                                    <Link href="#" className="nav-link px-0">
-                                        <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
-                                    </Link>
-
-                                </li>
                                 <li>
 
-                                    <Link href="#" className="nav-link px-0">
-                                        <i className="textUpdate fs-6 bi bi-pencil"></i> <span className="textUpdate ms-1 d-none d-sm-inline">Update</span>
+                                    <Link to='billPage' className="nav-link px-0">
+                                        <i className="text-info fs-6 bi bi-house"></i> <span className="text-info ms-1 d-none d-sm-inline">Principal</span>
                                     </Link>
 
                                 </li>
+                                
                             </ul>
                         </li>
 
