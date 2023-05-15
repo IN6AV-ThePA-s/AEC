@@ -11,11 +11,19 @@ export const RegisterPage = () => {
     const { loggedIn, setLoggedIn, setDataUser } = useContext(AuthContext)
     const navigate = useNavigate()
     const [form, setForm] = useState({
+        name: '',
+        surname: '', 
+        phone: '',
+        email: '',
         username: '',
         password: ''
     })
+    const [photo, setPhoto] = useState()
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+    }
     
-
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -23,15 +31,21 @@ export const RegisterPage = () => {
         })
     }
 
-    const login = async(e) => {
-        try {
-            const { data } = await axios.post('http://localhost:3022/user/login', form)
+    const handlePhoto = (e) => {
+        let formData = new FormData()
+        formData.append('image', e.target.files[0])
+        setPhoto(formData)
+    }
 
-            if(data.token) {
-                localStorage.setItem('token', data.token)
-                setDataUser(data.user)
-                setLoggedIn(true)
-                navigate('/dashboard')
+    const add = async(e) => {
+        try {
+            const { data } = await axios.post('http://localhost:3022/user/register', form)
+
+            if(data.user) {
+                if(photo) await axios.put(`http://localhost:3022/user/registerImg/${data.user._id}`, photo, {
+                    headers: {'Content-Type': 'multipart/form-data'}
+                })
+                navigate('/login')
             }
 
         } catch (err) {
@@ -101,11 +115,11 @@ export const RegisterPage = () => {
                             <br />
                             <div className='form-group d-flex justify-content-center'>
                                 <div className="mb-3">
-                                    <input className="form-control" type="file" id="formFile"/>
+                                    <input onChange={handlePhoto} className="form-control" type="file" id="formFile" name='photo'/>
                                 </div>
                             </div>
                                 <br />
-                                <button className="btnLogin draw-border rounded mx-3" onClick={login}>Register</button>
+                                <button className="btnLogin draw-border rounded mx-3" onClick={(e)=>{add(e), e.preventDefault()}}>Register</button>
                                 <Link to={'/login'}>
                                 <button className="btnLogin draw-border2 rounded">Cancel</button>
                                 </Link>

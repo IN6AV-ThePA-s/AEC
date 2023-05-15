@@ -6,7 +6,7 @@ import logo from '../assets/logo.png'
 export const Sidebar = () => {
     return (
         <>
-            <div className="sticky-top flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100 shadow-lg">
+            <div className="sticky-top d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100 shadow-lg">
 
                 <div className='text-center align-items-center ps-auto'>
                 

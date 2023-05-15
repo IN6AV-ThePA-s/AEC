@@ -48,8 +48,8 @@ export const LoginPage = () => {
                     <NavbarHome />
                 </div>
                 <div className="p-5 bg-image" style={ {height: '250px', 
-                backgroundImage: `url('https://img.freepik.com/free-photo/fantastic-blue-sky_1203-1929.jpg?w=996&t=st=1683838238~exp=1683838838~hmac=488e0f00855dd85560dee7eaa798f29a16699300c15d4e3f4e9edcad98586d8c')`,
-                backgroundSize: 'cover'
+                    //backgroundImage: `url('https://img.freepik.com/free-photo/fantastic-blue-sky_1203-1929.jpg?w=996&t=st=1683838238~exp=1683838838~hmac=488e0f00855dd85560dee7eaa798f29a16699300c15d4e3f4e9edcad98586d8c')`,
+                    backgroundSize: 'cover'
                 
                 }} >
                 </div>
@@ -79,7 +79,7 @@ export const LoginPage = () => {
                                 </div>
                             </div>
                                 <br />
-                                <button className="btnLogin draw-border rounded" onClick={login}>Login</button>
+                                <button className="btnLogin draw-border rounded" onClick={(e)=>{login(e), e.preventDefault()}}>Login</button>
                                 <br />
                                 <Link to={'/register'}>
                                     <p>Don't have an account? <a className="link-secondary" >Register here</a></p>

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import hotel1 from '../../assets/hotel1.jpg'
 import hotel2 from '../../assets/hotel2.jpg'
 import hotel3 from '../../assets/hotel3.jpg'
-import { ModalService } from '../../components/ModalService'
 
 
 export const HotelPage = () => {
@@ -119,8 +118,6 @@ export const HotelPage = () => {
 
                 </div>
 
-                <ModalService/>
-                
                 <div className='col-md-12 border-top border-dark'>
                     <div className="d-flex flex-column text-center p-3 ">
                         <h1 className="titlesHotelPage font-weight-bold mb-4">Rooms</h1>
@@ -132,7 +129,6 @@ export const HotelPage = () => {
                                     <th>Status</th>
                                     <th>Price</th>
                                     <th>Beds</th>
-                                    <th>Services</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -145,9 +141,6 @@ export const HotelPage = () => {
                                     <td><span className="badge rounded-pill text-bg-success">Avaliable</span></td>
                                     <td>443</td>
                                     <td>3</td>
-                                    <td>
-                                        <button className="btn btn-warning bi bi-pencil me-1" type="button" data-bs-toggle='modal' data-bs-target='#serviceModal'> Services</button>
-                                    </td>
                                     <td>
                                         <button className="btn btn-warning bi bi-pencil me-1" type="button"> Update</button>
                                         <button className="btn btn-danger bi bi-trash ms-1" type="button"> Delete</button>
@@ -225,7 +218,7 @@ export const HotelPage = () => {
 
             </div>
 
-        
+
 
         </div>
     )

@@ -11,7 +11,7 @@ export const Dashboard = () => {
                 
                 <div className="row flex-nowrap">
 
-                    <div className="bgDash col-auto col-md-3 col-xl-2 px-0">
+                    <div className="bgDash col-auto col-md-3 col-xl-2 px-0 sticky">
                         
                         <Sidebar/>
 

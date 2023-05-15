@@ -8,8 +8,6 @@ import { LoginPage } from './pages/Home/LoginPage'
 import { NotFound } from './pages/NotFound/NotFound'
 import { RegisterPage} from './pages/Home/RegisterPage'
 import { AboutUsPage } from './pages/Home/AboutUsPage'
-import { HotelPage } from './pages/Hotel/HotelPage'
-import { EventsPage } from './pages/Events/EventsPage'
 export const AuthContext = createContext();
 
 export const Index = () => {
@@ -47,7 +45,7 @@ export const Index = () => {
                 },
                 {
                     path: '/dashboard',
-                    element: <Dashboard/>,
+                    element: loggedIn ? <Dashboard/> : <LoginPage/>,
                     children: [
                         {
                             path: 'home',
@@ -55,14 +53,6 @@ export const Index = () => {
                         },{
                             path: 'settings',
                             element: <Settings/>
-                        },
-                        {
-                            path: 'hotelpage',
-                            element: <HotelPage/>
-                        },
-                        {
-                            path: 'eventspage',
-                            element: <EventsPage/>
                         }
                     ]
                 }
