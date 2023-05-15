@@ -13,28 +13,54 @@ import { AddHotelPage } from './pages/Hotel/AddHotelPage'
 import { UserPage } from './pages/User/UserPage'
 import { AddUserPage } from './pages/User/AddUserPage'
 import { UpdateUserPage } from './pages/User/UpdateUserPage'
+import { NotFound } from './pages/NotFound/NotFound'
+import { LoginPage } from './pages/Home/LoginPage'
+import { RegisterPage } from './pages/Home/RegisterPage'
+import { AboutUsPage } from './pages/Home/AboutUsPage'
 
 export const AuthContext = createContext();
 
 export const Index = () => {
+    const [loggedIn, setLoggedIn] = useState(false)
+    const [dataUser, setDataUser] = useState({
+        names: '',
+        username: '',
+        role: ''
+    })
+
+    useEffect(() => {
+        let token = localStorage.getItem('token')
+        if(token) setLoggedIn(true)
+    }, [])
 
     const routes = createBrowserRouter([
         {
             path: '/',
             element: <App />,
+            errorElement: <NotFound/>,
             children: [
                 {
                     path: '/',
                     element: <HomePage />
+                },
+                {
+                    path:'/login',
+                    element: <LoginPage/>
                 },{
+                    path: '/register',
+                    element: <RegisterPage/>
+                },{
+                    path: '/about',
+                    element: <AboutUsPage/>
+                },
+                {
                     path: '/dashboard',
-                    element: <Dashboard/>,
+                    element: loggedIn ? <Dashboard/> : <LoginPage/>,
                     children: [
                         {
                             path: 'home',
                             element: <HomePage/>
-                        },
-                        {
+                        },{
                             path: 'settings',
                             element: <Settings/>
                         },
@@ -81,7 +107,7 @@ export const Index = () => {
     ])
 
     return (
-        <AuthContext.Provider value={null}>
+        <AuthContext.Provider value={{loggedIn, setLoggedIn, dataUser, setDataUser}}>
             <RouterProvider router={routes} />
         </AuthContext.Provider>
     )

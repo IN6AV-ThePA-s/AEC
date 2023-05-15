@@ -6,7 +6,7 @@ import logo from '../assets/logo.png'
 export const Sidebar = () => {
     return (
         <>
-            <div className="sticky-top d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
+            <div className="sticky-top d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100 shadow-lg">
 
                 <div className='text-center align-items-center ps-auto'>
 
@@ -20,21 +20,25 @@ export const Sidebar = () => {
                     <ul className="textMenu nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
 
                         <li>
-                            <a href="#submenu1" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                                <i className="textOption align-middle fs-3 bi bi-person-circle"></i> <span className="textOption align-middle ms-1 d-none d-sm-inline">User</span>
+                            <a href="#submenu1" data-bs-toggle="collapse"  className="nav-link px-0 align-middle">
+                                <i className="textOption align-middle fs-3 bi bi-person-circle"></i> <span className="textOption align-middle d-none d-sm-inline">User</span>
                             </a>
                             <ul className="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                <li className="w-100">
+                                <li className='container max-width'>
 
                                     <Link to='userPage' className="nav-link px-0">
-                                        <i className="text-info fs-6 bi bi-house"></i> <span className="text-info ms-1 d-none d-sm-inline">Principal</span>
+                                        <div className='container bg-light p-2 rounded-4 shadow'>
+                                            <i className="text-info fs-6 bi bi-house"></i> <span className="text-info ms-1 d-none d-sm-inline">Principal</span>
+                                        </div>
                                     </Link>
 
                                 </li>
-                                <li>
+                                <li className='container max-width'>
 
                                     <Link to='addUser' className="nav-link px-0">
-                                        <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
+                                        <div className='container bg-light p-2 rounded-4 shadow'>
+                                            <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
+                                        </div>
                                     </Link>
 
                                 </li>
@@ -43,20 +47,24 @@ export const Sidebar = () => {
 
                         <li>
                             <a href="#submenu2" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                                <i className="textOption fs-3 bi bi-building-fill-gear"></i> <span className="textOption ms-1 d-none d-sm-inline">Hotel</span>
+                                <i className="textOption fs-3 bi bi-building-fill-gear"></i> <span className="textOption d-none d-sm-inline">Hotel</span>
                             </a>
                             <ul className="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                                <li>
+                                <li className='container max-width'>
 
                                     <Link to='hotelPage' className="nav-link px-0">
-                                        <i className="text-info fs-6 bi bi-house"></i> <span className="text-info ms-1 d-none d-sm-inline">Principal</span>
+                                        <div className='container bg-light p-2 rounded-4 shadow'>
+                                            <i className="text-info fs-6 bi bi-house"></i> <span className="text-info ms-1 d-none d-sm-inline">Principal</span>
+                                        </div>
                                     </Link>
 
                                 </li>
-                                <li className="w-100">
+                                <li className="container max-width">
 
                                     <Link to='addHotel' className="nav-link px-0">
-                                        <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
+                                        <div className='container bg-light p-2 rounded-4 shadow'>
+                                            <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
+                                        </div>
                                     </Link>
 
                                 </li>
@@ -71,17 +79,21 @@ export const Sidebar = () => {
                                 <i className="textOption fs-3 bi bi-telephone-outbound"></i> <span className="textOption ms-1 d-none d-sm-inline">Reservation</span>
                             </a>
                             <ul className="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                                <li className="w-100">
+                                <li className='container max-width'>
 
                                     <Link to='reservationPage' className="nav-link px-0">
-                                        <i className="text-info fs-6 bi bi-house"></i> <span className="text-info ms-1 d-none d-sm-inline">Principal</span>
+                                        <div className='container bg-light p-2 rounded-4 shadow'>
+                                            <i className="text-info fs-6 bi bi-house"></i> <span className="text-info ms-1 d-none d-sm-inline">Principal</span>
+                                        </div>
                                     </Link>
 
                                 </li>
-                                <li>
+                                <li className='container max-width'>
 
                                     <Link to='addReservation' className="nav-link px-0">
-                                        <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
+                                        <div className='container bg-light p-2 rounded-4 shadow'>
+                                            <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
+                                        </div>
                                     </Link>
 
                                 </li>
@@ -91,13 +103,15 @@ export const Sidebar = () => {
 
                         <li>
                             <a href="#submenu8" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                                <i className="textOption fs-3 bi bi-journal-text"></i> <span className="textOption ms-1 d-none d-sm-inline">Bill</span>
+                                <i className="textOption fs-3 bi bi-journal-text"></i> <span className="textOption d-none d-sm-inline">Bill</span>
                             </a>
                             <ul className="collapse nav flex-column ms-1" id="submenu8" data-bs-parent="#menu">
-                                <li>
+                                <li className='container max-width'>
 
                                     <Link to='billPage' className="nav-link px-0">
-                                        <i className="text-info fs-6 bi bi-house"></i> <span className="text-info ms-1 d-none d-sm-inline">Principal</span>
+                                        <div className='container bg-light p-2 rounded-4 shadow'>
+                                            <i className="text-info fs-6 bi bi-house"></i> <span className="text-info ms-1 d-none d-sm-inline">Principal</span>
+                                        </div>
                                     </Link>
 
                                 </li>
@@ -113,7 +127,7 @@ export const Sidebar = () => {
 
                 <div className="dropdown pb-4">
 
-                    <Link href="#" className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <Link href="#" className="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src={photo} alt="hugenerd" width="30" height="30" className="rounded-circle me-1" />
                         <span className="d-none d-sm-inline mx-1">gmatta</span>
                     </Link>

@@ -1,8 +1,4 @@
-'use strict'
-
-exports.test = (req, res) => {
-    res.send({ message: 'Test hotels' })
-}
+"use strict";
 
 const Hotel = require("./hotel.model");
 const Room = require('../room/room.model');
