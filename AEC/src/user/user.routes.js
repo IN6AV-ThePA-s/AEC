@@ -12,6 +12,7 @@ api.get('/test', test)
 api.post('/login', login)
 api.post('/register', register)
 api.get('/getImg/:file', upload, getImg)
+api.put('/registerImg/:id', [upload], uploadImg)
 
 //PRIVATE ROUTES
 api.put('/update', ensureAdvance, update)

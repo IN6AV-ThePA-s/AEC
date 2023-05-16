@@ -1,0 +1,216 @@
+@keyframes pan {
+    100% {
+        background-position: 15% 50%;
+    }
+}
+
+
+@font-face {
+    font-family: LemonmilkRegular;
+    src: url('../../fonts/LEMONMILK-Regular.otf');
+}
+
+
+.conLogin {
+    background-image: url('../../assets/sky.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation:
+        pan 20s infinite alternate linear;
+}
+
+.h2247 {
+    font-family: LemonmilkRegular;
+    font-size: calc(2em + 2vw);
+    color: #fff;
+}
+
+.bodyLogin {
+    text-shadow: 0 .05rem .1rem rgba(184, 172, 172, 0.5);
+    box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+
+.form__group {
+    position: relative;
+    padding: 15px 0 0;
+    margin-top: 10px;
+    width: 50%;
+}
+
+.form__field {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid #000000;
+    outline: 0;
+    font-size: 1.3rem;
+    color: #000000;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.form__field::placeholder {
+    color: transparent;
+}
+
+.form__field:placeholder-shown~.form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+}
+
+.form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #000000;
+}
+
+.form__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #00126c, #9d3473);
+    border-image-slice: 1;
+}
+
+.form__field:focus~.form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #00126c;
+    font-weight: 700;
+}
+
+/* reset input */
+.form__field:required,
+.form__field:invalid {
+    box-shadow: none;
+}
+
+.draw-border {
+    box-shadow: inset 0 0 0 4px #000000;
+    color: #000000;
+    transition: color 0.25s 0.0833333333s;
+    position: relative;
+}
+
+.draw-border::before,
+.draw-border::after {
+    border: 0 solid transparent;
+    box-sizing: border-box;
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.draw-border::before {
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+}
+
+.draw-border::after {
+    border-top-width: 4px;
+    border-right-width: 4px;
+}
+
+.draw-border:hover {
+    color: #00126c;
+}
+
+.draw-border:hover::before,
+.draw-border:hover::after {
+    border-radius: 9px;
+    border-color: #00126c;
+    transition: border-color 0s, width 0.25s, height 0.25s;
+    width: 100%;
+    height: 100%;
+}
+
+.draw-border:hover::before {
+    transition-delay: 0s, 0s, 0.25s;
+}
+
+.draw-border:hover::after {
+    transition-delay: 0s, 0.25s, 0s;
+}
+
+.draw-border2 {
+    box-shadow: inset 0 0 0 4px #000000;
+    color: #000000;
+    transition: color 0.25s 0.0833333333s;
+    position: relative;
+}
+
+.draw-border2::before,
+.draw-border2::after {
+    border: 0 solid transparent;
+    box-sizing: border-box;
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.draw-border2::before {
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+}
+
+.draw-border2::after {
+    border-top-width: 4px;
+    border-right-width: 4px;
+}
+
+.draw-border2:hover {
+    color: red;
+}
+
+.draw-border2:hover::before,
+.draw-border2:hover::after {
+    border-radius: 9px;
+    border-color: red;
+    transition: border-color 0s, width 0.25s, height 0.25s;
+    width: 100%;
+    height: 100%;
+}
+
+.draw-border2:hover::before {
+    transition-delay: 0s, 0s, 0.25s;
+}
+
+.draw-border2:hover::after {
+    transition-delay: 0s, 0.25s, 0s;
+}
+
+.btnLogin {
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1.5;
+    font: 700 1.2rem "Roboto Slab", sans-serif;
+    padding: 1em 2em;
+    letter-spacing: 0.05rem;
+}
+
+.btnLogin:focus {
+    outline: 2px dotted #ffffff;
+    transition: 1ms;
+}
