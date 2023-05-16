@@ -2,6 +2,7 @@
 const { validateData } = require('../utils/validate')
 
 const Service = require('./service.model');
+const Hotel = require('../hotel/hotel.model')
 
 exports.test = (req, res) => {
     res.send({ message: `Hi services` });
@@ -20,13 +21,24 @@ exports.addService = async(req,res) =>{
         let validacion = validateData(params)
         if(validacion) return res.status(400).send(validacion)
         //comporbar que no esxistan ya en la base de datos
-        let existsService = await Service.findOne({service:data.service})
-        if(existsService) return res.send({message:'Service already exists'})
+        let existService = await Service.findOne({
+            $and: [
+                {service: data.service},
+                {hotel: data.hotel},
+            ]
+        })
+
+        if (existService)  return res.status(403).send({ message: 'El servicio ya existe en este hotel' })
+
+        // let existsService = await Service.findOne({service:data.service})
+        // if(existsService) return res.send({message:'Service already exists'})
+        let hotel = await Hotel.findOne({ _id: data.hotel })
+        if (!hotel) return res.status(404).send({ message: 'Hotel not found :(' })
         //guardar los datos
         let newService = new Service(data)
         await newService.save()
         //regresar la respuesta
-        return res.send({message:'Service saved successfully',newService})
+        return res.send({message:'Service saved successfully', service: newService })
     } catch (err) {
         console.error(err);
         return res.status(500).send({message:'Error saving service',error:err.message})
@@ -61,24 +73,46 @@ exports.getService = async(req,res) =>{
     }
 }
 
+exports.getServicesByHotel = async(req, res) => {
+    try {
+        let hotel = req.params.hotel
+        let services = await Service.find({ hotel: hotel })
+        
+        if (!services) return res.status(404).send({ message: 'Services not found :(' })
+        return res.send({ message: 'Services found!', services: services })
+        
+    } catch (err) {
+        console.error(err)
+        res.status(500).send({ message: 'Error getting the hotel services :(', error: err })
+    }
+}
+
 exports.updateService = async(req,res) =>{
     try {
         //obtener el id del servicio que se actualizará
         let id = req.params.id
         //obtener los datos que se actualizaran
         let data = req.body
-        //validar que no exista ya el nombre
-        if(data.service !== undefined){
-            if(data.service == null || data.service == '') data.service = undefined
-            else{
-                let existsService = await Service.findOne({service:data.service})
-                if(existsService){
-                    if(existsService._id !== id) return res.send({message:'Service already exists'})
-                }         
-            }
+        let params = {
+            name: data.service,
+            price: data.price,
+            description: data.description,
+            hotel: data.hotel
         }
-        if(data.description == null || data.description == '') data.description = undefined
-        if(data.price == null || data.price == '') data.price = undefined
+        let msg = validateData(params)
+        if(msg) return res.status(403).send(msg)
+        //validar que no exista ya el nombre
+        let service = await Service.findOne({ _id: id })
+
+        let existService = await Service.findOne({
+            $and: [
+                {service: data.service},
+                {hotel: data.hotel},
+            ]
+        })
+
+        if (existService && existService._id.toString() !== service._id.toString())  return res.status(403).send({ message: 'El servicio ya existe en este hotel' })
+
         //actualizar
         let updateService = await Service.findOneAndUpdate(
             {_id:id},
@@ -98,7 +132,7 @@ exports.deleteService = async(req, res)=>{
     try {
         let id = req.params.id;
         let deleteService = await Service.findOneAndDelete({_id: id})
-        if(!deleteService) return res.status(404).send({message: 'Services not found and delete'});
+        if(!deleteService) return res.status(404).send({message: 'Service not found and not deleted'});
         return res.send({message: 'Service deleting successfully'})
     } catch (err) {
         console.error(err);

@@ -1,6 +1,67 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
+import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
 
 export const AddUserPage = () => {
+    const navigate = useNavigate()
+    const [form, setForm] = useState({
+        name: '',
+        surname: '',
+        phone: '',
+        email: '',
+        username: '',
+        password: '',
+        role: ''
+    })
+    const [photo, setPhoto] = useState()
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+    }
+
+    const handleForm = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        })
+    }
+    const handleSelect = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.options[e.target.selectedIndex].value
+        })
+    }
+    const handlePhoto = (e) => {
+        let formData = new FormData()
+        formData.append('image', e.target.files[0])
+        setPhoto(formData)
+    }
+
+    const add = async(e) => {
+        try {
+            const { data } = await axios.post('http://localhost:3022/user/save', form, { headers: headers })
+
+            if(data.user) {
+                if(photo) await axios.put(`http://localhost:3022/user/uploadImg/${data.user._id}`, photo, {
+                    headers: {'Content-Type': 'multipart/form-data', 'Authorization': localStorage.getItem('token')}
+                })
+                Swal.fire({
+                    title: 'User added',
+                    text: `User "${data.user.username}" was successfully added`,
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                })
+                navigate('/dashboard/userPage')
+            }
+            
+        } catch (err) {
+            Swal.fire(err.response.data.message, '', 'error')
+            console.error(err)
+        }
+    }
+    
     return (
         <div className="main-content">
             <div className="container">
@@ -20,40 +81,40 @@ export const AddUserPage = () => {
                                 <div className=" align-items-center mb-2">
 
                                     <h5 className="mr-2 mt-3">Name</h5>
-                                    <input type="text" className="form-control" />
+                                    <input onChange={handleForm} name='name' type="text" className="form-control" />
 
                                     <h5 className="mr-2 mt-3">Surname</h5>
-                                    <input type="text" className="form-control" />
+                                    <input onChange={handleForm} name='surname' type="text" className="form-control" />
 
                                     <h5 className="mr-2 mt-3">Phone</h5>
-                                    <input type="text" className="form-control" />
+                                    <input onChange={handleForm} name='phone' type="text" className="form-control" />
 
                                     <h5 className="mr-2 mt-3">Email</h5>
-                                    <input type="text" className="form-control" />
+                                    <input onChange={handleForm} name='email' type="text" className="form-control" />
 
                                     <h5 className="mr-2 mt-3">Username</h5>
-                                    <input type="text" className="form-control" />
+                                    <input onChange={handleForm} name='username' type="text" className="form-control" />
 
                                     <h5 className="mr-2 mt-3">Password</h5>
-                                    <input type="password" className="form-control" />
+                                    <input onChange={handleForm} name='password' type="password" className="form-control" />
 
                                     <h5 className=" mr-2 mt-3">Role</h5>
-                                    <select name="state" className='form-select'>
-
-                                        <option value={null}>ADMIN</option>
-                                        <option value={null}>CLIENT</option>
+                                    <select onChange={handleSelect} name='role' className='form-select'>
+                                        <option value={null}>Select...</option>
+                                        <option value={'ADMIN'}>ADMIN</option>
+                                        <option value={'CLIENT'}>CLIENT</option>
 
                                     </select>
 
                                     <h5 className="mr-2 mt-3">Photo</h5>
-                                    <input type="file" className="form-control" />
+                                    <input onChange={handlePhoto} name='photo' type="file" className="form-control" />
 
 
 
 
                                 </div>
 
-                                <button className="btn btn-success me-1 mt-4">Add User</button>
+                                <button onClick={(e)=>{e.preventDefault(); add()}} className="btn btn-success me-1 mt-4">Add User</button>
                                 <button className="btn btn-danger me-1 mt-4">Cancel</button>
 
                             </div>

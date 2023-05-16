@@ -204,8 +204,49 @@ export const CheckHotelPage = () => {
         }
     }
 
+    /* ---------------- Services ----------------------- */
+    const [service, setService] = useState([{}])
+
+    const getServicesByHotel = async() => {
+        try {
+            const { data } = await axios.get(`http://localhost:3022/service/get-hotel-service/${id}`, { headers: headers })
+
+            setService(data.services)
+
+        } catch (err) {
+            Swal.fire(err.response.data.message, '', 'error')
+            console.error(err)
+        }
+    }
+
+    const deleteService = async(service) => {
+        try {
+            Swal.fire({
+                title: 'Are you sure about delete this service?',
+                text: 'This action is irreversible',
+                icon: 'question',
+                showConfirmButton: true,
+                showDenyButton: true
+            }).then(async(result) => {
+                if (result.isConfirmed) {
+                    const { data } = await axios.delete(`http://localhost:3022/service/delete/${service}`, { headers: headers }).catch((err)=>{
+                        Swal.fire(err.response.data.message, '', 'error')
+                    })
+                    getServicesByHotel()
+                    Swal.fire(`${data.message}`, '', 'success')
+                } else {
+                    Swal.fire('No worries!', '', 'success')
+                }
+            })
+        } catch (err) {
+            Swal.fire(err.response.data.message, '', 'error')
+            console.error(err)
+        }
+    }
+
     useEffect(() => {
         getEventsByHotel()
+        getServicesByHotel()
         getHotel()
     }, [])
 
@@ -262,10 +303,28 @@ export const CheckHotelPage = () => {
 
                                     <div className="d-flex flex-column text-center mb-1">
 
-                                        <ModalAddServiceHotel />
-
-                                        <CardHotelServices />
-                                        <CardHotelServices />
+                                        <ModalAddServiceHotel hotel={id}/>
+                                        {   
+                                            service.length > 0 ? (
+                                                service.map(({ service, description, price, hotel, _id }, index) => {
+                                                    return (
+                                                        <CardHotelServices 
+                                                            key={index}
+                                                            name={service}
+                                                            description={description}
+                                                            price={price}
+                                                            hotel={hotel}
+                                                            id={_id}
+                                                            butDel={()=>deleteService(_id)}
+                                                            butEdit={``}
+                                                        />
+                                                    )
+                                                })
+                                            ) : (
+                                                <p className='textNormalHotel'>No services available</p>
+                                            )
+                                        }
+                                        
 
                                         <button className="btn btn-success me-1" type="button" data-bs-toggle="modal" data-bs-target="#modalAddServiceHotel">Add Service</button>
 
