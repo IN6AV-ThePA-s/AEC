@@ -56,10 +56,6 @@ exports.getEvents = async (req, res) => {
 
         let events = await Event.find().populate('hotel');
 
-        if (events.length == 0) {
-            return res.send({ message: 'There is not any event in the DB' })
-        }
-
         return res.send({ message: 'Events avaliable: ', events })
 
     } catch (err) {
