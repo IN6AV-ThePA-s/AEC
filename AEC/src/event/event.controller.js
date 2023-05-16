@@ -24,7 +24,7 @@ exports.addEvent = async (req, res) => {
         let validate = validateData(params);
 
         if (validate) {
-            return res.status(400).send(validate)
+            return res.status(400).send({message: 'You can not put empty information.'})
         }
 
         if (data.maxPersons <= 0) {
@@ -42,7 +42,7 @@ exports.addEvent = async (req, res) => {
 
         if (err.errors.type.name == 'ValidatorError') {
             console.error('Validation error: ', err.message);
-            return res.status(400).send({ message: 'Some params are required or are not valid.' });
+            return res.status(400).send({ message: 'Some params are required or you put an invalid type event.' });
         }
 
         console.error(err)
@@ -62,6 +62,23 @@ exports.getEvents = async (req, res) => {
 
         console.error(err)
         return res.status(500).send({ message: 'Error getting events' })
+
+    }
+}
+
+exports.getEventsByHotel = async (req, res) => {
+    try {
+
+        let idHotel = req.params.id;
+
+        let events = await Event.find({hotel: idHotel}).populate('hotel');
+
+        return res.send({ message: 'Events avaliable: ', events })
+
+    } catch (err) {
+
+        console.error(err)
+        return res.status(500).send({ message: 'Error getting the events of the hotel' })
 
     }
 }
@@ -124,6 +141,12 @@ exports.updateEvent = async (req, res) => {
             hotel: data.hotel
         }
 
+        let validate = validateData(params);
+
+        if (validate) {
+            return res.status(400).send({message: 'You can not put empty information.'})
+        }
+
         if (data.maxPersons !== '') {
             if (data.maxPersons <= 0) {
                 return res.status(400).send({ message: `The max capacity of the event can't be negative or zero.` })
@@ -147,7 +170,7 @@ exports.updateEvent = async (req, res) => {
     } catch (err) {
         if (err.errors.type.name == 'ValidatorError') {
             console.error('Validation error: ', err.message);
-            return res.status(400).send({ message: 'Some params are required or are not valid.' });
+            return res.status(400).send({ message: 'Some params are required or you put an invalid type event.' });
         }
         console.error(err)
         return res.status(500).send({ message: 'Error updating the event' })

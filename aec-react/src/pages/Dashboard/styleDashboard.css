@@ -148,6 +148,18 @@
 
 /* ------------------------------------- */
 
+h1{
+    font-family: Cereal;
+}
+
+h5{
+    font-family: Cereal;
+}
+
+input{
+    font-family: CerealLight;
+}
+
 .dashTitle {
     font-family: Azonix;
     font-size: calc(2vw + 2vh);

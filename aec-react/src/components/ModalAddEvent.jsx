@@ -14,7 +14,7 @@ export const ModalAddEvent = ({hotel}) => {
         type: '',
         maxPersons: '',
         price: '',
-        hotel: {hotel}
+        hotel: hotel
     })
 
     const handleFormEvent = (e) => {
@@ -35,7 +35,7 @@ export const ModalAddEvent = ({hotel}) => {
                     showConfirmButton: false
                 })
 
-                navigate('/dashboard/eventsPage')
+                /* navigate('/dashboard/eventsPage') */
             }
         } catch (err) {
             Swal.fire(err.response.data.message, '', 'error')

@@ -168,9 +168,9 @@ export const CheckHotelPage = () => {
 
     const [event, setEvent] = useState([{}])
 
-    const getEvents = async () => {
+    const getEventsByHotel = async () => {
         try {
-            const { data } = await axios('http://localhost:3022/event/get')
+            const { data } = await axios(`http://localhost:3022/event/getByHotel/${id}`)
             setEvent(data.events)
         } catch (err) {
             Swal.fire(err.response.data.message, '', 'error')
@@ -181,7 +181,7 @@ export const CheckHotelPage = () => {
     const deleteEvents = async (id) => {
         try {
             Swal.fire({
-                title: 'Are you sure to delete this user?',
+                title: 'Are you sure to delete this event?',
                 text: 'This action is irreversible',
                 icon: 'question',
                 showConfirmButton: true,
@@ -192,7 +192,7 @@ export const CheckHotelPage = () => {
                         (err) => {
                             Swal.fire(err.response.data.message, '', 'error')
                         })
-                    getEvents()
+                    getEventsByHotel()
                     Swal.fire(`${data.message}`, '', 'success')
                 } else {
                     Swal.fire('No worries!', '', 'success')
@@ -205,7 +205,7 @@ export const CheckHotelPage = () => {
     }
 
     useEffect(() => {
-        getEvents()
+        getEventsByHotel()
         getHotel()
     }, [])
 
@@ -287,7 +287,7 @@ export const CheckHotelPage = () => {
 
                                     <div className="d-flex flex-column text-center p-3">
 
-                                        <ModalAddEvent hotel={'6462a506700538a66c56c020'} />
+                                        <ModalAddEvent hotel={id} />
                                         {
                                             event.length > 0 ? (
                                                 event.map((i, index) => (
@@ -298,14 +298,14 @@ export const CheckHotelPage = () => {
                                                         type={i.type}
                                                         maxPersons={i.maxPersons}
                                                         price={i.price}
-                                                        hotel={i.hotel}
+                                                        hotel={id}
                                                         id={i._id}
                                                         butDelete={() => deleteEvents(i._id)}
-                                                        butEdit={`/dashboard/updateEvent/${i._id}`}
+                                                        butEdit={``}
                                                     />
                                                 ))
                                             ) : (
-                                                <p>No events available</p>
+                                                <p className='textNormalHotel'>No events available</p>
                                             )
                                         }
 
