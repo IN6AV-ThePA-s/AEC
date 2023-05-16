@@ -102,7 +102,7 @@ export const Index = () => {
                             element: <AddUserPage/>
                         },
                         {
-                            path: 'updateUser',
+                            path: 'updateUser/:id',
                             element: <UpdateUserPage/>
                         },
                         {
