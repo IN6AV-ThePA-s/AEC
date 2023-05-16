@@ -43,6 +43,10 @@
     src: url('../../fonts/CerealLight.otf');
 }
 
+@font-face {
+    font-family: CerealBold;
+    src: url('../../fonts/CerealBoldL.otf');
+}
 
 /* BOTONES GLOBALES */
 
@@ -181,7 +185,7 @@
 
 
 .bgDash {
-    background-color: #fff;
+    background-color: #ffffff;
 }
 
 /* *{

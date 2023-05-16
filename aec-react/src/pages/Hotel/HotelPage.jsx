@@ -1,14 +1,42 @@
-import React from 'react'
+import { useEffect, useState, useContext } from 'react'
 import './styleHotelPage.css'
-import foto from '../../assets/foto.png'
-import { Link } from 'react-router-dom'
-import hotel1 from '../../assets/hotel1.jpg'
-import hotel2 from '../../assets/hotel2.jpg'
-import hotel3 from '../../assets/hotel3.jpg'
+import { Link, useNavigate } from 'react-router-dom'
 import { CardHotelPage } from '../../components/CardHotelPage'
+import axios from 'axios'
+import Sweeta from 'sweetalert2'
 
 
 export const HotelPage = () => {
+
+    const navigate = useNavigate()
+    const [hotels, setHotels] = useState([{}])
+
+    const getHotels = async () => {
+        try {
+            const { data } = await axios(
+                'http://localhost:3022/hotel/get',
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': localStorage.getItem('token')
+                    }
+                }
+            )
+            setHotels(data.hotels)
+        } catch (err) {
+            console.error(err);
+            Sweeta.fire({
+                title: `${err.response.data.message}`,
+                icon: 'error',
+                showConfirmButton: true
+            })
+        }
+    }
+
+    useEffect(() => {
+        getHotels()
+    }, [])
+
     return (
         <>
 
@@ -41,9 +69,22 @@ export const HotelPage = () => {
 
 
                     </div>
-
-                    <CardHotelPage />
-
+                    {
+                        hotels.map(({ _id,name, address, email, phone, photos }, index) => {
+                            return (
+                                <CardHotelPage 
+                                    key={index}
+                                    _id={_id}
+                                    name={name}
+                                    address={address}
+                                    email={email}
+                                    phone={phone}
+                                    photos={photos}
+                                    index={index}
+                                />
+                            )
+                        })
+                    }
                 </div>
             </div>
 
