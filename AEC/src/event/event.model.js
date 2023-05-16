@@ -22,7 +22,7 @@ const eventSchema = mongoose.Schema({
     type:{
         type: String,
         required: true,
-        enum: ['Social', 'Cultural', 'Deportivo', 'Empresarial', 'Académico', 'Religioso']
+        enum: ['Social', 'Cultural', 'Deportivo', 'Empresarial', 'Académico', 'Religioso', 'Otro']
     },
     maxPersons:{
         type: Number,
