@@ -181,7 +181,7 @@ export const CheckHotelPage = () => {
     const deleteEvents = async (id) => {
         try {
             Swal.fire({
-                title: 'Are you sure to delete this user?',
+                title: 'Are you sure to delete this event?',
                 text: 'This action is irreversible',
                 icon: 'question',
                 showConfirmButton: true,
