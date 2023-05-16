@@ -1,16 +1,8 @@
 import React from 'react'
-import hotel1 from '../assets/hotel1.jpg'
-import hotel2 from '../assets/hotel2.jpg'
-import hotel3 from '../assets/hotel3.jpg'
 import '../pages/Hotel/styleCardHotelPage.css'
 import { Link } from 'react-router-dom'
 
-import bell from '../assets/desk-bell.svg'
-import single from '../assets/single-bed.svg'
-import towels from '../assets/towels.svg'
-import wifi from '../assets/wifi.svg'
-
-export const CardHotelPage = () => {
+export const CardHotelPage = ({ _id, index, name, address, email, phone, photos }) => {
     return (
         <>
 
@@ -18,23 +10,26 @@ export const CardHotelPage = () => {
                 <div className="col-sm-9 col-md-9 col-lg-9">
                     <div className="hotel-card bg-white rounded-lg shadow-lg overflow-hidden d-block d-lg-flex">
                         <div className="hotel-card_images">
-                            <div id="bootstrapCarousel" className="carousel slide h-100" data-ride="carousel">
+                            <div id={`bootstrapCarousel${index}`} className="carousel slide h-100" data-ride="carousel">
                                 <div className="carousel-inner h-100">
-                                    <div className="carousel-item h-100 active">
-                                        <img src={hotel1} className="d-block w-100" alt="Hotel Image" />
-                                    </div>
-                                    <div className="carousel-item h-100">
-                                        <img src={hotel2} className="d-block w-100" alt="Hotel Image" />
-                                    </div>
-                                    <div className="carousel-item h-100">
-                                        <img src={hotel3} className="d-block w-100" alt="Hotel Image" />
-                                    </div>
+
+                                    {
+                                        photos?.map((name, index) => {
+                                            return (
+
+                                                <div key={index} className="carousel-item h-100 active">
+                                                    <img crossOrigin='anonymous' src={`http://localhost:3022/hotel/get-img/${name}`} className="d-block w-100" alt="Hotel Image" />
+                                                </div>
+                                            )
+                                        })
+                                    }
+
                                 </div>
-                                <a className="carousel-control-prev" href="#bootstrapCarousel" role="button" data-slide="prev">
+                                <a className="carousel-control-prev" href={`#bootstrapCarousel${index}`} role="button" data-slide="prev">
                                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span className="sr-only">Previous</span>
                                 </a>
-                                <a className="carousel-control-next" href="#bootstrapCarousel" role="button" data-slide="next">
+                                <a className="carousel-control-next" href={`#bootstrapCarousel${index}`} role="button" data-slide="next">
                                     <span className="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span className="sr-only">Next</span>
                                 </a>
@@ -42,7 +37,7 @@ export const CardHotelPage = () => {
                         </div>
                         <div className="hotel-card_info p-4">
                             <div className="d-flex align-items-center mb-2">
-                                <h5 className="mb-0 mr-2">Name</h5>
+                                <h5 className="mb-0 mr-2">{name}</h5>
                                 {/* <div>
                                             <i className="fa fa-star text-warning"></i>
                                             <i className="fa fa-star text-warning"></i>
@@ -56,15 +51,15 @@ export const CardHotelPage = () => {
                                 <div className="hotel-card_details">
 
                                     <div className="text-muted mb-2">
-                                        <i className="fas fa-map-marker-alt"></i> Address
+                                        <i className="fas fa-map-marker-alt"></i> {address}
                                     </div>
 
                                     <div className="mb-2 mt-3">
-                                        <span className="badge badge-primary">57841073</span>
+                                        <span className="badge badge-primary">{phone}</span>
 
                                     </div>
                                     <div className="mb-2">
-                                        <span className="badge badge-secondary">gmatta-2021223@kinal.edu.gt</span>
+                                        <span className="badge badge-secondary">{email}</span>
 
                                     </div>
 
@@ -84,7 +79,7 @@ export const CardHotelPage = () => {
 
 
                             </div>
-                            <Link to='/dashboard/checkHotel'>
+                            <Link to={`/dashboard/checkHotel/${_id}`}>
                                 <button className="btn btn-primary me-1 mt-4">Check Hotel</button>
                             </Link>
 

@@ -81,7 +81,7 @@ export const Index = () => {
                             element: <HotelPage/>
                         },
                         {
-                            path: 'checkHotel',
+                            path: 'checkHotel/:id',
                             element: <CheckHotelPage/>
                         },
                         {
