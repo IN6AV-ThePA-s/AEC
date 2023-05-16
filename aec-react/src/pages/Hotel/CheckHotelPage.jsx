@@ -1,13 +1,8 @@
-import React from 'react'
-import hotel1 from '../../assets/hotel1.jpg'
-import hotel2 from '../../assets/hotel2.jpg'
-import hotel3 from '../../assets/hotel3.jpg'
-import room1 from '../../assets/room1.jpg'
-import room2 from '../../assets/room2.jpg'
-import room3 from '../../assets/room3.jpg'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import Sweeta from 'sweetalert2'
 import '../../pages/Hotel/styleCardHotelPage.css'
 import { ModalUpdateRoom } from '../../components/ModalUpdateRoom'
-import { Link } from 'react-router-dom'
 import { CardRoomPage } from '../../components/CardRoomPage'
 import { CardHotelServices } from '../../components/CardHotelServices'
 import { CardHotelEvents } from '../../components/CardHotelEvents'
@@ -17,7 +12,203 @@ import { ModalAddService } from '../../components/ModalAddService'
 import { ModalAddEvent } from '../../components/ModalAddEvent'
 import { ModalAddServiceHotel } from '../../components/ModalAddServiceHotel'
 
+import axios from 'axios';
+import Swal from 'sweetalert2'
+
 export const CheckHotelPage = () => {
+    const { id } = useParams()
+    const navigate = useNavigate();
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+    }
+    const [hotel, setHotel] = useState({})
+    const [imgs, setImgs] = useState()
+
+    const handleChange = (e) => {
+        setHotel({
+            ...hotel,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleImages = (e) => {
+        let f = new FormData()
+        for (let img of e.target.files) {
+            f.append('images', img)
+        }
+        setImgs(f)
+    }
+
+    const validateData = (data) => {
+        let keys = Object.keys(data), msg = ''
+        for (const key of keys) {
+            if (data[key] !== null &&
+                data[key] !== undefined &&
+                data[key] !== ''
+            ) continue
+            msg += ` ${key.toUpperCase()},`
+        }
+        const a = `${msg}`
+        return a.trim()
+    }
+
+    const getHotel = async () => {
+        try {
+            const { data } = await axios(
+                `http://localhost:3022/hotel/get/${id}`,
+                {
+                    headers: headers
+                }
+            )
+            setHotel(data.hotel)
+        } catch (err) {
+            console.error(err);
+            Sweeta.fire({
+                title: `${err.response.data.message}`,
+                icon: 'error',
+                showConfirmButton: true
+            })
+        }
+    }
+
+    const upda = async (e) => {
+        try {
+            e.preventDefault()
+            let msg = validateData(hotel)
+            if (msg)
+                return Sweeta.fire({
+                    title: `PARAMS REQUIRED`,
+                    text: msg,
+                    icon: 'warning',
+                    iconColor: 'orange',
+                    showConfirmButton: true
+                })
+            const { data } = await axios.put(
+                `http://localhost:3022/hotel/update/${id}`,
+                hotel,
+                {
+                    headers: headers
+                }
+            )
+            if (imgs) {
+                await axios.put(
+                    `http://localhost:3022/hotel/upload-imgs/${id}`,
+                    imgs,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                            'Authorization': localStorage.getItem('token')
+                        }
+                    }
+                )
+            }
+            Sweeta.fire({
+                title: `HOTEL UPDATED`,
+                text: `${data.message}`,
+                icon: 'success',
+                timer: 2500,
+                showConfirmButton: false
+            })
+            navigate('/dashboard/hotelPage')
+        } catch (err) {
+            console.error(err);
+            if (err.response.data.error) {
+                return Sweeta.fire({
+                    title: `Ya existe un hotel con el nombre ${hotel.name.toUpperCase()}`,
+                    icon: 'error',
+                    showConfirmButton: true
+                })
+            }
+            Sweeta.fire({
+                title: `${err.response.data.message}`,
+                icon: 'error',
+                showConfirmButton: true
+            })
+        }
+    }
+
+    const del = async (e) => {
+        try {
+            e.preventDefault()
+            const { isConfirmed } = await Sweeta.fire({
+                title: `Are you sure to delete this hotel?`,
+                text: `When doing this, all those rooms associated with the hotel will be eliminated altogether.`,
+                icon: 'question',
+                showConfirmButton: true,
+                showDenyButton: true
+            })
+            if (isConfirmed) {
+                const { data } = await axios.delete(
+                    `http://localhost:3022/hotel/delete/${id}`,
+                    {
+                        headers: headers
+                    }
+                )
+                Sweeta.fire({
+                    title: `HOTEL DELETED`,
+                    text: `${data.message}`,
+                    icon: 'success',
+                    timer: 2500,
+                    showConfirmButton: false
+                })
+                navigate('/dashboard/hotelPage')
+            }
+        } catch (err) {
+            console.error(err);
+            Sweeta.fire({
+                title: `${err.response.data.message}`,
+                icon: 'error',
+                showConfirmButton: true
+            })
+        }
+    }
+
+    /* ---------------- EVENTOS ----------------------- */
+
+    const [event, setEvent] = useState([{}])
+
+    const getEvents = async () => {
+        try {
+            const { data } = await axios('http://localhost:3022/event/get')
+            setEvent(data.events)
+        } catch (err) {
+            Swal.fire(err.response.data.message, '', 'error')
+            console.error(err)
+        }
+    }
+
+    const deleteEvents = async (id) => {
+        try {
+            Swal.fire({
+                title: 'Are you sure to delete this user?',
+                text: 'This action is irreversible',
+                icon: 'question',
+                showConfirmButton: true,
+                showDenyButton: true
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    const { data } = await axios.delete(`http://localhost:3022/event/delete/${id}`).catch(
+                        (err) => {
+                            Swal.fire(err.response.data.message, '', 'error')
+                        })
+                    getEvents()
+                    Swal.fire(`${data.message}`, '', 'success')
+                } else {
+                    Swal.fire('No worries!', '', 'success')
+                }
+            })
+        } catch (err) {
+            Swal.fire(err.response.data.message, '', 'error')
+            console.error(err)
+        }
+    }
+
+    useEffect(() => {
+        getEvents()
+        getHotel()
+    }, [])
+
     return (
 
         <div className="main-content">
@@ -37,31 +228,25 @@ export const CheckHotelPage = () => {
 
                                 <div className=" align-items-center mb-2">
 
-                                    <h5 className="mr-2 mt-3">Name</h5>
-                                    <input type="text" className="form-control" />
-
-                                    <h5 className="mr-2 mt-3">Address</h5>
-                                    <input type="text" className="form-control" />
-
-                                    <h5 className="mr-2 mt-3">Phone</h5>
-                                    <input type="text" className="form-control" />
-
-                                    <h5 className="mr-2 mt-3">Email</h5>
-                                    <input type="text" className="form-control" />
-
-                                    <h5 className="mr-2 mt-3">Photos</h5>
+                                    <h5 className=" mr-2 mt-3">Name</h5>
+                                    <input type="text" className="form-control" defaultValue={hotel.name} name='name' onChange={handleChange} />
+                                    <h5 className=" mr-2 mt-3">Address</h5>
+                                    <input type="text" className="form-control" defaultValue={hotel.address} name='address' onChange={handleChange} />
+                                    <h5 className=" mr-2 mt-3">Phone</h5>
+                                    <input type="text" className="form-control" defaultValue={hotel.phone} name='phone' onChange={handleChange} />
+                                    <h5 className=" mr-2 mt-3">Email</h5>
+                                    <input type="text" className="form-control" defaultValue={hotel.email} name='email' onChange={handleChange} />
+                                    <h5 className=" mr-2 mt-3">Photos</h5>
+                                    <label htmlFor="note">*este campo no es requerido, ya que modifica todas las fotos</label>
                                     <div className='d-flex'>
-
-                                        <input type="file" className="form-control" />
-                                        <input type="file" className="form-control ms-1" />
-                                        <input type="file" className="form-control ms-1" />
+                                        <input type="file" className="form-control" name='images' multiple accept='image/png, image/jpg, image/jpeg' onChange={(e) => handleImages(e)} />
                                     </div>
 
 
                                 </div>
 
-                                <button className="btn btn-warning me-1 mt-4 bi bi-pencil"> Update</button>
-                                <button className="btn btn-danger me-1 mt-4 bi bi-trash"> Delete</button>
+                                <button className="btn btn-warning me-1 mt-4 bi bi-pencil" onClick={(e) => upda(e)}> Update</button>
+                                <button className="btn btn-danger me-1 mt-4 bi bi-trash" onClick={(e) => del(e)}> Delete</button>
 
                             </div>
                         </div>
@@ -77,7 +262,7 @@ export const CheckHotelPage = () => {
 
                                     <div className="d-flex flex-column text-center mb-1">
 
-                                        <ModalAddServiceHotel/>
+                                        <ModalAddServiceHotel />
 
                                         <CardHotelServices />
                                         <CardHotelServices />
@@ -102,8 +287,28 @@ export const CheckHotelPage = () => {
 
                                     <div className="d-flex flex-column text-center p-3">
 
-                                        <ModalAddEvent/>
-                                        <CardHotelEvents />
+                                        <ModalAddEvent hotel={'6462a506700538a66c56c020'} />
+                                        {
+                                            event.length > 0 ? (
+                                                event.map((i, index) => (
+                                                    <CardHotelEvents
+                                                        key={index}
+                                                        name={i.name}
+                                                        description={i.description}
+                                                        type={i.type}
+                                                        maxPersons={i.maxPersons}
+                                                        price={i.price}
+                                                        hotel={i.hotel}
+                                                        id={i._id}
+                                                        butDelete={() => deleteEvents(i._id)}
+                                                        butEdit={`/dashboard/updateEvent/${i._id}`}
+                                                    />
+                                                ))
+                                            ) : (
+                                                <p>No events available</p>
+                                            )
+                                        }
+
 
                                         <button className="btn btn-success me-1" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEvent">Add Event</button>
 

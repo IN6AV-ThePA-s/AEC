@@ -17,6 +17,11 @@ import { NotFound } from './pages/NotFound/NotFound'
 import { LoginPage } from './pages/Home/LoginPage'
 import { RegisterPage } from './pages/Home/RegisterPage'
 import { AboutUsPage } from './pages/Home/AboutUsPage'
+import { ReservationPage } from './pages/Reservation/ReservationPage'
+import { BillPage } from './pages/Bill/BillPage'
+import { AddReservationPage } from './pages/Reservation/AddReservationPage'
+import { UpdateReservationPage } from './pages/Reservation/UpdateReservationPage'
+import { UpdateBillPage } from './pages/Bill/UpdateBillPage'
 
 export const AuthContext = createContext();
 
@@ -81,7 +86,7 @@ export const Index = () => {
                             element: <HotelPage/>
                         },
                         {
-                            path: 'checkHotel',
+                            path: 'checkHotel/:id',
                             element: <CheckHotelPage/>
                         },
                         {
@@ -99,6 +104,26 @@ export const Index = () => {
                         {
                             path: 'updateUser/:id',
                             element: <UpdateUserPage/>
+                        },
+                        {
+                            path: 'reservationPage',
+                            element: <ReservationPage/>
+                        },
+                        {
+                            path: 'addReservation',
+                            element: <AddReservationPage/>
+                        },
+                        {
+                            path: 'updateReservation',
+                            element: <UpdateReservationPage/>
+                        },
+                        {
+                            path: 'billPage',
+                            element: <BillPage/>
+                        },
+                        {
+                            path: 'updateBill',
+                            element: <UpdateBillPage/>
                         }
                     ]
                 }
