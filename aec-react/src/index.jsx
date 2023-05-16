@@ -86,7 +86,7 @@ export const Index = () => {
                             element: <HotelPage/>
                         },
                         {
-                            path: 'checkHotel',
+                            path: 'checkHotel/:id',
                             element: <CheckHotelPage/>
                         },
                         {
@@ -102,7 +102,7 @@ export const Index = () => {
                             element: <AddUserPage/>
                         },
                         {
-                            path: 'updateUser',
+                            path: 'updateUser/:id',
                             element: <UpdateUserPage/>
                         },
                         {

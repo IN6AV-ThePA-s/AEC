@@ -3,6 +3,7 @@
 const Room = require("./room.model");
 const Hotel = require("../hotel/hotel.model");
 const Reservation = require('../reservation/reservation.model');
+const Service = require('../service/service.model');
 const { validateData, isImg } = require("../utils/validate");
 const fs = require('fs');
 const path = require('path');
@@ -11,11 +12,17 @@ const path = require('path');
 exports.add = async(req, res) => {
     try {
         const data = req.body;
-        let msg = validateData({ hotel: data.hotel });
+        let msg = validateData({ hotel: data.hotel, services: data.services, price: data.price });
         if (msg)
             return res.status(418).send(msg);
         if (!(await Hotel.findOne({ _id: data.hotel })))
             return res.status(418).send({ message: `Hotel not found` });
+        let total = 0;
+        for (const service of data.services) {
+            const { price } = await Service.findOne({ _id: service.service });
+            total = Number(total + price).toFixed(2);
+        }
+        data.price = (Number(data.price) + total).toFixed(2);
         const room = new Room(data);
         await room.save();
         return res.send({ message: `The room has been added`, RI: room._id });
