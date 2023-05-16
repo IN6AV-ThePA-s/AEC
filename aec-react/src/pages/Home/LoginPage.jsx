@@ -48,7 +48,7 @@ export const LoginPage = () => {
                     <NavbarHome />
                 </div>
                 <div className="p-5 bg-image" style={ {height: '250px', 
-                    //backgroundImage: `url('https://img.freepik.com/free-photo/fantastic-blue-sky_1203-1929.jpg?w=996&t=st=1683838238~exp=1683838838~hmac=488e0f00855dd85560dee7eaa798f29a16699300c15d4e3f4e9edcad98586d8c')`,
+                    backgroundImage: `url('https://img.freepik.com/free-photo/fantastic-blue-sky_1203-1929.jpg?w=996&t=st=1683838238~exp=1683838838~hmac=488e0f00855dd85560dee7eaa798f29a16699300c15d4e3f4e9edcad98586d8c')`,
                     backgroundSize: 'cover'
                 
                 }} >
