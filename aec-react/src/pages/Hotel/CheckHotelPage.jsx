@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import axios from 'axios'
 import Sweeta from 'sweetalert2'
 import '../../pages/Hotel/styleCardHotelPage.css'
 import { ModalUpdateRoom } from '../../components/ModalUpdateRoom'
@@ -25,7 +24,6 @@ export const CheckHotelPage = () => {
     }
     const [hotel, setHotel] = useState({})
     const [imgs, setImgs] = useState()
-    const [event, setEvent] = useState([{}])
 
     const handleChange = (e) => {
         setHotel({
@@ -165,6 +163,10 @@ export const CheckHotelPage = () => {
             })
         }
     }
+
+    /* ---------------- EVENTOS ----------------------- */
+
+    const [event, setEvent] = useState([{}])
 
     const getEvents = async () => {
         try {
