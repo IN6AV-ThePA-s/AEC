@@ -2,6 +2,7 @@ import React from 'react'
 import './homeStyle.css'
 import logo from '../../assets/logo.png'
 import { Link } from 'react-router-dom'
+import { Card } from '../../components/Card'
 import { NavbarHome } from '../../components/NavbarHome'
 
 
@@ -28,16 +29,40 @@ export const HomePage = () => {
                 border: 'none'
             }}>
                 <div className="card-body py-5 px-md-5">
-
                     <div className="row d-flex justify-content-center">
                         <div className="col-lg-8">
                             <h2 className="fw-bold mb-5">Home</h2>
-                            
-
                         </div>
                     </div>
                 </div>
+                <div class="container h-100">
+                    <div class="d-flex justify-content-center h-100">
+                        <div class="searchbar">
+                            <input class="search_input" type="text" name="" placeholder="Search..." />
+                            <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div className='d-flex justify-content-center flex-wrap mb-3 mt-3 mx-3 '>
+                    <Card index={0} />
+                    <Card index={1} />
+                    <Card index={2} />
+                    <Card index={3} />
+                    <Card index={4} />
+                    <Card index={5} />
+                    {/*  {
+                    hotel.map((b, index) => {
+                        return (
+                            <Card 
+                            />
+                        )
+                    })
+                } */}
+                </div>
             </div>
+            <footer className="mt-auto">
+                <p className='text-dark'>Arc-En-Ciel®</p>
+            </footer>
         </div>
 
 
