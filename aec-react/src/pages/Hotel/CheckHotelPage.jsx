@@ -304,7 +304,7 @@ export const CheckHotelPage = () => {
             })
             if (isConfirmed) {
                 const { data } = await axios.delete(
-                    `http://localhost:3022/room/delete/${id}`,
+                    `http://localhost:3022/room/delete/${i}`,
                     {
                         headers: headers
                     }
