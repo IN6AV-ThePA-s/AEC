@@ -8,8 +8,8 @@ import photoError from '../assets/userDefault.png'
 
 export const Sidebar = () => {
     const navigate = useNavigate()
-    //const { dataUser } = useContext(AuthContext)
-    const dataUser = JSON.parse(localStorage.getItem('user'))
+    const { dataUser } = useContext(AuthContext)
+    //const dataUser = JSON.parse(localStorage.getItem('user'))
     const [photo, setPhoto] = useState()
     const headers = {
         'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export const Sidebar = () => {
     
     const getPhoto = async() => {
         try {
-            const img = await axios.get(`http://localhost:3022/user/getImg/${dataUser.user.photo}`)
+            const img = await axios.get(`http://localhost:3022/user/getImg/${dataUser.photo}`)
 
             if (img) setPhoto(img.request.responseURL)
             
@@ -165,13 +165,13 @@ export const Sidebar = () => {
 
                     <Link href="#" className="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src={photo || photoError} onError={handleImageError} crossOrigin='anonymous' alt="userFoto" width="30" height="30" className="rounded-circle me-1" />
-                        <span className="d-none d-sm-inline mx-1">{dataUser.user.username}</span>
+                        <span className="d-none d-sm-inline mx-1">{dataUser.username}</span>
                     </Link>
 
                     <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
                         <li><Link className="dropdown-item" href="#">Profile</Link></li>
                         <li><Link className="dropdown-item" to='settings'>Settings</Link></li>
-                        <li><Link className="dropdown-item disabled" href="#">Role: {dataUser.user.role}</Link></li>
+                        <li><Link className="dropdown-item disabled" href="#">Role: {dataUser.role}</Link></li>
 
                         <li>
                             <hr className="dropdown-divider" />

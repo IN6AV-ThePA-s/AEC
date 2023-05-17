@@ -30,10 +30,12 @@ export const LoginPage = () => {
 
             if (data.token) {
                 localStorage.setItem('token', data.token)
-                localStorage.setItem('user', JSON.stringify({user: data.user}))
-                setDataUser(JSON.stringify({user: data.user}))
+                localStorage.setItem('user', JSON.stringify(data.user))
+                setDataUser(data.user)
                 setLoggedIn(true)
-                navigate('/dashboard')
+                
+                data.user.role === 'CLIENT' ? navigate('/home') : navigate('/dashboard')
+                
             }
 
         } catch (err) {
