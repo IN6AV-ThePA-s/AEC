@@ -12,17 +12,11 @@ const path = require('path');
 exports.add = async(req, res) => {
     try {
         const data = req.body;
-        let msg = validateData({ hotel: data.hotel, services: data.services, price: data.price });
+        let msg = validateData({ hotel: data.hotel, price: data.price });
         if (msg)
             return res.status(418).send(msg);
         if (!(await Hotel.findOne({ _id: data.hotel })))
             return res.status(418).send({ message: `Hotel not found` });
-        let total = 0;
-        for (const service of data.services) {
-            const { price } = await Service.findOne({ _id: service.service });
-            total = Number(total + price).toFixed(2);
-        }
-        data.price = (Number(data.price) + total).toFixed(2);
         const room = new Room(data);
         await room.save();
         return res.send({ message: `The room has been added`, RI: room._id });
@@ -49,7 +43,7 @@ exports.gets = async(req, res) => {
 exports.getByHotel = async(req, res) => {
     try {
         const hotelId = req.params.id;
-        const rooms = await Room.find({ hotel: hotelId });
+        const rooms = await Room.find({ hotel: hotelId }).populate('services.service');
         return res.send({ rooms });
     } catch (err) {
         console.error(err);
@@ -104,6 +98,85 @@ exports.upda = async(req, res) => {
     } catch (err) {
         console.error(err);
         return res.status(500).send({ message: `Error updating room` });
+    }
+}
+
+exports.addService = async(req, res) => {
+    try {
+        const roomId = req.params.id;
+        const data = {
+            service: req.body.service
+        };
+        const service = await Service.findOne({ _id: data.service });
+        data.price = service.price;
+        const addService = await Room.findOneAndUpdate({
+            _id: roomId
+        }, {
+            $push: {
+                services: data
+            },
+            $inc: {
+                price: data.price
+            }
+        }, {
+            new: true
+        });
+        if (!addService)
+            return res.status(400).send({ message: `Room not found or service not found` })
+        return res.send({ message: `Service added` });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: `Error adding service` });
+    }
+}
+
+exports.delService = async(req, res) => {
+    try {
+        const roomId = req.params.id;
+        const data = {
+            service: req.body.service
+        };
+        const service = await Service.findOne({ _id: data.service });
+        data.price = service.price;
+        const addService = await Room.findOneAndUpdate({
+            _id: roomId
+        }, {
+            $pull: {
+                services: { service: service._id }
+            },
+            $inc: {
+                price: Number(data.price * -1)
+            }
+        }, {
+            new: true
+        });
+        if (!addService)
+            return res.status(400).send({ message: `Room not found or service not found` })
+        return res.send({ message: `Service deleted` });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: `Error adding service` });
+    }
+}
+
+exports.getServiceByHotel = async(req, res) => {
+    try {
+        const roomId = req.params.id;
+        const room = await Room.findOne({ _id: roomId })
+        const sers = await Service.find({ hotel: room.hotel });
+        let services = [];
+        for (const service of sers) {
+            if (!(await Room.findOne({
+                    $and: [
+                        { _id: roomId },
+                        { 'services.service': service._id }
+                    ]
+                }))) services.push(service);
+        }
+        return res.send({ services });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: `Error getting services` })
     }
 }
 
