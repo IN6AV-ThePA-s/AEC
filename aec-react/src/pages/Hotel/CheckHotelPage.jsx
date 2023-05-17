@@ -170,7 +170,10 @@ export const CheckHotelPage = () => {
 
     const getEventsByHotel = async () => {
         try {
-            const { data } = await axios(`http://localhost:3022/event/getByHotel/${id}`)
+            const { data } = await axios(
+                `http://localhost:3022/event/getByHotel/${id}`
+                , { headers: headers }
+            )
             setEvent(data.events)
         } catch (err) {
             Swal.fire(err.response.data.message, '', 'error')
@@ -188,7 +191,7 @@ export const CheckHotelPage = () => {
                 showDenyButton: true
             }).then(async (result) => {
                 if (result.isConfirmed) {
-                    const { data } = await axios.delete(`http://localhost:3022/event/delete/${id}`).catch(
+                    const { data } = await axios.delete(`http://localhost:3022/event/delete/${id}`, { headers: headers }).catch(
                         (err) => {
                             Swal.fire(err.response.data.message, '', 'error')
                         })
