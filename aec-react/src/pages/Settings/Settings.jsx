@@ -8,7 +8,7 @@ import photoError from '../../assets/userDefault.png'
 
 export const Settings = () => {
     const navigate = useNavigate()
-
+    const { dataUser } = useContext(AuthContext)
     const userData = JSON.parse(localStorage.getItem('user'))
     const [photo, setPhoto] = useState()
     const [user, setUser] = useState({})
@@ -24,7 +24,7 @@ export const Settings = () => {
     const getUser = async() => {
         try {
             
-            const { data } = await axios.get(`http://localhost:3022/user/get/${userData.user.sub}`, { headers: headers })
+            const { data } = await axios.get(`http://localhost:3022/user/get/${dataUser.sub}`, { headers: headers })
 
             if (data.data) {
                 setUser(data.data[0])

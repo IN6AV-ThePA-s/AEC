@@ -22,6 +22,7 @@ import { BillPage } from './pages/Bill/BillPage'
 import { AddReservationPage } from './pages/Reservation/AddReservationPage'
 import { UpdateReservationPage } from './pages/Reservation/UpdateReservationPage'
 import { UpdateBillPage } from './pages/Bill/UpdateBillPage'
+import { ClientPage } from './pages/Client/ClientPage'
 
 export const AuthContext = createContext();
 
@@ -57,6 +58,15 @@ export const Index = () => {
                 },{
                     path: '/about',
                     element: <AboutUsPage/>
+                },
+                {
+                    path: '/home',
+                    element: loggedIn ? <ClientPage/> : <LoginPage/>,
+                    children: [
+                        {
+                            path: 'hotel'
+                        }
+                    ]
                 },
                 {
                     path: '/dashboard',
