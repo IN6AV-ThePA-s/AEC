@@ -8,8 +8,8 @@ api.get('/test', [ensureAdvance, isAdmin], serviceController.test);
 api.get('/get', [ensureAdvance], serviceController.getServices)
 api.get('/get/:id', [ensureAdvance], serviceController.getService)
 api.get('/get-hotel-service/:hotel', [ensureAdvance], serviceController.getServicesByHotel)
-api.post('/add', [ensureAdvance, isMaster], serviceController.addService)
-api.put('/update/:id', [ensureAdvance, isMaster], serviceController.updateService)
-api.delete('/delete/:id', [ensureAdvance, isMaster], serviceController.deleteService);
+api.post('/add', [ensureAdvance, isAdmin], serviceController.addService)
+api.put('/update/:id', [ensureAdvance, isAdmin], serviceController.updateService)
+api.delete('/delete/:id', [ensureAdvance, isAdmin], serviceController.deleteService);
 
 module.exports = api;
