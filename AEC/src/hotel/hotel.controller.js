@@ -39,6 +39,16 @@ exports.gets = async(req, res) => {
     }
 };
 
+exports.getOfHome = async(req, res) => {
+    try {
+        const hotels = await Hotel.find({}, { _id: 1, name: 1, address: 1, photos: 1 })
+        return res.send({ hotels });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: `Error getting hotels` });
+    }
+}
+
 exports.getAdminsHotels = async(req, res) => {
     try {
         const { sub, role } = req.user;

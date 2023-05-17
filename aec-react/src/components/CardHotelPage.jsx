@@ -17,7 +17,7 @@ export const CardHotelPage = ({ _id, index, name, address, email, phone, photos 
                                         photos?.map((name, index) => {
                                             return (
 
-                                                <div key={index} className="carousel-item h-100 active">
+                                                <div key={index} className={`carousel-item h-100 ${index === 0 ? 'active':''}`}>
                                                     <img crossOrigin='anonymous' src={`http://localhost:3022/hotel/get-img/${name}`} className="d-block w-100" alt="Hotel Image" />
                                                 </div>
                                             )
