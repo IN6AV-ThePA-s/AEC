@@ -69,7 +69,7 @@ exports.get = async(req, res) => {
 exports.del = async(req, res) => {
     try {
         const roomId = req.params.id;
-        if (await Reservation.find({ room: roomId }))
+        if (!(await Reservation.find({ room: roomId })))
             return res.status(401).send({ message: `The room cannot be deleted as it has a reservation` });
         const delR = await Room.deleteOne({ _id: roomId });
         if (delR.deletedCount == 0)
