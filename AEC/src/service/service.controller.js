@@ -8,14 +8,14 @@ exports.test = (req, res) => {
     res.send({ message: `Hi services` });
 }
 
-exports.addService = async(req,res) =>{
+exports.addService = async(req, res) => {
     try {
         //obtener los datos
         let data = req.body
         let params = {
             service: data.service,
-            description:data.description,
-            price:data.price,
+            description: data.description,
+            price: data.price,
             hotel: data.hotel
         }
         let validacion = validateData(params)
@@ -28,7 +28,7 @@ exports.addService = async(req,res) =>{
             ]
         })
 
-        if (existService)  return res.status(403).send({ message: 'El servicio ya existe en este hotel' })
+        if (existService)  return res.status(403).send({ message: 'This service is already in this hotel' })
 
         // let existsService = await Service.findOne({service:data.service})
         // if(existsService) return res.send({message:'Service already exists'})
@@ -41,35 +41,35 @@ exports.addService = async(req,res) =>{
         return res.send({message:'Service saved successfully', service: newService })
     } catch (err) {
         console.error(err);
-        return res.status(500).send({message:'Error saving service',error:err.message})
+        return res.status(500).send({ message: 'Error saving service', error: err.message })
     }
 }
 
-exports.getServices = async(req,res) =>{
+exports.getServices = async(req, res) => {
     try {
         //obtener los datos de la BD
         let services = await Service.find()
-        //Retornarlos
-        if(services.length == 0) return res.send({message:'There is not any service'})
-        return res.send({message:'The services availables are these:',services})
+            //Retornarlos
+        if (services.length == 0) return res.send({ message: 'There is not any service' })
+        return res.send({ message: 'The services availables are these:', services })
     } catch (err) {
         console.error(err);
-        return res.status(500).send({message:'Error getting services'})
+        return res.status(500).send({ message: 'Error getting services' })
     }
 }
 
-exports.getService = async(req,res) =>{
+exports.getService = async(req, res) => {
     try {
         //obtener el id del servicio que se traerá
         let id = req.params.id
-        //obtenerlo de la base de datos
-        let serviceFind = await Service.findOne({_id:id})
-        //retornarlo
-        if(!serviceFind) return res.status(404).send({message:'Service not found'})
-        return res.send({message: 'Service Found', service: serviceFind})
+            //obtenerlo de la base de datos
+        let serviceFind = await Service.findOne({ _id: id })
+            //retornarlo
+        if (!serviceFind) return res.status(404).send({ message: 'Service not found' })
+        return res.send({ message: 'Service Found', service: serviceFind })
     } catch (err) {
         console.error(err);
-        return res.status(500).send({message:'Error getting service'})
+        return res.status(500).send({ message: 'Error getting service' })
     }
 }
 
@@ -91,7 +91,7 @@ exports.updateService = async(req,res) =>{
     try {
         //obtener el id del servicio que se actualizará
         let id = req.params.id
-        //obtener los datos que se actualizaran
+            //obtener los datos que se actualizaran
         let data = req.body
         let params = {
             name: data.service,
@@ -119,16 +119,16 @@ exports.updateService = async(req,res) =>{
             data,
             {new:true}
         )
-        if(!updateService) return res.status(404).send({message:'Service not found and not updated'})
-        return res.send({message:'Updated successfully',updateService})
+        if (!updateService) return res.status(404).send({ message: 'Service not found and not updated' })
+        return res.send({ message: 'Updated successfully', updateService })
     } catch (err) {
         console.error(err);
-        return res.status(500).send({message:'Error updating service'})
+        return res.status(500).send({ message: 'Error updating service' })
     }
 }
 
 
-exports.deleteService = async(req, res)=>{
+exports.deleteService = async(req, res) => {
     try {
         let id = req.params.id;
         let deleteService = await Service.findOneAndDelete({_id: id})
@@ -136,6 +136,6 @@ exports.deleteService = async(req, res)=>{
         return res.send({message: 'Service deleting successfully'})
     } catch (err) {
         console.error(err);
-        return res.status(500).send({message: 'Error deleting service'})
+        return res.status(500).send({ message: 'Error deleting service' })
     }
 }

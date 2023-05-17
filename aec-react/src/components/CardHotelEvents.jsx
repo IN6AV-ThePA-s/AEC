@@ -9,7 +9,10 @@ export const CardHotelEvents = ({ name, description, type, maxPersons, price, ho
 
     const navigate = useNavigate()
 
-
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+    }
 
     const updateEvents = async (idEvent) => {
         try {
@@ -29,7 +32,7 @@ export const CardHotelEvents = ({ name, description, type, maxPersons, price, ho
                 hotel: hotel
             }
 
-            const { data } = await axios.put(`http://localhost:3022/event/update/${idEvent}`, formEvent)
+            const { data } = await axios.put(`http://localhost:3022/event/update/${idEvent}`, formEvent, { headers: headers })
 
             if (data.message) {
                 Swal.fire({
@@ -60,7 +63,18 @@ export const CardHotelEvents = ({ name, description, type, maxPersons, price, ho
                             </div>
                             <div className='col-md-5'>
                                 <h4 className='text-center'>Type</h4>
-                                <input type="text" id={`inputTypeEvent${id}`} defaultValue={type} name='type' className='form-control textNormalHotel' />
+                                <select className="form-control textNormalHotel" id={`inputTypeEvent${id}`} defaultValue={type} name='type' >
+
+                                    <option value='Social'>Social</option>
+                                    <option value='Cultural'>Cultural</option>
+                                    <option value='Deportivo'>Deportivo</option>
+                                    <option value='Empresarial'>Empresarial</option>
+                                    <option value='Académico'>Académico</option>
+                                    <option value='Religioso'>Religioso</option>
+                                    <option value='Otro'>Otro</option>
+
+                                </select>
+                                {/* <input type="text" id={`inputTypeEvent${id}`} defaultValue={type} name='type' className='form-control textNormalHotel' /> */}
                             </div>
 
                         </div>

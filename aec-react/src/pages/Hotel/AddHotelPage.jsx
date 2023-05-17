@@ -76,7 +76,7 @@ export const AddHotelPage = () => {
                     iconColor: 'orange',
                     showConfirmButton: true
                 })
-            if (imgs.length == 0)
+            if (!imgs)
                 return Sweeta.fire({
                     title: `IMAGE REQUIRED`,
                     text: `Se requiere como minimo una imagen`,
@@ -105,6 +105,13 @@ export const AddHotelPage = () => {
             navigate('/dashboard/hotelPage')
         } catch (err) {
             console.error(err);
+            if (err.response.data.error) {
+                return Sweeta.fire({
+                    title: `Ya existe un hotel con el nombre ${form.name.toUpperCase()}`,
+                    icon: 'error',
+                    showConfirmButton: true
+                })
+            }
             Sweeta.fire({
                 title: `${err.response.data.message}`,
                 icon: 'error',

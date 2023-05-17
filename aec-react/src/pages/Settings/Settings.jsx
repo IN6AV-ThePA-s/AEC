@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../index'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import photoError from '../../assets/userDefault.png'
 
 export const Settings = () => {
     const navigate = useNavigate()
@@ -15,6 +16,10 @@ export const Settings = () => {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
     }
+
+    const handleImageError = (e) => {
+        e.target.src = photoError;
+    };
 
     const getUser = async() => {
         try {
@@ -79,7 +84,7 @@ export const Settings = () => {
                 <div className="col-md-3 border-right ">
                     <div className="d-flex flex-column align-items-center text-center p-3 py-5">
 
-                        <img className="rounded-circle mt-5" width="150px" crossOrigin='anonymous' src={photo} />
+                        <img className="rounded-circle mt-5" width="150px" crossOrigin='anonymous' src={photo || photoError} onError={handleImageError} />
                         <span className="textSUser font-weight-bold mt-1">{user.username}</span>
                         <span className="textSEmail text-black-50">{user.email}</span>
 

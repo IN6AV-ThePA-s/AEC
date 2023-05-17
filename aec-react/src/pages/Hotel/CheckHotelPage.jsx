@@ -170,7 +170,10 @@ export const CheckHotelPage = () => {
 
     const getEventsByHotel = async () => {
         try {
-            const { data } = await axios(`http://localhost:3022/event/getByHotel/${id}`)
+            const { data } = await axios(
+                `http://localhost:3022/event/getByHotel/${id}`
+                , { headers: headers }
+            )
             setEvent(data.events)
         } catch (err) {
             Swal.fire(err.response.data.message, '', 'error')
@@ -188,7 +191,7 @@ export const CheckHotelPage = () => {
                 showDenyButton: true
             }).then(async (result) => {
                 if (result.isConfirmed) {
-                    const { data } = await axios.delete(`http://localhost:3022/event/delete/${id}`).catch(
+                    const { data } = await axios.delete(`http://localhost:3022/event/delete/${id}`, { headers: headers }).catch(
                         (err) => {
                             Swal.fire(err.response.data.message, '', 'error')
                         })
@@ -243,11 +246,93 @@ export const CheckHotelPage = () => {
             console.error(err)
         }
     }
+    /* ---------------- ROOMs ----------------------- */
+    const [rooms, setRooms] = useState([{}])
+    const [room, setRoom] = useState({})
+    const [servicesRooms, setServicesRooms] = useState([{}])
+
+    const getRooms = async () => {
+        try {
+            const { data } = await axios(
+                `http://localhost:3022/room/get-by-hotel/${id}`,
+                {
+                    headers: headers
+                }
+            )
+            console.log(data);
+            setRooms(data.rooms)
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    const getRoom = async (a) => {
+        try {
+            const { data } = await axios(
+                `http://localhost:3022/room/get/${a}`,
+                {
+                    headers: headers
+                }
+            )
+            setRoom(data.room)
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    const getServicesRoom = async (i) => {
+        try {
+            const { data } = await axios(
+                `http://localhost:3022/room/get-services-room/${i}`,
+                {
+                    headers: headers
+                }
+            )
+            setServicesRooms(data.services)
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    const delRoom = async (i) => {
+        try {
+            const { isConfirmed } = await Sweeta.fire({
+                title: `Are you sure to delete this room?`,
+                icon: 'question',
+                showConfirmButton: true,
+                showDenyButton: true
+            })
+            if (isConfirmed) {
+                const { data } = await axios.delete(
+                    `http://localhost:3022/room/delete/${i}`,
+                    {
+                        headers: headers
+                    }
+                )
+                getRooms()
+                Sweeta.fire({
+                    title: `ROOM DELETED`,
+                    text: `${data.message}`,
+                    icon: 'success',
+                    timer: 2500,
+                    showConfirmButton: false
+                })
+            }
+        } catch (err) {
+            console.error(err);
+            Sweeta.fire({
+                title: `${err.response.data.message}`,
+                icon: 'error',
+                showConfirmButton: true
+            })
+        }
+    }
 
     useEffect(() => {
         getEventsByHotel()
         getServicesByHotel()
         getHotel()
+        getRooms()
     }, [])
 
     return (
@@ -414,14 +499,57 @@ export const CheckHotelPage = () => {
 
                     <div className="col-sm-9 col-md-9 col-lg-9 mt-2">
 
-                        <ModalAddRoom />
-                        <ModalUpdateRoom />
+                        <ModalAddRoom id={id} getRooms={getRooms} />
 
-                        <ModalCheckServices />
-                        <ModalAddService />
+                        {
+                            rooms.map(({ _id, code, status, type, price, beds, photos, services }, index) => {
+                                return (
+                                    <>
 
-                        <CardRoomPage />
+                                        <CardRoomPage
+                                            key={`CR-${index}`}
+                                            _id={_id}
+                                            code={code}
+                                            status={status}
+                                            type={type}
+                                            price={price}
+                                            beds={beds}
+                                            photos={photos}
+                                            i={index}
+                                            butRoom={() => delRoom(_id)}
+                                            butUpda={() => getRoom(_id)}
+                                            butSerRoom={() => getServicesRoom(_id)}
+                                            butGetRoom={getRooms}
+                                        />
+                                        <ModalCheckServices
+                                            key={`MCS-${index}`}
+                                            id={_id}
+                                            services={services}
+                                            getRooms={getRooms}
 
+                                        />
+                                        <ModalAddService
+                                            key={`MAD-${index}`}
+                                            id={_id}
+                                            services={servicesRooms}
+                                            getRooms={getRooms}
+                                            getServices={() => getServicesRoom(_id)}
+                                        />
+                                        <ModalUpdateRoom
+                                            key={`MU-${index}`}
+                                            id={_id}
+                                            code={room?.code}
+                                            status={room?.status}
+                                            price={room?.price}
+                                            type={room?.type}
+                                            beds={room?.beds}
+                                            hotel={id}
+                                            getRooms={getRooms}
+                                        />
+                                    </>
+                                )
+                            })
+                        }
                     </div>
 
                 </div>

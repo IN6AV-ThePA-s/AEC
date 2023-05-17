@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../index'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import photoError from '../assets/userDefault.png'
+
 
 export const Sidebar = () => {
     const navigate = useNavigate()
@@ -13,6 +15,10 @@ export const Sidebar = () => {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
     }
+
+    const handleImageError = (e) => {
+        e.target.src = photoError;
+    };
     
     const getPhoto = async() => {
         try {
@@ -158,7 +164,7 @@ export const Sidebar = () => {
                 <div className="dropdown pb-4">
 
                     <Link href="#" className="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src={photo} crossOrigin='anonymous' alt="hugenerd" width="30" height="30" className="rounded-circle me-1" />
+                        <img src={photo || photoError} onError={handleImageError} crossOrigin='anonymous' alt="userFoto" width="30" height="30" className="rounded-circle me-1" />
                         <span className="d-none d-sm-inline mx-1">{dataUser.user.username}</span>
                     </Link>
 

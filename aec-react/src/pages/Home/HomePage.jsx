@@ -1,12 +1,26 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 import './homeStyle.css'
-import logo from '../../assets/logo.png'
-import { Link } from 'react-router-dom'
 import { Card } from '../../components/Card'
 import { NavbarHome } from '../../components/NavbarHome'
 
 
 export const HomePage = () => {
+
+    const [hotels, setHotels] = useState([{}])
+
+    const getHotels = async () => {
+        try {
+            const { data } = await axios('http://localhost:3022/hotel/hotels');
+            setHotels(data.hotels)
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    useEffect(() => {
+        getHotels();
+    }, [])
 
     return (
         <div className="text-center" >
@@ -35,21 +49,29 @@ export const HomePage = () => {
                         </div>
                     </div>
                 </div>
-                <div class="container h-100">
-                    <div class="d-flex justify-content-center h-100">
-                        <div class="searchbar">
-                            <input class="search_input" type="text" name="" placeholder="Search..." />
-                            <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                <div className="container h-100">
+                    <div className="d-flex justify-content-center h-100">
+                        <div className="searchbar">
+                            <input className="search_input" type="text" name="" placeholder="Search..." />
+                            <a href="#" className="search_icon"><i className="fas fa-search"></i></a>
                         </div>
                     </div>
                 </div>
                 <div className='d-flex justify-content-center flex-wrap mb-3 mt-3 mx-3 '>
-                    <Card index={0} />
-                    <Card index={1} />
-                    <Card index={2} />
-                    <Card index={3} />
-                    <Card index={4} />
-                    <Card index={5} />
+                    {
+                        hotels.map(({_id, name, address,photos},index) => {
+                            return (
+                                <Card 
+                                    key={index}
+                                    id={_id}
+                                    name={name}
+                                    descripion={address}
+                                    photos={photos}
+                                    index={index} 
+                                />
+                            )
+                        })
+                    }
                     {/*  {
                     hotel.map((b, index) => {
                         return (
