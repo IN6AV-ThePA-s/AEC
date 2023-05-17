@@ -1,6 +1,6 @@
 @font-face {
-    font-family: Azonix;
-    src: url('../../fonts/Azonix.otf');
+    font-family: Designer;
+    src: url('../../fonts/DESIGNER.otf');
 }
 
 @font-face {
@@ -161,8 +161,8 @@ input{
 }
 
 .dashTitle {
-    font-family: Azonix;
-    font-size: calc(2vw + 2vh);
+    font-family: Designer;
+    font-size: calc(3vw + 3vh);
 }
 
 .textAec {

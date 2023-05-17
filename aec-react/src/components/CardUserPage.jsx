@@ -14,7 +14,7 @@ export const CardUserPage = ({ name, surname, username, photo, phone, email, id,
             <div className="col-sm-9 col-md-9 col-lg-9">
                 <div className="hotel-card bg-white rounded-lg shadow-lg overflow-hidden d-block d-lg-flex">
                     <div className="hotel-card_images">
-                        <div id="bootstrapCarousel" className="carousel  h-100" data-ride="carousel">
+                        <div id="bootstrapCarousel" className="carousel" data-ride="carousel" style={{width:'343px', height: '300px'}}>
                             <div className="carousel-inner h-100">
                                 <div className="carousel-item h-100 active">
                                     <img crossOrigin="anonymous"

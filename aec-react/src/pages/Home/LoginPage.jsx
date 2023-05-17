@@ -66,7 +66,7 @@ export const LoginPage = () => {
 
                     <div className="row d-flex justify-content-center">
                         <div className="col-lg-8">
-                            <h2 className="fw-bold mb-5" style={{ color: '#00126c' }}><img src={logo} width='120rem' height='120rem' /></h2>
+                            <h2 className="fw-bold mb-5" style={{ color: '#00126c' }}><img src={logo} width='120rem' height='160rem' /></h2>
                             <h2 className="fw-bold mb-5">Sign up</h2>
                             <form >
                                 <div className='form-group d-flex justify-content-center'>
@@ -84,7 +84,10 @@ export const LoginPage = () => {
                                 <button className="btnLogin draw-border rounded" onClick={(e)=>{login(e), e.preventDefault()}}>Login</button>
                                 <br />
                                 
+                                <div className='mt-4'>
                                 <p>Don't have an account? <Link to='/register' className="link-secondary" >Register here</Link></p>
+                                </div>
+                                
                                 
                             </form>
 
