@@ -22,7 +22,7 @@ api.put('/uploadImg/:id', [ensureAdvance, authImg, upload], uploadImg)
 
 //ADMIN ROUTES
 api.get('/get', [ensureAdvance, isAdmin], get)
-api.get('/get/:id', [ensureAdvance, isAdmin], getUser)
+api.get('/get/:id', [ensureAdvance], getUser)
 
 //MASTER ROUTES
 api.post('/save', [ensureAdvance, isMaster], save)

@@ -60,9 +60,10 @@ exports.login = async(req, res) => {
         if(user && await check(data.password, user.password)) {
             let token = await createToken(user)
             let logged = {
-                name: user.name,
+                sub: user._id,
                 username: user.username,
-                role: user.role
+                role: user.role,
+                photo: user.photo
             }
 
             return res.send({ message: 'Logged!', token: token, user: logged })

@@ -1,11 +1,26 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 import './homeStyle.css'
-import logo from '../../assets/logo.png'
-import { Link } from 'react-router-dom'
+import { Card } from '../../components/Card'
 import { NavbarHome } from '../../components/NavbarHome'
 
 
 export const HomePage = () => {
+
+    const [hotels, setHotels] = useState([{}])
+
+    const getHotels = async () => {
+        try {
+            const { data } = await axios('http://localhost:3022/hotel/hotels');
+            setHotels(data.hotels)
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    useEffect(() => {
+        getHotels();
+    }, [])
 
     return (
         <div className="text-center" >
@@ -28,16 +43,48 @@ export const HomePage = () => {
                 border: 'none'
             }}>
                 <div className="card-body py-5 px-md-5">
-
                     <div className="row d-flex justify-content-center">
                         <div className="col-lg-8">
                             <h2 className="fw-bold mb-5">Home</h2>
-                            
-
                         </div>
                     </div>
                 </div>
+                <div className="container h-100">
+                    <div className="d-flex justify-content-center h-100">
+                        <div className="searchbar">
+                            <input className="search_input" type="text" name="" placeholder="Search..." />
+                            <a href="#" className="search_icon"><i className="fas fa-search"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div className='d-flex justify-content-center flex-wrap mb-3 mt-3 mx-3 '>
+                    {
+                        hotels.map(({_id, name, address,photos},index) => {
+                            return (
+                                <Card 
+                                    key={index}
+                                    id={_id}
+                                    name={name}
+                                    descripion={address}
+                                    photos={photos}
+                                    index={index} 
+                                />
+                            )
+                        })
+                    }
+                    {/*  {
+                    hotel.map((b, index) => {
+                        return (
+                            <Card 
+                            />
+                        )
+                    })
+                } */}
+                </div>
             </div>
+            <footer className="mt-auto">
+                <p className='text-dark'>Arc-En-Ciel®</p>
+            </footer>
         </div>
 
 

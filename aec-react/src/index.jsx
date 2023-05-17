@@ -22,20 +22,21 @@ import { BillPage } from './pages/Bill/BillPage'
 import { AddReservationPage } from './pages/Reservation/AddReservationPage'
 import { UpdateReservationPage } from './pages/Reservation/UpdateReservationPage'
 import { UpdateBillPage } from './pages/Bill/UpdateBillPage'
+import { ClientPage } from './pages/Client/ClientPage'
 
 export const AuthContext = createContext();
 
 export const Index = () => {
     const [loggedIn, setLoggedIn] = useState(false)
-    const [dataUser, setDataUser] = useState({
-        names: '',
-        username: '',
-        role: ''
-    })
+    const [dataUser, setDataUser] = useState()
 
     useEffect(() => {
         let token = localStorage.getItem('token')
+        let user = localStorage.getItem('user')
+
         if(token) setLoggedIn(true)
+        if(user) setDataUser(JSON.parse(user))
+        
     }, [])
 
     const routes = createBrowserRouter([
@@ -57,6 +58,15 @@ export const Index = () => {
                 },{
                     path: '/about',
                     element: <AboutUsPage/>
+                },
+                {
+                    path: '/home',
+                    element: loggedIn ? <ClientPage/> : <LoginPage/>,
+                    children: [
+                        {
+                            path: 'hotel'
+                        }
+                    ]
                 },
                 {
                     path: '/dashboard',

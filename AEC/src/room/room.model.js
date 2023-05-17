@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const roomSchema = mongoose.Schema({
-    cod: {
+    code: {
         type: String,
         required: true,
         uppercase: true
@@ -11,8 +11,8 @@ const roomSchema = mongoose.Schema({
     status: {
         type: String,
         required: true,
-        default: 'AVAILABLE',
-        enum: ['AVAILABLE', 'BUSY']
+        default: 'AVALIABLE',
+        enum: ['AVALIABLE', 'BUSY']
     },
     price: {
         type: Number,
@@ -46,8 +46,7 @@ const roomSchema = mongoose.Schema({
                 ref: 'Service',
                 required: true
             }
-        }],
-        required: true
+        }]
     },
     photos: {
         type: [String]

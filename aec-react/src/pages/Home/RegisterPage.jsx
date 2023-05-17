@@ -6,6 +6,7 @@ import { auto } from '@popperjs/core'
 import { AuthContext } from '../../index'
 import axios from 'axios'
 import logo from '../../assets/logo.png'
+import Swal from 'sweetalert2'
 
 export const RegisterPage = () => {
     const { loggedIn, setLoggedIn, setDataUser } = useContext(AuthContext)
@@ -49,6 +50,7 @@ export const RegisterPage = () => {
             }
 
         } catch (err) {
+            Swal.fire(err.response.data.message, '', 'error')
             console.error(err)
             throw new Error('Login error')
         }

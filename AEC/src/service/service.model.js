@@ -6,8 +6,7 @@ const serviceSchema = mongoose.Schema({
     service:{
         type: String,
         required: true,
-        uppercase: true,
-        unique: true
+        uppercase: true
     },
     description:{
         type: String,

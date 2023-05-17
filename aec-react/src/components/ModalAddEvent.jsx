@@ -66,6 +66,7 @@ export const ModalAddEvent = ({ hotel }) => {
                                 <h4 className='text-center'>Type</h4>
                                 <select className="form-control textNormalHotel" onChange={handleFormEvent} name='type' >
 
+                                    <option value={null}>Select Option</option>
                                     <option value='Social'>Social</option>
                                     <option value='Cultural'>Cultural</option>
                                     <option value='Deportivo'>Deportivo</option>
