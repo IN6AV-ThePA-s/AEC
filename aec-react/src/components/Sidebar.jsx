@@ -1,9 +1,39 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import photo from '../assets/foto.png'
-import logo from '../assets/logo.png'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../index'
+import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export const Sidebar = () => {
+    const navigate = useNavigate()
+    //const { dataUser } = useContext(AuthContext)
+    const dataUser = JSON.parse(localStorage.getItem('user'))
+    const [photo, setPhoto] = useState()
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+    }
+    
+    const getPhoto = async() => {
+        try {
+            const img = await axios.get(`http://localhost:3022/user/getImg/${dataUser.user.photo}`)
+
+            if (img) setPhoto(img.request.responseURL)
+            
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    const logOut = ()=> {
+        localStorage.clear()
+        navigate('/')
+    }
+    useEffect(() => {
+        getPhoto()
+    }, [])
+    
+    
     return (
         <>
             <div className="sticky-top d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
@@ -128,19 +158,19 @@ export const Sidebar = () => {
                 <div className="dropdown pb-4">
 
                     <Link href="#" className="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src={photo} alt="hugenerd" width="30" height="30" className="rounded-circle me-1" />
-                        <span className="d-none d-sm-inline mx-1">gmatta</span>
+                        <img src={photo} crossOrigin='anonymous' alt="hugenerd" width="30" height="30" className="rounded-circle me-1" />
+                        <span className="d-none d-sm-inline mx-1">{dataUser.user.username}</span>
                     </Link>
 
                     <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
                         <li><Link className="dropdown-item" href="#">Profile</Link></li>
                         <li><Link className="dropdown-item" to='settings'>Settings</Link></li>
-                        <li><Link className="dropdown-item disabled" href="#">Role: ADMIN</Link></li>
+                        <li><Link className="dropdown-item disabled" href="#">Role: {dataUser.user.role}</Link></li>
 
                         <li>
                             <hr className="dropdown-divider" />
                         </li>
-                        <li><Link className="dropdown-item" href="#">Log Out</Link></li>
+                        <li><Link onClick={logOut} className="dropdown-item" href="#">Log Out</Link></li>
                     </ul>
 
                 </div>
