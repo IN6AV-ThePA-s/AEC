@@ -27,15 +27,15 @@ export const AuthContext = createContext();
 
 export const Index = () => {
     const [loggedIn, setLoggedIn] = useState(false)
-    const [dataUser, setDataUser] = useState({
-        names: '',
-        username: '',
-        role: ''
-    })
+    const [dataUser, setDataUser] = useState()
 
     useEffect(() => {
         let token = localStorage.getItem('token')
+        let user = localStorage.getItem('user')
+
         if(token) setLoggedIn(true)
+        if(user) setDataUser(JSON.parse(user))
+        
     }, [])
 
     const routes = createBrowserRouter([

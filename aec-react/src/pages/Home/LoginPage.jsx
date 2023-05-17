@@ -30,7 +30,8 @@ export const LoginPage = () => {
 
             if (data.token) {
                 localStorage.setItem('token', data.token)
-                setDataUser(data.user)
+                localStorage.setItem('user', JSON.stringify({user: data.user}))
+                setDataUser(JSON.stringify({user: data.user}))
                 setLoggedIn(true)
                 navigate('/dashboard')
             }
