@@ -12,7 +12,7 @@ export const Card = ({ index, id, name, descripion, photos }) => {
                             photos?.map((name, index) => {
                                 return (
                                     <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="3000">
-                                        <img crossOrigin='anonymous' src={`http://localhost:3022/hotel/get-img/${name}`} className="d-block w-100" />
+                                        <img crossOrigin='anonymous' src={`http://localhost:3022/hotel/get-img/${name}`} className="d-block" style={{height: '173px', width: '254px'}}/>
                                         <div className="carousel-caption d-none d-md-block">
                                         </div>
                                     </div>
