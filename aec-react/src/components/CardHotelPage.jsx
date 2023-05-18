@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../pages/Hotel/styleCardHotelPage.css'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../index'
 
 export const CardHotelPage = ({ _id, index, name, address, email, phone, photos }) => {
+    const { dataUser } = useContext(AuthContext)
+    const [route, setRoute] = useState(`dashboard`)
+
+    useEffect(() => {
+      if(dataUser.role === 'CLIENT'){
+        setRoute(`home`)
+      }
+    }, [])
+    
+    
     return (
         <>
 
@@ -79,7 +90,7 @@ export const CardHotelPage = ({ _id, index, name, address, email, phone, photos 
 
 
                             </div>
-                            <Link to={`/dashboard/checkHotel/${_id}`}>
+                            <Link to={`/${route}/checkHotel/${_id}`}>
                                 <button className="btn btn-primary me-1 mt-4">Check Hotel</button>
                             </Link>
 
