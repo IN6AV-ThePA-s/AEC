@@ -29,8 +29,8 @@ export const UserPage = () => {
             setUser(data.data)
 
         } catch (err) {
+            Swal.fire(err.response.data.message, '', 'error')
             console.error(err)
-
         }
     }
 

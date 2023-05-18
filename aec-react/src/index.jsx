@@ -34,7 +34,7 @@ export const Index = () => {
         let token = localStorage.getItem('token')
         let user = localStorage.getItem('user')
 
-        if(token) setLoggedIn(true)
+        token ? setLoggedIn(true) : setLoggedIn(false)
         if(user) setDataUser(JSON.parse(user))
         
     }, [])
