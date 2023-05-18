@@ -92,7 +92,6 @@ export const ClientPage = () => {
             const img = await axios.get(`http://localhost:3022/user/getImg/${id}`)
 
             if (img) setPhoto(img.request.responseURL)
-
         } catch (err) {
             console.error(err)
         }

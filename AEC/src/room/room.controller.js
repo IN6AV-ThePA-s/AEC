@@ -36,6 +36,20 @@ exports.gets = async(req, res) => {
             .populate({
                 path: 'hotel'
             }).populate('services.service');
+            
+        return res.send({ rooms });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: `Error getting rooms` });
+    }
+}
+
+exports.getsAvailable = async(req, res) => {
+    try {
+        const rooms = await Room.find({status:'AVAILABLE'})
+            .populate({
+                path: 'hotel'
+            });
         return res.send({ rooms });
     } catch (err) {
         console.error(err);

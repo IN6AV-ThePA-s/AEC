@@ -1,6 +1,5 @@
 'use strict'
 
-//const autoIncrement = require('mongoose-auto-increment')
 const mongoose = require('mongoose')
 
 const reservationSchema = mongoose.Schema({
@@ -13,11 +12,19 @@ const reservationSchema = mongoose.Schema({
         ref:'User',
         required:true
     },
-    room:[{
+    room:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Room',
         required:true
-    }],
+    },
+    numberOfPeople:{
+        type:Number,
+        required:true   
+    },
+    numberOfNight:{
+        type:Number,
+        required:true 
+    },
     additionalServices:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Service'
@@ -34,13 +41,11 @@ const reservationSchema = mongoose.Schema({
         type:String,
         uppercase:true,
         default:'PROGRESS',
-        enum:['PROGRESS','COMPLETED'],
+        enum:['PROGRESS','COMPLETED','CANCELED'],
         required:true
     }
 },{
     versionKey:false    
 })
 
-
 module.exports = mongoose.model('Reservation',reservationSchema)
-////reservationSchema.plugin(autoIncrement.plugin, { model: 'Reservation', field: 'numberRes' });

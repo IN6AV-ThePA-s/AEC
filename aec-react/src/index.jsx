@@ -26,6 +26,8 @@ import { ClientPage } from './pages/Client/ClientPage'
 import { CheckHotelClientPage } from './pages/Hotel/CheckHotelClientPage'
 import { HotelPageClient } from './pages/Client/HotelPageClient'
 import { RoomPageClient } from './pages/Client/RoomPageClient'
+import { AddOrRemoveEventPage } from './pages/Reservation/AddOrRemoveEventPage'
+import { HistoryUserPage } from './pages/Reservation/HistoryUserPage'
 
 export const AuthContext = createContext();
 
@@ -85,6 +87,10 @@ export const Index = () => {
                         {
                             path: 'checkHotel',
                             element: <CheckHotelPage/>
+                        },
+                        {
+                            path:'history',
+                            element:<HistoryUserPage/>
                         }
                     ]
                 },
@@ -144,7 +150,7 @@ export const Index = () => {
                             element: <AddReservationPage/>
                         },
                         {
-                            path: 'updateReservation',
+                            path: 'updateReservation/:id',
                             element: <UpdateReservationPage/>
                         },
                         {
@@ -154,6 +160,10 @@ export const Index = () => {
                         {
                             path: 'updateBill',
                             element: <UpdateBillPage/>
+                        },
+                        {
+                            path:'addOrRemEvent/:idReserv',
+                            element:<AddOrRemoveEventPage/>
                         }
                     ]
                 }
