@@ -10,7 +10,7 @@ export const RoomPageClient = () => {
 
     const { id } = useParams()
     const navigate = useNavigate();
-    
+
     const [hotel, setHotel] = useState({})
     const [imgs, setImgs] = useState()
 
@@ -42,14 +42,14 @@ export const RoomPageClient = () => {
         return a.trim()
     }
 
-    
+
     const [allRooms, setAllRooms] = useState([{}])
     const headers = {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
     }
 
-    const getAllRooms = async ()=>{
+    const getAllRooms = async () => {
         try {
             const { data } = await axios(
                 `http://localhost:3022/room/get`,
@@ -64,10 +64,27 @@ export const RoomPageClient = () => {
         }
     }
 
+    const [searchOption, setSearchOption] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const filteredRooms = allRooms.filter((room) => {
+
+        if (!searchOption || searchOption === 'code') {
+
+            return room.code?.toLowerCase().includes(searchTerm.toLowerCase());
+
+        } else if (searchOption === 'status') {
+
+            return room.status?.toLowerCase().includes(searchTerm.toLowerCase());
+
+        }
+
+    });
+
     useEffect(() => {
         getAllRooms()
     }, [])
-    
+
 
     return (
         <>
@@ -80,10 +97,9 @@ export const RoomPageClient = () => {
 
             <div className="row justify-content-start mb-4 mt-3">
                 <div className="col-md-5">
-                    <select id='selectOption' name="state" className="form-select">
-                        <option value={null}>FILTER</option>
-                        <option value='name'>NAME</option>
-                        <option value='addresss'>ADDRESS</option>
+                    <select id='selectOption' name="state" className="form-select" onChange={(e) => setSearchOption(e.target.value)}>
+                        <option value='code'>CODE</option>
+                        <option value='status'>STATUS</option>
                     </select>
                 </div>
                 <div className="col-md-7">
@@ -91,14 +107,14 @@ export const RoomPageClient = () => {
                         type="text"
                         placeholder="Search"
                         className="form-control"
-
-
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
             </div>
 
             {
-                allRooms.map(({ _id, code, status, type, price, beds, photos, services }, index) => {
+                filteredRooms.map(({ _id, code, status, type, price, beds, photos, services }, index) => {
                     return (
                         <>
 
@@ -113,9 +129,9 @@ export const RoomPageClient = () => {
                                 beds={beds}
                                 photos={photos}
                                 i={index}
-                                
+
                             />
-                            
+
                         </>
                     )
                 })

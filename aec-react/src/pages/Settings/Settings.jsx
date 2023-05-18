@@ -81,10 +81,10 @@ export const Settings = () => {
 
             <div className="row justify-content-center ">
 
-                <div className="col-md-3 border-right ">
+                <div className="col-md-2 border-right ">
                     <div className="d-flex flex-column align-items-center text-center p-3 py-5">
 
-                        <img className="rounded-circle mt-5" width="150px" crossOrigin='anonymous' src={photo || photoError} onError={handleImageError} />
+                        <img className="rounded-circle mt-5" width="150px" height='150px' crossOrigin='anonymous' src={photo || photoError} onError={handleImageError} />
                         <span className="textSUser font-weight-bold mt-1">{user.username}</span>
                         <span className="textSEmail text-black-50">{user.email}</span>
 
@@ -138,26 +138,26 @@ export const Settings = () => {
                     </div>
 
                 </div>
-                {/* <div className="col-md-4">
+                <div className="col-md-4">
                     <div className="p-3 py-5">
                         <div className="d-flex justify-content-between align-items-center experience">
-                            <h4>Change Password</h4>
+                            <h4 className='titleProfile'>Change Password</h4>
                         </div>
                         <br />
                         <div className="col-md-12">
                             <label className="labels">Actual Password</label>
-                            <input type="text" className="form-control" />
+                            <input type="password" className="form-control" />
                         </div> 
                         <br />
                         <div className="col-md-12">
                             <label className="labels">New Password</label>
-                            <input type="text" className="form-control" />
+                            <input type="password" className="form-control" />
                         </div>
                     </div>
                     <div className="text-center">
                         <button className="btn btn-primary profile-button" type="button">Save Password</button>
                     </div>
-                </div> */}
+                </div> 
             </div>
         </div>
 

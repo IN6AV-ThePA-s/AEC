@@ -24,9 +24,6 @@ export const HotelPageClient = () => {
         e.target.src = photoError;
     };
 
-    const [hotels, setHotels] = useState([{}]);
-    const [searchTerm, setSearchTerm] = useState('');
-
     const getHotels = async () => {
         try {
             const { data } = await axios('http://localhost:3022/hotel/get', {
@@ -47,11 +44,13 @@ export const HotelPageClient = () => {
     };
 
     const [searchOption, setSearchOption] = useState(null);
+    const [hotels, setHotels] = useState([{}]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const filteredHotels = hotels.filter((hotel) => {
 
         if (!searchOption || searchOption === 'name') {
-
+            
             return hotel.name?.toLowerCase().includes(searchTerm.toLowerCase());
 
         } else if (searchOption === 'address') {
@@ -59,8 +58,6 @@ export const HotelPageClient = () => {
             return hotel.address?.toLowerCase().includes(searchTerm.toLowerCase());
 
         }
-
-        return false;
 
     });
 
@@ -80,7 +77,6 @@ export const HotelPageClient = () => {
             <div className="row justify-content-start mb-4 mt-3">
                 <div className="col-md-5">
                     <select id='selectOption' name="state" className="form-select" onChange={(e) => setSearchOption(e.target.value)}>
-                        <option value={null}>FILTER</option>
                         <option value='name'>NAME</option>
                         <option value='address'>ADDRESS</option>
                     </select>
