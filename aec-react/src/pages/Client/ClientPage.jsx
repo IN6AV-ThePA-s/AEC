@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import { useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../index'
 
 export const ClientPage = () => {
@@ -193,6 +193,9 @@ export const ClientPage = () => {
     }, [])
     
   return (
-    <h1>{user.username}</h1>
+    <>
+        <Outlet/>
+    </>
+    
   )
 }
