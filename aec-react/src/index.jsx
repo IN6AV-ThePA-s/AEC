@@ -76,6 +76,10 @@ export const Index = () => {
                         {
                             path: 'settings',
                             element: <Settings/>
+                        },
+                        {
+                            path: 'checkHotel',
+                            element: <CheckHotelPage/>
                         }
                     ]
                 },

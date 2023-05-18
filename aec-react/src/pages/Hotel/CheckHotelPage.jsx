@@ -18,6 +18,7 @@ import Swal from 'sweetalert2'
 export const CheckHotelPage = () => {
     const { id } = useParams()
     const navigate = useNavigate();
+
     const headers = {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
@@ -504,6 +505,10 @@ export const CheckHotelPage = () => {
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                 />
                             </div>
+
+                        </div>
+                        <div className='mt-3'>
+                            <button className="btn btn-success col-md-12" type="button" data-bs-toggle="modal" data-bs-target="#modalAddRoom">Add Room</button>
                         </div>
 
                     </div>

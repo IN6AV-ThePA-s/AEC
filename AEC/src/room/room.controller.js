@@ -17,6 +17,9 @@ exports.add = async(req, res) => {
             return res.status(418).send(msg);
         if (!(await Hotel.findOne({ _id: data.hotel })))
             return res.status(418).send({ message: `Hotel not found` });
+        if ((await Room.findOne({$and: [{code: data.code}, {hotel: data.hotel}]}))) {
+            return res.status(400).send({message: 'This room has already been taken.'})
+        }
         const room = new Room(data);
         await room.save();
         return res.send({ message: `The room has been added`, RI: room._id });

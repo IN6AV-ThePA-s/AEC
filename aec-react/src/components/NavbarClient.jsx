@@ -16,6 +16,11 @@ export const NavbarClient = () => {
         'Authorization': localStorage.getItem('token')
     }
 
+    const logOut = ()=> {
+        localStorage.clear()
+        navigate('/')
+    }
+
     const handleImageError = (e) => {
         e.target.src = photoError;
     };
@@ -107,7 +112,7 @@ export const NavbarClient = () => {
                                         <li>
                                             <hr className="dropdown-divider" />
                                         </li>
-                                        <li><Link className="dropdown-item" href="#">Log Out</Link></li>
+                                        <li><Link className="dropdown-item" onClick={logOut}>Log Out</Link></li>
                                     </ul>
                                 </div>
                             </ul>
