@@ -1,80 +1,33 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import { useNavigate } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../index'
+import { CardHotelPage } from '../../components/CardHotelPage'
+import room1 from '../../assets/room1.jpg'
+import room2 from '../../assets/room2.jpg'
+import room3 from '../../assets/room3.jpg'
+import foto from '../../assets/foto.png'
+import { NavbarClient } from '../../components/NavbarClient'
 
 export const ClientPage = () => {
-    const navigate = useNavigate()
-    const { dataUser } = useContext(AuthContext)
-    
-    const [photo, setPhoto] = useState()
-    const [user, setUser] = useState({})
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token')
-    }
 
-    const handleImageError = (e) => {
-        e.target.src = photoError;
-    };
+    return (
+        <>
+            <div className='container' style={{ marginTop: '6rem' }}>
+                
+                <div>
+                    <NavbarClient/>
+                </div>
 
-    const getUser = async() => {
-        try {
-            
-            const { data } = await axios.get(`http://localhost:3022/user/get/${dataUser.sub}`, { headers: headers })
+                <div className="col-sm-12 col-md-12 col-lg-12">
 
-            if (data.data) {
-                setUser(data.data[0])
-                getPhoto(data.data[0].photo)
-            }
-            
-        } catch (err) {
-            console.error(err)
-        }
-    }
-    
-    const getPhoto = async(id) => {
-        try {
-            const img = await axios.get(`http://localhost:3022/user/getImg/${id}`)
+                    <Outlet/>
 
-            if (img) setPhoto(img.request.responseURL)
-            
-        } catch (err) {
-            console.error(err)
-        }
-    }
+                </div>
 
-    const delAccount = async() => {
-        try {
-            Swal.fire({
-                title: 'Are you sure about deleting your account?',
-                text: 'This action is irreversible',
-                icon: 'question',
-                showConfirmButton: true,
-                showDenyButton: true,
-            }).then(async(result)=>{
-                if(result.isConfirmed) {
-                    const { data } = await axios.delete(`http://localhost:3022/user/delete`, { headers: headers }).catch((err)=>{
-                        Swal.fire(err.response.data.message, '', 'error')
-                    })
-                    Swal.fire(`${data.message}`, '', 'success')
-                    navigate('/')
-                } else {
-                    Swal.fire('No worries!', '', 'success')
-                }
-            })
-        } catch (err) {
-            Swal.fire(err.response.data.message, '', 'error')
-            console.error(err)
-        }
-    }
+            </div>
 
-    useEffect(() => {
-        getUser()
-    }, [])
-    
-  return (
-    <h1>{user.username}</h1>
-  )
+        </>
+    )
 }

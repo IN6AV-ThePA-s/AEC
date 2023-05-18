@@ -6,11 +6,11 @@ export const CardHotelPage = ({ _id, index, name, address, email, phone, photos 
     return (
         <>
 
-            <div className="row justify-content-center mt-2">
-                <div className="col-sm-9 col-md-9 col-lg-9">
+            <div className="row justify-content-center mt-2 mb-1">
+                <div className="col-sm-12 col-md-12 col-lg-12">
                     <div className="hotel-card bg-white rounded-lg shadow-lg overflow-hidden d-block d-lg-flex">
                         <div className="hotel-card_images">
-                            <div id={`bootstrapCarousel${index}`} className="carousel slide" data-ride="carousel" style={{width:'343px', height: '248px'}}>
+                            <div id={`bootstrapCarousel${index}`} className="carousel slide" data-ride="carousel" style={{height:'324px', width:'487px'}}>
                                 <div className="carousel-inner h-100">
 
                                     {
