@@ -47,7 +47,8 @@ exports.isMaster = (req, res, next) => {
 exports.authImg = (req, res, next) => {
     try {
         let user = req.user
-        let id = req.id
+        let id = req.params.id
+        
         if (user.sub !== id && user.role !== ROLES.master) return res.status(403).send({ message: 'Unauthorized' })
         next()
     } catch (err) {
