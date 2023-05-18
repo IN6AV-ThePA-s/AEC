@@ -59,7 +59,9 @@ export const CardRoomPage = ({ _id, code, status, type, price, beds, photos, i, 
                             </Link>
                             {
                                 dataUser === 'CLIENT' ? (
-                                    <></>
+                                    <Link>
+                                        <button className="btn btn-success me-1 mt-4 bi bi-card-checklist" data-bs-toggle="modal" /* data-bs-target={`#modalCheckServices${_id}`} onClick={(e)=> { e.preventDefault(); butGetRoom()}} */> Make reservation</button>
+                                    </Link>
                                     
                                 ) : (
                                     <Link>
