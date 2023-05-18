@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
-export const CardHotelServices = ({ name, description, price, hotel, butDel, id }) => {
+export const CardHotelServices = ({ name, description, price, hotel, butDel, id, dataUser }) => {
     const navigate = useNavigate()
     const headers = {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
     }
-    
-    const updateService = async() => {
+    const [read, setRead] = useState(false)
+    const updateService = async () => {
         try {
             const name = document.getElementById(`name${id}`).value
             const price = document.getElementById(`price${id}`).value
@@ -33,13 +33,20 @@ export const CardHotelServices = ({ name, description, price, hotel, butDel, id 
                     showConfirmButton: false
                 })
             }
-            
+
         } catch (err) {
             Swal.fire(err.response.data.message, '', 'error')
             console.error(err)
         }
     }
+
+    useEffect(() => {
+      if(dataUser === 'CLIENT') {
+        setRead(true)
+      }
+    }, [])
     
+
     return (
         <div className="card mb-3">
             <div className="row g-0">
@@ -49,24 +56,31 @@ export const CardHotelServices = ({ name, description, price, hotel, butDel, id 
                         <div className='row'>
                             <div className='col-md-7'>
                                 <h4 className='text-center'>Name</h4>
-                                <input id={`name${id}`} defaultValue={name} type="text" placeholder='Name' className='form-control textNormalHotel' />
+                                <input id={`name${id}`} readOnly={read} defaultValue={name} type="text" placeholder='Name' className='form-control textNormalHotel' />
                             </div>
                             <div className='col-md-5'>
                                 <h4 className='text-center'>Price</h4>
-                                <input id={`price${id}`} defaultValue={price} type="number" placeholder='Price' className='form-control textNormalHotel' />
+                                <input id={`price${id}`} readOnly={read} defaultValue={price} type="number" placeholder='Price' className='form-control textNormalHotel' />
                             </div>
 
                         </div>
 
                         <div>
                             <h4 className='text-center mt-3'>Description</h4>
-                            <textarea id={`desc${id}`} defaultValue={description} className="form-control textNormalHotel" aria-label="With textarea"></textarea>
+                            <textarea id={`desc${id}`} readOnly={read} defaultValue={description} className="form-control textNormalHotel" aria-label="With textarea"></textarea>
                         </div>
 
-                        <div className='mt-3'>
-                            <button onClick={(e)=>{e.preventDefault(); updateService()}} className="btn btn-warning bi bi-pencil me-1" type="button"> Update</button>
-                            <button onClick={(e)=>{e.preventDefault(); butDel()}} className="btn btn-danger bi bi-trash ms-1" type="button"> Delete</button>
-                        </div>
+                        {
+                            dataUser === 'CLIENT' ? (
+                                <></>
+                            ) : (
+                                <div className='mt-3'>
+                                    <button onClick={(e) => { e.preventDefault(); updateService() }} className="btn btn-warning bi bi-pencil me-1" type="button"> Update</button>
+                                    <button onClick={(e) => { e.preventDefault(); butDel() }} className="btn btn-danger bi bi-trash ms-1" type="button"> Delete</button>
+                                </div>
+                            )
+                        }
+
 
                     </div>
                 </div>
