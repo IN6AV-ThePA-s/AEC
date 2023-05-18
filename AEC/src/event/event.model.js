@@ -15,10 +15,14 @@ const eventSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    description:{
+        type: String,
+        required: true
+    },
     type:{
         type: String,
         required: true,
-        enum: ['Social', 'Cultural', 'Deportivo', 'Empresarial', 'Académico', 'Religioso']
+        enum: ['Social', 'Cultural', 'Deportivo', 'Empresarial', 'Académico', 'Religioso', 'Otro']
     },
     maxPersons:{
         type: Number,
@@ -27,6 +31,12 @@ const eventSchema = mongoose.Schema({
     price:{
         type: Number,
         required: true
+    },
+    hotel:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Hotel',
+        required: true
+
     }
 
 },{

@@ -1,6 +1,6 @@
 @font-face {
-    font-family: Azonix;
-    src: url('../../fonts/Azonix.otf');
+    font-family: Designer;
+    src: url('../../fonts/DESIGNER.otf');
 }
 
 @font-face {
@@ -28,7 +28,75 @@
     src: url('../../fonts/TypoSlab Irregular Demo.otf');
 }
 
+@font-face {
+    font-family: Avenue;
+    src: url('../../fonts//Avenue.otf');
+}
+
+@font-face {
+    font-family: Cereal;
+    src: url('../../fonts/Cereal.otf');
+}
+
+@font-face {
+    font-family: CerealLight;
+    src: url('../../fonts/CerealLight.otf');
+}
+
+@font-face {
+    font-family: CerealBold;
+    src: url('../../fonts/CerealBoldL.otf');
+}
+
 /* BOTONES GLOBALES */
+
+.btn-success {
+    transition: 0.2s;
+    color: #fff;
+    background-color: #71dd37;
+    border-color: #71dd37;
+    box-shadow: 0 0.125rem 0.25rem 0 rgba(113, 221, 55, 0.4);
+}
+
+.btn-success:hover {
+    color: #fff;
+    background-color: #66c732;
+    border-color: #66c732;
+    transform: translateY(-1px);
+}
+
+.btn-check:active {
+    color: #fff;
+    background-color: #66c732;
+    border-color: #66c732;
+    transform: translateY(0);
+    box-shadow: none;
+    transition: 1ms;
+}
+
+.btn-warning {
+    transition: 0.2s;
+    color: #fff;
+    background-color: #ffab00;
+    border-color: #ffab00;
+    box-shadow: 0 0.125rem 0.25rem 0 rgba(255, 171, 0, 0.4);
+}
+
+.btn-warning:hover {
+    color: #fff;
+    background-color: #e69a00;
+    border-color: #e69a00;
+    transform: translateY(-1px);
+}
+
+.btn-warning:active {
+    color: #fff;
+    background-color: #e69a00;
+    border-color: #e69a00;
+    transform: translateY(0);
+    box-shadow: none;
+    transition: 1ms;
+}
 
 .btn-danger {
     transition: 0.2s;
@@ -45,7 +113,7 @@
     transform: translateY(-1px);
 }
 
-.btn-check:active {
+.btn-danger:active {
     color: #fff;
     background-color: #e6381a;
     border-color: #e6381a;
@@ -80,9 +148,21 @@
 
 /* ------------------------------------- */
 
+h1{
+    font-family: Cereal;
+}
+
+h5{
+    font-family: Cereal;
+}
+
+input{
+    font-family: CerealLight;
+}
+
 .dashTitle {
-    font-family: Azonix;
-    font-size: calc(2vw + 2vh);
+    font-family: Designer;
+    font-size: calc(3vw + 3vh);
 }
 
 .textAec {
@@ -101,20 +181,23 @@
 }
 
 .textOption {
-    color: white;
+    color: #02192B;
+    font-size: larger;
 }
 
 .textAdd {
     color: #71dd37;
+    font-size: larger;
 }
 
 .textUpdate {
     color: #ffab00;
+    font-size: larger;
 }
 
 
 .bgDash {
-    background-color: #04135d;
+    background-color: #ffffff;
 }
 
 /* *{

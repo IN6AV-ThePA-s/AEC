@@ -1,19 +1,92 @@
-import React from 'react'
-import photo from '../../assets/foto.png'
+import React, { useContext, useEffect, useState } from 'react'
 import './styleSettings.css'
+import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../index'
+import axios from 'axios'
+import Swal from 'sweetalert2'
+import photoError from '../../assets/userDefault.png'
 
 export const Settings = () => {
+    const navigate = useNavigate()
+    const { dataUser } = useContext(AuthContext)
+    const userData = JSON.parse(localStorage.getItem('user'))
+    const [photo, setPhoto] = useState()
+    const [user, setUser] = useState({})
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+    }
+
+    const handleImageError = (e) => {
+        e.target.src = photoError;
+    };
+
+    const getUser = async() => {
+        try {
+            
+            const { data } = await axios.get(`http://localhost:3022/user/get/${dataUser.sub}`, { headers: headers })
+
+            if (data.data) {
+                setUser(data.data[0])
+                getPhoto(data.data[0].photo)
+            }
+            
+        } catch (err) {
+            console.error(err)
+        }
+    }
+    
+    const getPhoto = async(id) => {
+        try {
+            const img = await axios.get(`http://localhost:3022/user/getImg/${id}`)
+
+            if (img) setPhoto(img.request.responseURL)
+            
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    const delAccount = async() => {
+        try {
+            Swal.fire({
+                title: 'Are you sure about deleting your account?',
+                text: 'This action is irreversible',
+                icon: 'question',
+                showConfirmButton: true,
+                showDenyButton: true,
+            }).then(async(result)=>{
+                if(result.isConfirmed) {
+                    const { data } = await axios.delete(`http://localhost:3022/user/delete`, { headers: headers }).catch((err)=>{
+                        Swal.fire(err.response.data.message, '', 'error')
+                    })
+                    Swal.fire(`${data.message}`, '', 'success')
+                    navigate('/')
+                } else {
+                    Swal.fire('No worries!', '', 'success')
+                }
+            })
+        } catch (err) {
+            Swal.fire(err.response.data.message, '', 'error')
+            console.error(err)
+        }
+    }
+
+    useEffect(() => {
+        getUser()
+    }, [])
+    
     return (
         <div className="bodySettings container rounded bg-white">
 
-            <div className="row justify-content-center">
+            <div className="row justify-content-center ">
 
                 <div className="col-md-3 border-right ">
                     <div className="d-flex flex-column align-items-center text-center p-3 py-5">
 
-                        <img className="rounded-circle mt-5" width="150px" src={photo} />
-                        <span className="textSUser font-weight-bold mt-1">gmatta</span>
-                        <span className="textSEmail text-black-50">gmatta-2021223@kinal.edu.gt</span>
+                        <img className="rounded-circle mt-5" width="150px" crossOrigin='anonymous' src={photo || photoError} onError={handleImageError} />
+                        <span className="textSUser font-weight-bold mt-1">{user.username}</span>
+                        <span className="textSEmail text-black-50">{user.email}</span>
 
                     </div>
                 </div>
@@ -28,11 +101,11 @@ export const Settings = () => {
                         <div className="row mt-2">
                             <div className="col-md-6">
                                 <label className="labels">Names</label>
-                                <input type="text" className="form-control" />
+                                <input defaultValue={user.name} type="text" className="form-control" />
                             </div>
                             <div className="col-md-6">
                                 <label className="labels">Surnames</label>
-                                <input type="text" className="form-control" />
+                                <input defaultValue={user.surname} type="text" className="form-control" />
                             </div>
                         </div>
 
@@ -40,19 +113,24 @@ export const Settings = () => {
 
                             <div className="col-md-12 mt-3">
                                 <label className="labels">Phone</label>
-                                <input type="text" className="form-control" />
+                                <input defaultValue={user.phone} type="text" className="form-control" />
                             </div>
 
                             <div className="col-md-12 mt-3">
                                 <label className="labels">Email</label>
-                                <input type="text" className="form-control" />
+                                <input defaultValue={user.email} type="text" className="form-control" />
                             </div>
 
                         </div>
 
                         <div className="text-center mt-3">
-
-                            <button className="btn btn-danger me-1" type="button">Delete Account</button>
+                            {
+                                user.role === 'CLIENT' ? (
+                                    <button onClick={delAccount} className="btn btn-danger me-1" type="button">Delete Account</button>
+                                ) : (
+                                    <></>
+                                )
+                            }
                             <button className="btn btn-primary ms-1" type="button">Save Profile</button>
 
                         </div>

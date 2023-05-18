@@ -12,6 +12,7 @@ api.get('/test', test)
 api.post('/login', login)
 api.post('/register', register)
 api.get('/getImg/:file', upload, getImg)
+api.put('/registerImg/:id', [upload], uploadImg)
 
 //PRIVATE ROUTES
 api.put('/update', ensureAdvance, update)
@@ -21,7 +22,7 @@ api.put('/uploadImg/:id', [ensureAdvance, authImg, upload], uploadImg)
 
 //ADMIN ROUTES
 api.get('/get', [ensureAdvance, isAdmin], get)
-api.get('/get/:id', [ensureAdvance, isAdmin], getUser)
+api.get('/get/:id', [ensureAdvance], getUser)
 
 //MASTER ROUTES
 api.post('/save', [ensureAdvance, isMaster], save)

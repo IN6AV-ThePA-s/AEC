@@ -14,15 +14,17 @@ exports.addEvent = async (req, res) => {
 
         let params = {
             name: data.name,
+            description: data.description,
             type: data.type,
             maxPersons: data.maxPersons,
-            price: data.price
+            price: data.price,
+            hotel: data.hotel
         }
 
         let validate = validateData(params);
 
         if (validate) {
-            return res.status(400).send(validate)
+            return res.status(400).send({message: 'You can not put empty information.'})
         }
 
         if (data.maxPersons <= 0) {
@@ -40,7 +42,7 @@ exports.addEvent = async (req, res) => {
 
         if (err.errors.type.name == 'ValidatorError') {
             console.error('Validation error: ', err.message);
-            return res.status(400).send({ message: 'Some params are required or are not valid.' });
+            return res.status(400).send({ message: 'Some params are required or you put an invalid type event.' });
         }
 
         console.error(err)
@@ -52,11 +54,7 @@ exports.addEvent = async (req, res) => {
 exports.getEvents = async (req, res) => {
     try {
 
-        let events = await Event.find();
-
-        if (events.length == 0) {
-            return res.send({ message: 'There is not any event in the DB' })
-        }
+        let events = await Event.find().populate('hotel');
 
         return res.send({ message: 'Events avaliable: ', events })
 
@@ -64,6 +62,23 @@ exports.getEvents = async (req, res) => {
 
         console.error(err)
         return res.status(500).send({ message: 'Error getting events' })
+
+    }
+}
+
+exports.getEventsByHotel = async (req, res) => {
+    try {
+
+        let idHotel = req.params.id;
+
+        let events = await Event.find({hotel: idHotel}).populate('hotel');
+
+        return res.send({ message: 'Events avaliable: ', events })
+
+    } catch (err) {
+
+        console.error(err)
+        return res.status(500).send({ message: 'Error getting the events of the hotel' })
 
     }
 }
@@ -119,9 +134,17 @@ exports.updateEvent = async (req, res) => {
 
         let params = {
             name: data.name,
+            description: data.description,
             type: data.type,
             maxPersons: data.maxPersons,
-            price: data.price
+            price: data.price,
+            hotel: data.hotel
+        }
+
+        let validate = validateData(params);
+
+        if (validate) {
+            return res.status(400).send({message: 'You can not put empty information.'})
         }
 
         if (data.maxPersons !== '') {
@@ -147,7 +170,7 @@ exports.updateEvent = async (req, res) => {
     } catch (err) {
         if (err.errors.type.name == 'ValidatorError') {
             console.error('Validation error: ', err.message);
-            return res.status(400).send({ message: 'Some params are required or are not valid.' });
+            return res.status(400).send({ message: 'Some params are required or you put an invalid type event.' });
         }
         console.error(err)
         return res.status(500).send({ message: 'Error updating the event' })

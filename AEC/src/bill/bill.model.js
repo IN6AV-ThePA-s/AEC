@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 
 const billSchema = mongoose.Schema({
     numberBill:{
-        type:number,
+        type:Number,
         required:true
     },
     reservation:{
@@ -13,7 +13,7 @@ const billSchema = mongoose.Schema({
         required:true
     }
 },{
-    versionKey:true
+    versionKey:false    
 })
 
 module.exports = mongoose.model('Bill',billSchema)
