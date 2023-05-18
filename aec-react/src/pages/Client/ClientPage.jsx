@@ -3,11 +3,12 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../index'
+import { NavbarClient } from '../../components/NavbarClient'
 
 export const ClientPage = () => {
     const navigate = useNavigate()
     const { dataUser } = useContext(AuthContext)
-    
+
     const [photo, setPhoto] = useState()
     const [uPhoto, setUPhoto] = useState()
     const [user, setUser] = useState({})
@@ -46,12 +47,12 @@ export const ClientPage = () => {
 
     const handlePhoto = (e) => {
         const allowedExtensions = /(.jpg|.jpeg|.png)$/i
-        if(!allowedExtensions.exec(e.target.value)) {
+        if (!allowedExtensions.exec(e.target.value)) {
             Swal.fire({
                 title: 'Invalid extension (only .png | .jpg | .jpeg)',
                 icon: 'error',
                 showConfirmButton: true
-            }).then(()=>{
+            }).then(() => {
                 e.target.value = ''
             })
         } else {
@@ -66,12 +67,12 @@ export const ClientPage = () => {
             }, 500);
         }
 
-        
+
     }
 
-    const getUser = async() => {
+    const getUser = async () => {
         try {
-            
+
             const { data } = await axios.get(`http://localhost:3022/user/get/${dataUser.sub}`, { headers: headers })
 
             if (data.data) {
@@ -80,24 +81,24 @@ export const ClientPage = () => {
                 setForm({ name: user.name, surname: user.surname, email: user.email, phone: user.phone, username: user.username })
                 getPhoto(data.data[0].photo)
             }
-            
+
         } catch (err) {
             console.error(err)
         }
     }
-    
-    const getPhoto = async(id) => {
+
+    const getPhoto = async (id) => {
         try {
             const img = await axios.get(`http://localhost:3022/user/getImg/${id}`)
 
             if (img) setPhoto(img.request.responseURL)
-            
+
         } catch (err) {
             console.error(err)
         }
     }
 
-    const delAccount = async() => {
+    const delAccount = async () => {
         try {
             Swal.fire({
                 title: 'Are you sure about deleting your account?',
@@ -105,9 +106,9 @@ export const ClientPage = () => {
                 icon: 'question',
                 showConfirmButton: true,
                 showDenyButton: true,
-            }).then(async(result)=>{
-                if(result.isConfirmed) {
-                    const { data } = await axios.delete(`http://localhost:3022/user/delete`, { headers: headers }).catch((err)=>{
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    const { data } = await axios.delete(`http://localhost:3022/user/delete`, { headers: headers }).catch((err) => {
                         Swal.fire(err.response.data.message, '', 'error')
                     })
                     Swal.fire(`${data.message}`, '', 'success')
@@ -125,14 +126,14 @@ export const ClientPage = () => {
     const update = async () => {
         try {
             const { data } = await axios.put(`http://localhost:3022/user/update`, form, { headers: headers })
-            
+
             if (data.user) {
                 if (uPhoto) {
                     console.log(uPhoto);
-                    const { data } = await axios.put(`http://localhost:3022/user/uploadImg/${dataUser.sub}`, photo, { 
-                        headers: {'Content-type': 'multipart/form-data', 'Authorization': localStorage.getItem('token')}
+                    const { data } = await axios.put(`http://localhost:3022/user/uploadImg/${dataUser.sub}`, photo, {
+                        headers: { 'Content-type': 'multipart/form-data', 'Authorization': localStorage.getItem('token') }
                     })
-                    
+
                     Swal.fire({
                         title: 'Account updated!',
                         icon: 'success',
@@ -186,16 +187,29 @@ export const ClientPage = () => {
         }
     }
 
-    
+
 
     useEffect(() => {
         getUser()
     }, [])
-    
-  return (
-    <>
-        <Outlet/>
-    </>
-    
-  )
+
+    return (
+        <>
+            <div className='container' style={{ marginTop: '6rem' }}>
+
+                <div>
+                    <NavbarClient />
+                </div>
+
+                <div className="col-sm-12 col-md-12 col-lg-12">
+
+                    <Outlet />
+
+                </div>
+
+            </div>
+
+        </>
+
+    )
 }

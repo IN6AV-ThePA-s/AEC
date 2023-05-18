@@ -18,6 +18,25 @@ export const HomePage = () => {
         }
     }
 
+    const [searchOption, setSearchOption] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const filteredHotels = hotels.filter((hotel) => {
+
+        if (!searchOption || searchOption === 'name') {
+
+            return hotel.name?.toLowerCase().includes(searchTerm.toLowerCase());
+
+        } else if (searchOption === 'address') {
+
+            return hotel.address?.toLowerCase().includes(searchTerm.toLowerCase());
+
+        }
+
+
+
+    });
+
     useEffect(() => {
         getHotels();
     }, [])
@@ -49,25 +68,35 @@ export const HomePage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="container h-100">
-                    <div className="d-flex justify-content-center h-100">
-                        <div className="searchbar">
-                            <input className="search_input" type="text" name="" placeholder="Search..." />
-                            <a href="#" className="search_icon"><i className="fas fa-search"></i></a>
-                        </div>
+                <div className="row justify-content-center mb-4 mt-3 text-dark">
+                    <div className="col-md-4">
+                        <select id='selectOption' name="state" className="form-select" onChange={(e) => setSearchOption(e.target.value)}>
+                            <option value='name'>NAME</option>
+                            <option value='address'>ADDRESS</option>
+                        </select>
+                    </div>
+                    <div className="col-md-6">
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            className="form-control"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
                     </div>
                 </div>
+
                 <div className='d-flex justify-content-center flex-wrap mb-3 mt-3 mx-3 '>
                     {
-                        hotels.map(({_id, name, address,photos},index) => {
+                        filteredHotels.map(({ _id, name, address, photos }, index) => {
                             return (
-                                <Card 
+                                <Card
                                     key={index}
                                     id={_id}
                                     name={name}
                                     descripion={address}
                                     photos={photos}
-                                    index={index} 
+                                    index={index}
                                 />
                             )
                         })

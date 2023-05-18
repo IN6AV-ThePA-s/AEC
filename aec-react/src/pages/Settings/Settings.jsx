@@ -157,7 +157,6 @@ export const Settings = () => {
             const img = await axios.get(`http://localhost:3022/user/getImg/${id}`)
 
             if (img) setPhoto(img.request.responseURL)
-
         } catch (err) {
             console.error(err)
         }
@@ -191,7 +190,7 @@ export const Settings = () => {
     useEffect(() => {
         getUser()
     }, [])
-
+    
     return (
         <div className="bodySettings container rounded bg-white">
             {

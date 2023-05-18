@@ -24,6 +24,8 @@ import { UpdateReservationPage } from './pages/Reservation/UpdateReservationPage
 import { UpdateBillPage } from './pages/Bill/UpdateBillPage'
 import { ClientPage } from './pages/Client/ClientPage'
 import { CheckHotelClientPage } from './pages/Hotel/CheckHotelClientPage'
+import { HotelPageClient } from './pages/Client/HotelPageClient'
+import { RoomPageClient } from './pages/Client/RoomPageClient'
 
 export const AuthContext = createContext();
 
@@ -67,7 +69,22 @@ export const Index = () => {
                         {
                             path: 'checkHotel/:id',
                             element: <CheckHotelClientPage/>,
-                            
+                        },
+                        {
+                            path: 'hotels',
+                            element: <HotelPageClient/>
+                        },
+                        {
+                            path: 'rooms',
+                            element: <RoomPageClient/>
+                        },
+                        {
+                            path: 'settings',
+                            element: <Settings/>
+                        },
+                        {
+                            path: 'checkHotel',
+                            element: <CheckHotelPage/>
                         }
                     ]
                 },

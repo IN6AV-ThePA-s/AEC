@@ -8,8 +8,6 @@ import Sweeta from 'sweetalert2'
 
 export const HotelPage = () => {
     const navigate = useNavigate();
-    const [hotels, setHotels] = useState([{}]);
-    const [searchTerm, setSearchTerm] = useState('');
 
     const getHotels = async () => {
         try {
@@ -30,15 +28,27 @@ export const HotelPage = () => {
         }
     };
 
+    const [searchOption, setSearchOption] = useState(null);
+    const [hotels, setHotels] = useState([{}]);
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const filteredHotels = hotels.filter((hotel) => {
+
+        if (!searchOption || searchOption === 'name') {
+
+            return hotel.name?.toLowerCase().includes(searchTerm.toLowerCase());
+
+        } else if (searchOption === 'address') {
+
+            return hotel.address?.toLowerCase().includes(searchTerm.toLowerCase());
+
+        }
+
+    });
+
     useEffect(() => {
         getHotels();
     }, []);
-
-    const filteredHotels = hotels.filter((hotel) =>
-
-        hotel.name?.toLowerCase().includes(searchTerm.toLowerCase())
-
-    );
 
     return (
         <>
@@ -53,10 +63,9 @@ export const HotelPage = () => {
 
                     <div className="row justify-content-start mb-4 mt-3">
                         <div className="col-md-5">
-                            <select id='selectOption' name="state" className="form-select">
-                                <option value={null}>FILTER</option>
+                            <select id='selectOption' name="state" className="form-select" onChange={(e) => setSearchOption(e.target.value)}>
                                 <option value='name'>NAME</option>
-                                <option value='addresss'>ADDRESS</option>
+                                <option value='address'>ADDRESS</option>
                             </select>
                         </div>
                         <div className="col-md-7">

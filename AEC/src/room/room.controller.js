@@ -17,6 +17,9 @@ exports.add = async(req, res) => {
             return res.status(418).send(msg);
         if (!(await Hotel.findOne({ _id: data.hotel })))
             return res.status(418).send({ message: `Hotel not found` });
+        if ((await Room.findOne({$and: [{code: data.code}, {hotel: data.hotel}]}))) {
+            return res.status(400).send({message: 'This room has already been taken.'})
+        }
         const room = new Room(data);
         await room.save();
         return res.send({ message: `The room has been added`, RI: room._id });
@@ -32,7 +35,7 @@ exports.gets = async(req, res) => {
         const rooms = await Room.find()
             .populate({
                 path: 'hotel'
-            });
+            }).populate('services.service');
         return res.send({ rooms });
     } catch (err) {
         console.error(err);
@@ -91,8 +94,8 @@ exports.upda = async(req, res) => {
             return res.status(418).send(msg);
         if (!(await Hotel.findOne({ _id: data.hotel })))
             return res.status(418).send({ message: `Hotel not found` });
-        const upH = await Room.updateOne({ _id: roomId }, data);
-        if (upH.modifiedCount == 0)
+        const upH = await Room.findOneAndUpdate({ _id: roomId }, data, {new: true});
+        if (!upH)
             return res.status(401).send({ message: `Room not found or not updated` });
         return res.send({ message: `The room has been updated successfully` });
     } catch (err) {
@@ -188,7 +191,7 @@ exports.uploadImgs = async(req, res) => {
         const imgs = req.files.images;
         let names = [];
         const roomId = req.params.id;
-        const url = './src/uploads/hotels/';
+        const url = './src/uploads/rooms/';
         const room = await Room.findOne({ _id: roomId });
         if (room) {
             if (room.photos) {
