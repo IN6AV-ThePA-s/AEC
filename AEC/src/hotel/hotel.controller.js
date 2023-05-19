@@ -174,6 +174,12 @@ exports.uploadImgs = async(req, res) => {
     }
 }
 
+exports.getHotelPerAdmin = async(req,res) =>{
+    let userLoggued = req.user
+    let existsHotel = await Hotel.findOne({admin:userLoggued.sub})
+    if(!existsHotel) return res.statu(404).send({message:'Hotel nof found'})
+    return res.send({existsHotel})
+}
 /* ----- GET PHOTO ----- */
 exports.getImg = async(req, res) => {
     try {

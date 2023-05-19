@@ -118,6 +118,23 @@ export const NavbarClient = () => {
                                 <li className='container max-width'>
                                 </li>
                             </ul>
+                            <li>
+                            <a href="#submenu8" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
+                                <i className="textOption fs-3 bi bi-journal-text"></i> <span className="textOption d-none d-sm-inline">Bill</span>
+                            </a>
+                            <ul className="collapse nav flex-column ms-1" id="submenu8" data-bs-parent="#menu">
+                                <li className='container max-width'>
+
+                                    <Link to='billPage' className="nav-link px-0">
+                                        <div className='container bg-light p-2 rounded-4 shadow'>
+                                            <i className="text-info fs-6 bi bi-house"></i> <span className="text-info ms-1 d-none d-sm-inline">Principal</span>
+                                        </div>
+                                    </Link>
+
+                                </li>
+                                
+                            </ul>
+                        </li>
                         </li>
                                 <div className="dropdown pb-4 ">
                                     <Link href="#" className="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">

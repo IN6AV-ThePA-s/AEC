@@ -227,7 +227,7 @@ exports.getReservPerHotel = async(req,res) =>{
         if(!existsHotel) return res.status(404).send({message:'Hotel not found'})
         let rooms = await Room.find({hotel:id})
         if(!rooms) return res.status(404).send({message:'This hotel have not rooms'})
-        let getResHotel = await Reservation.find({room:rooms})
+        let getResHotel = await Reservation.find({room:rooms,status:'COMPLETED'})
             .populate({
                 path:'room',
                 populate:{
@@ -297,6 +297,7 @@ exports.getRservationsUser = async(req,res)=>{
 
 exports.getReservations = async(req,res) =>{
     try {
+        let userL
         let reservations = await Reservation.find()
             .populate({
                 path:'room',

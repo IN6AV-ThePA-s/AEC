@@ -6,7 +6,7 @@ const reservationController = require('./reservation.controller')
 
 api.get('/test', reservationController.test)
 api.get('/history',[ensureAdvance],reservationController.historylUserLogged)
-api.get('/resHotel/:id',[ensureAdvance,isMaster],reservationController.getReservPerHotel)
+api.get('/resHotel/:id',[ensureAdvance,isAdmin],reservationController.getReservPerHotel)
 api.get('/get',[ensureAdvance,isMaster],reservationController.getReservations)
 api.get('/hosted/:id',[ensureAdvance,isAdmin],reservationController.geteClientHotl)
 api.get('/getUser/:id',[ensureAdvance],reservationController.getRservationsUser)
