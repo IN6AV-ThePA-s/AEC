@@ -90,7 +90,7 @@ export const ModalUpdateRoom = ({ id, hotel, code, type, status, price, beds, ge
                         <select className="form-control" id='status' defaultValue={status} >
 
                             <option>Select Option</option>
-                            <option value='AVALIABLE'>AVALIABLE</option>
+                            <option value='AVAILABLE'>AVAILABLE</option>
                             <option value='BUSY'>BUSY</option>
 
                         </select>

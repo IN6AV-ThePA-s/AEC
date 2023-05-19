@@ -138,7 +138,7 @@ export const ModalAddRoom = ({id, getRooms}) => {
                         <select className="form-control" name='status' onChange={handleChange}>
 
                             <option value={null}>Select Option</option>
-                            <option value={null}>AVALIABLE</option>
+                            <option value={null}>AVAILABLE</option>
                             <option value={null}>BUSY</option>
 
                         </select>

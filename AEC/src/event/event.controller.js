@@ -56,7 +56,7 @@ exports.getEvents = async (req, res) => {
 
         let events = await Event.find().populate('hotel');
 
-        return res.send({ message: 'Events avaliable: ', events })
+        return res.send({ message: 'Events available: ', events })
 
     } catch (err) {
 
@@ -73,7 +73,7 @@ exports.getEventsByHotel = async (req, res) => {
 
         let events = await Event.find({hotel: idHotel}).populate('hotel');
 
-        return res.send({ message: 'Events avaliable: ', events })
+        return res.send({ message: 'Events available: ', events })
 
     } catch (err) {
 
