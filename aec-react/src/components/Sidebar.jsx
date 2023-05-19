@@ -137,12 +137,18 @@ export const Sidebar = () => {
 
                                 </li>
                                 <li className='container max-width'>
-
-                                    <Link to='addReservation' className="nav-link px-0">
-                                        <div className='container bg-light p-2 rounded-4 shadow'>
-                                            <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
-                                        </div>
-                                    </Link>
+                                    {
+                                        dataUser.role === 'MASTER' ? (
+                                            <></>
+                                        ) : (
+                                            <Link to='addReservation' className="nav-link px-0">
+                                                <div className='container bg-light p-2 rounded-4 shadow'>
+                                                    <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Add</span>
+                                                </div>
+                                            </Link>
+                                        )
+                                    }
+                                    
 
                                 </li>
                             </ul>

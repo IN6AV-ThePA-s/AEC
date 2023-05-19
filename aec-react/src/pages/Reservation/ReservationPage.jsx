@@ -9,14 +9,28 @@ export const ReservationPage = () => {
     const getReservation = async () => {
         try {
             let user = (JSON.parse(localStorage.getItem('user')))
-            const { data } = await axios(`http://localhost:3022/reservation/getUser/${user.sub}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': localStorage.getItem('token'),
-                },
-            });
+
+            if(user.role === 'MASTER') {
+                const { data } = await axios(`http://localhost:3022/reservation/get`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': localStorage.getItem('token'),
+                    },
+                });
+                setResevations(data.reservations);
+            } else {
+                const { data } = await axios(`http://localhost:3022/reservation/getAdminRes`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': localStorage.getItem('token'),
+                    },
+                });
+                console.log(data.reser);
+                setResevations(data.reser);
+            }
+            
             //console.log(data.existsReservs);
-            setResevations(data.existsReservs);
+            
         } catch (err) {
             console.error(err);
             Swal.fire({
@@ -72,6 +86,7 @@ export const ReservationPage = () => {
 
                                     <div className="d-flex flex-column text-center p-3">
                                         {  
+                                            
                                             resevations.length > 0 ? resevations.map(
                                                 ({_id,numberRes, client, room, numberOfPeople, numberOfNight,
                                                     additionalServices, events, total, status},index)=>{

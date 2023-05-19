@@ -295,6 +295,34 @@ exports.getRservationsUser = async(req,res)=>{
     }
 }
 
+exports.getAdminReservations = async(req,res)=>{
+    try {
+        let userLoggued = req.user
+        let hotel = await Hotel.findOne({admin: userLoggued.sub})
+        let rooms = await Room.find({hotel: hotel._id})
+        
+        let reser = []
+        for (let r of rooms) {
+            const existsReservs = await Reservation.find({room: r._id})
+                .populate({path:'client',select:'name surname'})
+                .populate({path:'events',select:'name'})
+                .populate(hotelPop)
+                .populate(servRoomPop)
+                .populate(servicePop)
+            if(existsReservs) {
+                reser.push(existsReservs)
+            } 
+            continue
+        }
+        
+        if(reser.length > 0) return res.status(404).send({message:'You have not reservation yet'})
+        return res.send({reser})
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send("Error getting reservations")
+    }
+}
+
 exports.getReservations = async(req,res) =>{
     try {
         let userL

@@ -20,5 +20,6 @@ api.put('/addService/:id/:idService',[ensureAdvance],reservationController.addSe
 api.put('/remService/:id/:idService',[ensureAdvance],reservationController.removeService)
 api.put('/complete/:id',[ensureAdvance],reservationController.complete)
 
+api.get('/getAdminRes', [ensureAdvance, isAdmin], reservationController.getAdminReservations)
 
 module.exports = api
