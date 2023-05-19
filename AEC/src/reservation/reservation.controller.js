@@ -178,7 +178,7 @@ exports.cancelReserv = async(req,res) =>{
     }
 }
 
-exports.getClientHotel = async(req,res) =>{
+exports.geteClientHotl = async(req,res) =>{
     try {
         let {id} = req.params
         let userLoggued = req.user

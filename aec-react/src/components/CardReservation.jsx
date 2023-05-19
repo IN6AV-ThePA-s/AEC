@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 export const CardReservation = ({id, numberRes, client, room, numberOfPeople, numberOfNight,additionalServices, events, total, status}) => {
     const navigator = useNavigate()
 
-    const viewEventos = () =>{
+    /*const viewEventos = () =>{
         if(Array.isArray(events)){
             for(let event of events){
                 return(
@@ -24,7 +24,7 @@ export const CardReservation = ({id, numberRes, client, room, numberOfPeople, nu
         }else{
             <input type="text" placeholder='Name' value={additionalServices.service} className='form-control textNormalHotel' style={{ background: 'transparent' }} readOnly />
         }
-    }
+    }*/
 
     const compete = async() =>{
         try {
@@ -77,9 +77,9 @@ export const CardReservation = ({id, numberRes, client, room, numberOfPeople, nu
     }
  
     useEffect(()=>{
-        viewEventos()
-        viewServicios()
-        //console.log(additionalServices[0].service);
+        //viewEventos()
+        //viewServicios()
+        console.log(additionalServices);
     },[])
 
     return (
@@ -94,7 +94,13 @@ export const CardReservation = ({id, numberRes, client, room, numberOfPeople, nu
                             </div>
                             <div className='col-md-8'>
                                 <h4 className='text-center'>Client</h4>
-                                <input type="text" placeholder='Name' value={`${client.name} ${client.surname}`} className='form-control textNormalHotel' style={{ background: 'transparent' }} readOnly />
+                                    {
+                                        client != undefined ? (
+                                            <input type="text" placeholder='Name' value={`${client.name} ${client.surname}`} className='form-control textNormalHotel' style={{ background: 'transparent' }} readOnly />
+                                        ) : (
+                                            <input type="text" placeholder='Name' className='form-control textNormalHotel' style={{ background: 'transparent' }} readOnly />
+                                        )
+                                    }
                             </div>
 
                         </div>
@@ -102,15 +108,36 @@ export const CardReservation = ({id, numberRes, client, room, numberOfPeople, nu
                         <div className='row mt-2'>
                             <div className='col-md-4'>
                                 <h4 className='text-center'>Room</h4>
-                                <input type="text" placeholder='Name' value={`${room.cod} of ${room.hotel.name}`} className='form-control textNormalHotel' style={{ background: 'transparent' }} readOnly />
+                                    {
+                                        room != undefined ? (
+                                            <input type="text" placeholder='Name' value={`${room.cod} of ${room.hotel.name}`} className='form-control textNormalHotel' style={{ background: 'transparent' }} readOnly />
+                                        ) : (
+                                            <input type="text" placeholder='Name' className='form-control textNormalHotel' style={{ background: 'transparent' }} readOnly />
+                                        )
+                                    }    
+                                {/* <input type="text" placeholder='Name' value={`${room.cod} of ${room.hotel.name}`} className='form-control textNormalHotel' style={{ background: 'transparent' }} readOnly /> */}
                             </div>
                             <div className='col-md-4'>
                                 <h4 className='text-center'>No. People</h4>
-                                <input type="text" placeholder='Name' value={numberOfPeople} className='form-control textNormalHotel' style={{ background: 'transparent' }} readOnly />
+                                {
+                                    room != undefined ? (
+                                        <input type="text" placeholder='Name' value={numberOfPeople} className='form-control textNormalHotel' style={{ background: 'transparent' }} readOnly />
+                                    ) : (
+                                        <input type="text" placeholder='Name' className='form-control textNormalHotel' style={{ background: 'transparent' }} readOnly />
+                                    )
+                                } 
+                                {/* <input type="text" placeholder='Name' value={numberOfPeople} className='form-control textNormalHotel' style={{ background: 'transparent' }} readOnly /> */}
                             </div>
                             <div className='col-md-4'>
                                 <h4 className='text-center'>No. Nights</h4>
-                                <input type="text" placeholder='Name' value={numberOfNight} className='form-control textNormalHotel' style={{ background: 'transparent' }} readOnly />
+                                {
+                                        room != undefined ? (
+                                            <input type="text" placeholder='Name' value={numberOfNight} className='form-control textNormalHotel' style={{ background: 'transparent' }} readOnly />
+                                        ) : (
+                                            <input type="text" placeholder='Name' className='form-control textNormalHotel' style={{ background: 'transparent' }} readOnly />
+                                        )
+                                    } 
+                                {/* <input type="text" placeholder='Name' value={numberOfNight} className='form-control textNormalHotel' style={{ background: 'transparent' }} readOnly /> */}
                             </div>
                         </div>
 
@@ -119,12 +146,12 @@ export const CardReservation = ({id, numberRes, client, room, numberOfPeople, nu
                                 <h4 className='text-center'>Additionals Services</h4>
                                 <select className="form-control selectpicker show-menu-arrow" name='additionalServices' 
                                 data-style="form-control" data-live-search="true">
-                                    {    
-                                        additionalServices != undefined /*&& additionalServices[0].service != undefined*/ ? (additionalServices.map(({_id,service}, i)=>{
+                                    {   
+                                        additionalServices != undefined /*&& additionalServices[0].service != undefined*/ ? additionalServices.map(({_id,service}, i)=>{
                                             return(
                                                 <option key={i} value={_id}>{service}</option>
                                             )
-                                        }) ): (
+                                        }) : (
                                             <option>No services available</option>
                                         )
                                     }
@@ -146,12 +173,6 @@ export const CardReservation = ({id, numberRes, client, room, numberOfPeople, nu
                             </div>
                         </div>
                         <div className='row mt-2'>
-                            <div className='col-md-3'>
-                                <h4 className='text-center'>Status</h4>
-                                <select name="state" className='form-select' style={{ background: 'transparent' }} disabled>
-                                    <option value={null}>PROGRESS</option>
-                                </select>
-                            </div>
                             <div className='col-md-9'>
                                 <h4 className='text-center'>Total</h4>
                                 <input type="text" placeholder='Name' value={total} className='form-control textNormalHotel' style={{ background: 'transparent' }} readOnly />

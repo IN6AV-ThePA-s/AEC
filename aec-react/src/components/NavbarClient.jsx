@@ -101,6 +101,24 @@ export const NavbarClient = () => {
                                 <li className="nav-item">
                                     <Link className="nav-link fs-5 text-black textNormalHotel" to='rooms'><i className='fas fa-bed'></i> Rooms</Link>
                                 </li>
+                                <li>
+                            <a href="#submenu3" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
+                                <i className="textOption fs-3 bi bi-telephone-outbound"></i> <span className="textOption ms-1 d-none d-sm-inline">Reservation</span>
+                            </a>
+                            <ul className="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                                <li className='container max-width'>
+
+                                    <Link to='reservationPage' className="nav-link px-0">
+                                        <div className='container bg-light p-2 rounded-4 shadow'>
+                                            <i className="text-info fs-6 bi bi-house"></i> <span className="text-info ms-1 d-none d-sm-inline">Principal</span>
+                                        </div>
+                                    </Link>
+
+                                </li>
+                                <li className='container max-width'>
+                                </li>
+                            </ul>
+                        </li>
                                 <div className="dropdown pb-4 ">
                                     <Link href="#" className="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                                         <img crossOrigin='anonymous' src={photo} alt="hugenerd" width="30" height="30" className="rounded-circle me-1" />

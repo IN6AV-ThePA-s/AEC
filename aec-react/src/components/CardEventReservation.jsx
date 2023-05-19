@@ -1,11 +1,11 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 
 
 export const CardEventReservation = ({ name, description, type, maxPersons, price, id, already, idReserv }) => {
-
+    const navigator = useNavigate()
     const addEvent = async() =>{
         try {
             let idr = idReserv._id
@@ -22,6 +22,7 @@ export const CardEventReservation = ({ name, description, type, maxPersons, pric
                 icon:'success',
                 showConfirmButton: true,
             });
+            navigator('/home/reservationPage')
         } catch (err) {
             console.error(err);
             Swal.fire({
@@ -46,6 +47,7 @@ export const CardEventReservation = ({ name, description, type, maxPersons, pric
                 icon:'success',
                 showConfirmButton: true,
             });
+            navigator('/home/reservationPage')
         } catch (err) {
             console.error(err);
             Swal.fire({
@@ -105,7 +107,7 @@ export const CardEventReservation = ({ name, description, type, maxPersons, pric
                                 already == 1 ? (
                                         <button className="btn btn-danger bi bi-trash ms-1" type="button" onClick={()=>remEvent()} > Delete</button>
                                 ) : (
-                                    <button className="btn btn-success bi bi-pencil me-1" type="button" onClick={()=>addEvent()} > Add</button>
+                                        <button className="btn btn-success bi bi-pencil me-1" type="button" onClick={()=>addEvent()} > Add</button>
                                 )
                             }
                         </div>

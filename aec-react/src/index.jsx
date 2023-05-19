@@ -92,7 +92,24 @@ export const Index = () => {
                         {
                             path:'history',
                             element:<HistoryUserPage/>
-                        }
+                        },
+                        {
+                            path: 'reservationPage',
+                            element: <ReservationPage/>
+                        },
+                        {
+                            path: 'addReservation/:id',
+                            element: <AddReservationPage/>
+                        },
+                        {
+                            path: 'updateReservation/:id',
+                            element: <UpdateReservationPage/>
+                        },
+                        {
+                            path: 'billPage',
+                            element: <BillPage/>
+                        },
+
                     ]
                 },
                 {
@@ -157,10 +174,6 @@ export const Index = () => {
                         {
                             path: 'billPage',
                             element: <BillPage/>
-                        },
-                        {
-                            path: 'updateBill',
-                            element: <UpdateBillPage/>
                         },
                         {
                             path:'addOrRemEvent/:idReserv',

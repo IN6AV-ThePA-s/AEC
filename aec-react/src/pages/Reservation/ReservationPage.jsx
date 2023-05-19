@@ -15,6 +15,7 @@ export const ReservationPage = () => {
                     'Authorization': localStorage.getItem('token'),
                 },
             });
+            //console.log(data.existsReservs);
             setResevations(data.existsReservs);
         } catch (err) {
             console.error(err);
@@ -70,8 +71,8 @@ export const ReservationPage = () => {
                                 <div className=" align-items-center">
 
                                     <div className="d-flex flex-column text-center p-3">
-                                        {   
-                                            resevations > 0 ? resevations.map(
+                                        {  
+                                            resevations.length > 0 ? resevations.map(
                                                 ({_id,numberRes, client, room, numberOfPeople, numberOfNight,
                                                     additionalServices, events, total, status},index)=>{
                                                     
@@ -92,7 +93,7 @@ export const ReservationPage = () => {
                                             }) : (
                                                 <h1>You have not make any reservations yet</h1>
                                             )                                      
-                                        }
+                                            }
 
                                     </div>
 
