@@ -1,16 +1,27 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../pages/Hotel/styleCardHotelPage.css'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../index'
 
 export const CardHotelPage = ({ _id, index, name, address, email, phone, photos }) => {
+    const { dataUser } = useContext(AuthContext)
+    const [route, setRoute] = useState(`dashboard`)
+
+    useEffect(() => {
+      if(dataUser.role === 'CLIENT'){
+        setRoute(`home`)
+      }
+    }, [])
+    
+    
     return (
         <>
 
-            <div className="row justify-content-center mt-2">
-                <div className="col-sm-9 col-md-9 col-lg-9">
+            <div className="row justify-content-center mt-2 mb-1">
+                <div className="col-sm-12 col-md-12 col-lg-12">
                     <div className="hotel-card bg-white rounded-lg shadow-lg overflow-hidden d-block d-lg-flex">
                         <div className="hotel-card_images">
-                            <div id={`bootstrapCarousel${index}`} className="carousel slide" data-ride="carousel" style={{width:'343px', height: '248px'}}>
+                            <div id={`bootstrapCarousel${index}`} className="carousel slide" data-ride="carousel" style={{height:'324px', width:'487px'}}>
                                 <div className="carousel-inner h-100">
 
                                     {
@@ -79,7 +90,7 @@ export const CardHotelPage = ({ _id, index, name, address, email, phone, photos 
 
 
                             </div>
-                            <Link to={`/dashboard/checkHotel/${_id}`}>
+                            <Link to={`/${route}/checkHotel/${_id}`}>
                                 <button className="btn btn-primary me-1 mt-4">Check Hotel</button>
                             </Link>
 

@@ -188,6 +188,7 @@ exports.del = async(req, res) => {
 exports.updatePassword = async(req, res) => {
     try {
         let data = req.body
+        let id = req.user.sub
         let form = {
             password: data.password,
             newPassword: data.newPass
@@ -318,15 +319,17 @@ exports.uploadImg = async(req, res) => {
         ) {
             fs.unlinkSync(filePath)
             return res.status(400).send({ message: 'File extension not admited' })
-        } 
+        } else {
+            const upUser = await User.findOneAndUpdate(
+                { _id: id },
+                { photo: fileName },
+                { new: true }
+            )
+            if (!upUser) return res.status(404).send({ message: 'User not found!' })
+            return res.send({ message: 'Photo added successfully', user: upUser })
+        }
 
-        const upUser = await User.findOneAndUpdate(
-            { _id: id },
-            { photo: fileName },
-            { new: true }
-        )
-        if (!upUser) return res.status(404).send({ message: 'User not found!' })
-        return res.send({ message: 'Photo added successfully' })
+        
         
     } catch (err) {
         console.error(err)

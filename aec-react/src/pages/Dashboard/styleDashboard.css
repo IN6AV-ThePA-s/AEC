@@ -160,6 +160,13 @@ input{
     font-family: CerealLight;
 }
 
+.navTitle{
+    font-family: Designer;
+    font-size: 60px;
+    margin-top: -15px;
+    margin-bottom: -15px;
+}
+
 .dashTitle {
     font-family: Designer;
     font-size: calc(3vw + 3vh);

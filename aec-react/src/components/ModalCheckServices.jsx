@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { Link } from 'react-router-dom'
 import { CardModalCheckServices } from './CardModalCheckServices'
 
-export const ModalCheckServices = ({ id, services,getRooms }) => {
+export const ModalCheckServices = ({ id, services,getRooms, dataUser }) => {
 
     const headers = {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
     }
+    const [read, setRead] = useState(false)
     const delService = async(i)=>{
         try {
             console.log(i);
@@ -32,7 +33,13 @@ export const ModalCheckServices = ({ id, services,getRooms }) => {
             console.error(err);
         }
     }
-
+    
+    useEffect(() => {
+      if(dataUser === 'CLIENT'){
+        setRead(true)
+      }
+    }, [])
+    
     return (
 
         <div className="modal fade" id={`modalCheckServices${id}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -56,21 +63,27 @@ export const ModalCheckServices = ({ id, services,getRooms }) => {
                                                     <div className='row'>
                                                         <div className='col-md-7'>
                                                             <h5 className='text-center'>Name</h5>
-                                                            <input type="text" placeholder='Name' defaultValue={service?.service} className='form-control textNormalHotel' disabled />
+                                                            <input readOnly={read} type="text" placeholder='Name' defaultValue={service?.service} className='form-control textNormalHotel' disabled />
                                                         </div>
                                                         <div className='col-md-5'>
                                                             <h5 className='text-center'>Price</h5>
-                                                            <input type="number" placeholder='Price' defaultValue={service?.price} className='form-control textNormalHotel' disabled />
+                                                            <input readOnly={read} type="number" placeholder='Price' defaultValue={service?.price} className='form-control textNormalHotel' disabled />
                                                         </div>
 
                                                     </div>
 
                                                     <div>
                                                         <h5 className='text-center mt-3'>Description</h5>
-                                                        <textarea className="form-control textNormalHotel" placeholder='Description' defaultValue={service?.description} aria-label="With textarea" disabled></textarea>
+                                                        <textarea readOnly={read} className="form-control textNormalHotel" placeholder='Description' defaultValue={service?.description} aria-label="With textarea" disabled></textarea>
                                                     </div>
 
-                                                    <button type="button" className="btn btn-danger mt-3" data-bs-dismiss="modal" onClick={(e) => { e.preventDefault(); delService(service?._id) }}>Delete Service</button>
+                                                    {
+                                                        dataUser === 'CLIENT' ? (
+                                                            <></>
+                                                        ) : (
+                                                            <button type="button" className="btn btn-danger mt-3" data-bs-dismiss="modal" onClick={(e) => { e.preventDefault(); delService(service?._id) }}>Delete Service</button>
+                                                        )
+                                                    }
 
                                                 </div>
                                             </div>

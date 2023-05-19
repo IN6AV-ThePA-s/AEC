@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export const CardRoomPage = ({ _id, code, status, type, price, beds, photos, i, butRoom, butUpda, butSerRoom, butGetRoom }) => {
+export const CardRoomPage = ({ _id, code, status, type, price, beds, photos, i, butRoom, butUpda, butSerRoom, butGetRoom, dataUser }) => {
     return (
 
         <div className="hotel-card bg-white rounded-lg shadow overflow-hidden d-block d-lg-flex mt-3">
@@ -57,9 +57,19 @@ export const CardRoomPage = ({ _id, code, status, type, price, beds, photos, i, 
                             <Link>
                                 <button className="btn btn-primary me-1 mt-4 bi bi-list" data-bs-toggle="modal" data-bs-target={`#modalCheckServices${_id}`} onClick={(e)=> { e.preventDefault(); butGetRoom()}}> Check Services</button>
                             </Link>
-                            <Link>
-                                <button className="btn btn-success me-1 mt-4 bi bi-plus-circle" data-bs-toggle="modal" data-bs-target={`#modalAddService${_id}`} onClick={(e) => { e.preventDefault(); butSerRoom() }}> Add Service</button>
-                            </Link>
+                            {
+                                dataUser === 'CLIENT' ? (
+                                    <Link to={`/home/addReservation/${_id}`}>
+                                        <button className="btn btn-success me-1 mt-4 bi bi-card-checklist" data-bs-toggle="modal" /* data-bs-target={`#modalCheckServices${_id}`} onClick={(e)=> { e.preventDefault(); butGetRoom()}} */> Make reservation</button>
+                                    </Link>
+                                    
+                                ) : (
+                                    <Link>
+                                        <button className="btn btn-success me-1 mt-4 bi bi-plus-circle" data-bs-toggle="modal" data-bs-target={`#modalAddService${_id}`} onClick={(e) => { e.preventDefault(); butSerRoom() }}> Add Service</button>
+                                    </Link>
+                                )
+                            }
+                            
                         </div>
                     </div>
                     <div className="hotel-card_pricing text-center">
@@ -73,11 +83,21 @@ export const CardRoomPage = ({ _id, code, status, type, price, beds, photos, i, 
 
                 </div>
 
-                <button className="btn btn-warning me-1 mt-4 bi bi-pencil" data-bs-toggle="modal" data-bs-target={`#modalUpdateRoom${_id}`} onClick={(e) => { e.preventDefault(); butUpda() }}> Update Room</button>
+                {
+                    dataUser === 'CLIENT' ? (
+                        <></>
+                    ) : (
+                        <>
+                            <button className="btn btn-warning me-1 mt-4 bi bi-pencil" data-bs-toggle="modal" data-bs-target={`#modalUpdateRoom${_id}`} onClick={(e) => { e.preventDefault(); butUpda() }}> Update Room</button>
 
-                <Link>
-                    <button className="btn btn-danger me-1 mt-4 bi bi-trash" onClick={(e) => { e.preventDefault(); butRoom() }}> Delete Room</button>
-                </Link>
+                            <Link>
+                                <button className="btn btn-danger me-1 mt-4 bi bi-trash" onClick={(e) => { e.preventDefault(); butRoom() }}> Delete Room</button>
+                            </Link>
+                        </>
+                    )
+                }
+
+                
             </div>
         </div>
 

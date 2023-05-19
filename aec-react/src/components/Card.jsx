@@ -27,7 +27,7 @@ export const Card = ({ index, id, name, descripion, photos }) => {
             <div className="card-body">
                 <h5 className="card-title">{name}</h5>
                 <p className="card-text">{descripion}</p>
-                <Link to={'/login'}>
+                <Link to={`/login`} state={`checkHotel/${id}`}>
                     <button className="btn me-md-2" type="button" style={{
                         backgroundColor: '#82BDCD',
                         borderRadius: '30px'

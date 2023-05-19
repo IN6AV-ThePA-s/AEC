@@ -169,7 +169,6 @@ export const Sidebar = () => {
                     </Link>
 
                     <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><Link className="dropdown-item" href="#">Profile</Link></li>
                         <li><Link className="dropdown-item" to='settings'>Settings</Link></li>
                         <li><Link className="dropdown-item disabled" href="#">Role: {dataUser.role}</Link></li>
 

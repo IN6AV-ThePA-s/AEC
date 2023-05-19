@@ -23,6 +23,9 @@ import { AddReservationPage } from './pages/Reservation/AddReservationPage'
 import { UpdateReservationPage } from './pages/Reservation/UpdateReservationPage'
 import { UpdateBillPage } from './pages/Bill/UpdateBillPage'
 import { ClientPage } from './pages/Client/ClientPage'
+import { CheckHotelClientPage } from './pages/Hotel/CheckHotelClientPage'
+import { HotelPageClient } from './pages/Client/HotelPageClient'
+import { RoomPageClient } from './pages/Client/RoomPageClient'
 import { AddOrRemoveEventPage } from './pages/Reservation/AddOrRemoveEventPage'
 import { HistoryUserPage } from './pages/Reservation/HistoryUserPage'
 
@@ -36,7 +39,7 @@ export const Index = () => {
         let token = localStorage.getItem('token')
         let user = localStorage.getItem('user')
 
-        if(token) setLoggedIn(true)
+        token ? setLoggedIn(true) : setLoggedIn(false)
         if(user) setDataUser(JSON.parse(user))
         
     }, [])
@@ -66,8 +69,46 @@ export const Index = () => {
                     element: loggedIn ? <ClientPage/> : <LoginPage/>,
                     children: [
                         {
-                            path: 'hotel'
-                        }
+                            path: 'checkHotel/:id',
+                            element: <CheckHotelClientPage/>,
+                        },
+                        {
+                            path: 'hotels',
+                            element: <HotelPageClient/>
+                        },
+                        {
+                            path: 'rooms',
+                            element: <RoomPageClient/>
+                        },
+                        {
+                            path: 'settings',
+                            element: <Settings/>
+                        },
+                        {
+                            path: 'checkHotel',
+                            element: <CheckHotelPage/>
+                        },
+                        {
+                            path:'history',
+                            element:<HistoryUserPage/>
+                        },
+                        {
+                            path: 'reservationPage',
+                            element: <ReservationPage/>
+                        },
+                        {
+                            path: 'addReservation/:id',
+                            element: <AddReservationPage/>
+                        },
+                        {
+                            path: 'updateReservation/:id',
+                            element: <UpdateReservationPage/>
+                        },
+                        {
+                            path: 'billPage',
+                            element: <BillPage/>
+                        },
+
                     ]
                 },
                 {
@@ -134,16 +175,8 @@ export const Index = () => {
                             element: <BillPage/>
                         },
                         {
-                            path: 'updateBill',
-                            element: <UpdateBillPage/>
-                        },
-                        {
                             path:'addOrRemEvent/:idReserv',
                             element:<AddOrRemoveEventPage/>
-                        },
-                        {
-                            path:'history',
-                            element:<HistoryUserPage/>
                         }
                     ]
                 }

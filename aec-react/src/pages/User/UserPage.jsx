@@ -7,12 +7,18 @@ import Swal from 'sweetalert2'
 export const UserPage = () => {
     const [user, setUser] = useState([{}])
     const [photo, setPhoto] = useState()
+    const [searchTerm, setSearchTerm] = useState('')
+    const [select, setSelect] = useState('')
     const headers = {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
     }
     const navigate = useNavigate()
 
+    const handleSelect = (e) => {
+        setSelect(e.target.value)
+    }
+    
     const getUsers = async() => {
         try {
             const { data } = await axios('http://localhost:3022/user/get', { headers: headers })
@@ -27,10 +33,11 @@ export const UserPage = () => {
                 }
             }
             setUser(data.data)
+            
 
         } catch (err) {
+            Swal.fire(err.response.data.message, '', 'error')
             console.error(err)
-
         }
     }
 
@@ -58,10 +65,23 @@ export const UserPage = () => {
         }
     }
 
+    
+
     useEffect(() => {
         getUsers()
     }, [])
     
+    const filteredUsers = user.filter((u) => 
+        select === 'username' ? (
+            u.username?.toLowerCase().includes(searchTerm.toLowerCase())
+        ) : (
+            select === 'role' ? (
+                u.role?.toLowerCase().includes(searchTerm.toLowerCase())
+            ) : (
+                u.name?.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+        )
+    )
     
     return (
         <div className="main-content">
@@ -77,25 +97,31 @@ export const UserPage = () => {
 
                     <div className='col-md-5'>
 
-                        <select name="state" className='form-select'>
+                        <select onChange={handleSelect} id='selectOption' name="state" className='form-select'>
 
                             <option value={null}>FILTER</option>
+                            <option value='username'>USERNAME</option>
+                            <option value='role'>ROLE</option>
+                            <option value='name'>NAME</option>
 
                         </select>
 
                     </div>
 
                     <div className='col-md-7'>
-
-                        <input type="text" placeholder='Search' className='form-control' />
-
+                        <input type="text" 
+                            placeholder='Search' 
+                            className='form-control' 
+                            value={searchTerm} 
+                            onChange={(e)=>setSearchTerm(e.target.value)}
+                        />
                     </div>
 
 
                 </div>
 
                 {
-                    user.map(({ name, surname, phone, email, username, photo, id, role }, index) => {
+                    filteredUsers.map(({ name, surname, phone, email, username, photo, id, role }, index) => {
                         
                         return (
                             <CardUserPage 

@@ -1,15 +1,18 @@
-import React, { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { NavbarHome } from '../../components/NavbarHome'
 import './LoginStyle.css'
 import { auto } from '@popperjs/core'
 import { AuthContext } from '../../index'
 import axios from 'axios'
 import logo from '../../assets/logo.png'
-
+import Swal from 'sweetalert2'
 
 export const LoginPage = () => {
     const { loggedIn, setLoggedIn, setDataUser } = useContext(AuthContext)
+    const location = useLocation()
+    const url = location.state
+    
     const navigate = useNavigate()
     const [form, setForm] = useState({
         username: '',
@@ -34,15 +37,21 @@ export const LoginPage = () => {
                 setDataUser(data.user)
                 setLoggedIn(true)
                 
-                data.user.role === 'CLIENT' ? navigate('/home') : navigate('/dashboard')
+                if(url) {
+                    data.user.role === 'CLIENT' ? navigate(`/home/${url}`) : navigate(`/dashboard/${url}`)
+                } else {
+                    data.user.role === 'CLIENT' ? navigate(`/home`) : navigate(`/dashboard`)
+                }
+                
                 
             }
 
         } catch (err) {
+            Swal.fire(err.response.data.message, '', 'error')
             console.error(err)
             throw new Error('Login error')
         }
-    }
+    } 
 
     return (
         <div className="text-center" >

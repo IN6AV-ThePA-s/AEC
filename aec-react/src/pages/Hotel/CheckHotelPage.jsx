@@ -18,6 +18,7 @@ import Swal from 'sweetalert2'
 export const CheckHotelPage = () => {
     const { id } = useParams()
     const navigate = useNavigate();
+
     const headers = {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
@@ -210,7 +211,7 @@ export const CheckHotelPage = () => {
     /* ---------------- Services ----------------------- */
     const [service, setService] = useState([{}])
 
-    const getServicesByHotel = async() => {
+    const getServicesByHotel = async () => {
         try {
             const { data } = await axios.get(`http://localhost:3022/service/get-hotel-service/${id}`, { headers: headers })
 
@@ -222,7 +223,7 @@ export const CheckHotelPage = () => {
         }
     }
 
-    const deleteService = async(service) => {
+    const deleteService = async (service) => {
         try {
             Swal.fire({
                 title: 'Are you sure about delete this service?',
@@ -230,9 +231,9 @@ export const CheckHotelPage = () => {
                 icon: 'question',
                 showConfirmButton: true,
                 showDenyButton: true
-            }).then(async(result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
-                    const { data } = await axios.delete(`http://localhost:3022/service/delete/${service}`, { headers: headers }).catch((err)=>{
+                    const { data } = await axios.delete(`http://localhost:3022/service/delete/${service}`, { headers: headers }).catch((err) => {
                         Swal.fire(err.response.data.message, '', 'error')
                     })
                     getServicesByHotel()
@@ -328,6 +329,23 @@ export const CheckHotelPage = () => {
         }
     }
 
+    const [searchOption, setSearchOption] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const filteredRooms = rooms.filter((room) => {
+
+        if (!searchOption || searchOption === 'code') {
+
+            return room.code?.toLowerCase().includes(searchTerm.toLowerCase());
+
+        } else if (searchOption === 'status') {
+
+            return room.status?.toLowerCase().includes(searchTerm.toLowerCase());
+
+        }
+
+    });
+
     useEffect(() => {
         getEventsByHotel()
         getServicesByHotel()
@@ -388,19 +406,19 @@ export const CheckHotelPage = () => {
 
                                     <div className="d-flex flex-column text-center mb-1">
 
-                                        <ModalAddServiceHotel hotel={id}/>
-                                        {   
+                                        <ModalAddServiceHotel hotel={id} />
+                                        {
                                             service.length > 0 ? (
                                                 service.map(({ service, description, price, hotel, _id }, index) => {
                                                     return (
-                                                        <CardHotelServices 
+                                                        <CardHotelServices
                                                             key={index}
                                                             name={service}
                                                             description={description}
                                                             price={price}
                                                             hotel={hotel}
                                                             id={_id}
-                                                            butDel={()=>deleteService(_id)}
+                                                            butDel={() => deleteService(_id)}
                                                             butEdit={``}
                                                         />
                                                     )
@@ -409,7 +427,6 @@ export const CheckHotelPage = () => {
                                                 <p className='textNormalHotel'>No services available</p>
                                             )
                                         }
-                                        
 
                                         <button className="btn btn-success me-1" type="button" data-bs-toggle="modal" data-bs-target="#modalAddServiceHotel">Add Service</button>
 
@@ -471,28 +488,26 @@ export const CheckHotelPage = () => {
 
                         <h1 className='text-center'>Rooms</h1>
 
-                        <div className='row justify-content-start mt-3'>
-
-                            <div className='col-md-5'>
-
-                                <select name="state" className='form-select'>
-
-                                    <option value={null}>FILTER</option>
-
+                        <div className="row justify-content-start mb-4 mt-3">
+                            <div className="col-md-5">
+                                <select id='selectOption' name="state" className="form-select" onChange={(e) => setSearchOption(e.target.value)}>
+                                    <option value='code'>CODE</option>
+                                    <option value='status'>STATUS</option>
                                 </select>
-
+                            </div>
+                            <div className="col-md-7">
+                                <input
+                                    type="text"
+                                    placeholder="Search"
+                                    className="form-control"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
                             </div>
 
-                            <div className='col-md-7'>
-
-                                <input type="text" placeholder='Search' className='form-control' />
-
-                            </div>
-
-                            <div className='mt-3'>
-                                <button className="btn btn-success col-md-12" type="button" data-bs-toggle="modal" data-bs-target="#modalAddRoom">Add Room</button>
-                            </div>
-
+                        </div>
+                        <div className='mt-3'>
+                            <button className="btn btn-success col-md-12" type="button" data-bs-toggle="modal" data-bs-target="#modalAddRoom">Add Room</button>
                         </div>
 
                     </div>
@@ -502,7 +517,7 @@ export const CheckHotelPage = () => {
                         <ModalAddRoom id={id} getRooms={getRooms} />
 
                         {
-                            rooms.map(({ _id, code, status, type, price, beds, photos, services }, index) => {
+                            filteredRooms.map(({ _id, code, status, type, price, beds, photos, services }, index) => {
                                 return (
                                     <>
 
