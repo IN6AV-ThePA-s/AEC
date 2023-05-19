@@ -33,9 +33,28 @@ export const RegisterPage = () => {
     }
 
     const handlePhoto = (e) => {
-        let formData = new FormData()
-        formData.append('image', e.target.files[0])
-        setPhoto(formData)
+        const allowedExtensions = /(.jpg|.jpeg|.png)$/i
+        if(!allowedExtensions.exec(e.target.value)) {
+            Swal.fire({
+                title: 'Invalid extension (only .png | .jpg | .jpeg)',
+                icon: 'error',
+                showConfirmButton: true
+            }).then(()=>{
+                e.target.value = ''
+            })
+        } else {
+            let formData = new FormData()
+            formData.append('image', e.target.files[0])
+            setPhoto(formData)
+
+            setUPhoto(URL.createObjectURL(e.target.files[0]))
+
+            setTimeout(() => {
+                setIsUp(true)
+            }, 500);
+        }
+
+        
     }
 
     const add = async(e) => {
