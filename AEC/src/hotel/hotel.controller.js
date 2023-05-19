@@ -88,8 +88,8 @@ exports.upd = async(req, res) => {
         };
         let msg = validateData(data);
         if (msg) return res.status(418).send(msg);
-        const hotel = await Hotel.updateOne({ _id: hotelId }, data);
-        if (hotel.modifiedCount == 0)
+        const hotel = await Hotel.findOneAndUpdate({ _id: hotelId }, data, {new: true});
+        if (!hotel)
             return res
                 .status(400)
                 .send({ message: `Hotel not found or not updated` });

@@ -24,6 +24,11 @@ import { UpdateReservationPage } from './pages/Reservation/UpdateReservationPage
 import { UpdateBillPage } from './pages/Bill/UpdateBillPage'
 import { ClientPage } from './pages/Client/ClientPage'
 import { CheckHotelClientPage } from './pages/Hotel/CheckHotelClientPage'
+import { HotelPageClient } from './pages/Client/HotelPageClient'
+import { RoomPageClient } from './pages/Client/RoomPageClient'
+import { AddOrRemoveEventPage } from './pages/Reservation/AddOrRemoveEventPage'
+import { HistoryUserPage } from './pages/Reservation/HistoryUserPage'
+import { Estadistics } from './pages/Hotel/Estadistics'
 
 export const AuthContext = createContext();
 
@@ -67,7 +72,26 @@ export const Index = () => {
                         {
                             path: 'checkHotel/:id',
                             element: <CheckHotelClientPage/>,
-                            
+                        },
+                        {
+                            path: 'hotels',
+                            element: <HotelPageClient/>
+                        },
+                        {
+                            path: 'rooms',
+                            element: <RoomPageClient/>
+                        },
+                        {
+                            path: 'settings',
+                            element: <Settings/>
+                        },
+                        {
+                            path: 'checkHotel',
+                            element: <CheckHotelPage/>
+                        },
+                        {
+                            path:'history',
+                            element:<HistoryUserPage/>
                         }
                     ]
                 },
@@ -127,7 +151,7 @@ export const Index = () => {
                             element: <AddReservationPage/>
                         },
                         {
-                            path: 'updateReservation',
+                            path: 'updateReservation/:id',
                             element: <UpdateReservationPage/>
                         },
                         {
@@ -137,6 +161,14 @@ export const Index = () => {
                         {
                             path: 'updateBill',
                             element: <UpdateBillPage/>
+                        },
+                        {
+                            path:'addOrRemEvent/:idReserv',
+                            element:<AddOrRemoveEventPage/>
+                        },
+                        {
+                            path: 'estadistics',
+                            element: <Estadistics/>
                         }
                     ]
                 }

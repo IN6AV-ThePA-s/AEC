@@ -103,6 +103,18 @@ export const Sidebar = () => {
                                         </div>
                                     </Link>
 
+                                    {
+                                        dataUser.role === 'MASTER' ? (
+                                            <Link to='estadistics' className="nav-link px-0">
+                                                <div className='container bg-light p-2 rounded-4 shadow'>
+                                                    <i className="textAdd fs-6 bi bi-plus-circle"></i> <span className="textAdd ms-1 d-none d-sm-inline">Estadistics</span>
+                                                </div>
+                                            </Link>
+                                        ) : (
+                                            <></>
+                                        )
+                                    }
+
                                 </li>
 
                             </ul>
@@ -169,7 +181,6 @@ export const Sidebar = () => {
                     </Link>
 
                     <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><Link className="dropdown-item" href="#">Profile</Link></li>
                         <li><Link className="dropdown-item" to='settings'>Settings</Link></li>
                         <li><Link className="dropdown-item disabled" href="#">Role: {dataUser.role}</Link></li>
 
