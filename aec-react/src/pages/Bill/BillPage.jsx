@@ -1,20 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { CardBill } from '../../components/CardBill'
-
+import { AuthContext } from '../..'
 export const BillPage = () => {
     const [bills,setBills] = useState([{}])
     const [reservations,setReservations] = useState([{}])
-
+    const { dataUser } = useContext(AuthContext)
     const getReservation = async () => {
         try {
             let user = (JSON.parse(localStorage.getItem('user')))
-            const { data } = await axios(`http://localhost:3022/reservation/history/${user.sub}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': localStorage.getItem('token'),
-                },
-            });
-            setReservations(data.existsReservs);
+
+            if(dataUser.role == 'MASTER') {
+                const { data } = await axios(`http://localhost:3022/reservation/get`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': localStorage.getItem('token'),
+                    },
+                });
+                setReservations(data.reservations);
+            } else {
+                const { data } = await axios(`http://localhost:3022/reservation/history/${user.sub}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': localStorage.getItem('token'),
+                    },
+                });
+            }
+            
+            
         } catch (err) {
             console.error(err);
             Swal.fire({
