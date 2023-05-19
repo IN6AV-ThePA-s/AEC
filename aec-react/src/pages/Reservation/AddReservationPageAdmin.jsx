@@ -1,39 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { CardReservation } from '../../components/CardReservation'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 
-export const AddReservationPage = () => {
+export const AddReservationPageAdmin = () => {
     const navigator = useNavigate()
-    const { id } = useParams()
-    const [room, setRoom] = useState(null)
     const [rooms, setRooms] = useState([{}])
+    const [hotelAdmin,setHotelAdmin] = useState(null)
     let user = (JSON.parse(localStorage.getItem('user')))
     let form
-    const getRoom = async () => {
-        try {
-            const { data } = await axios(`http://localhost:3022/room/get/${id}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': localStorage.getItem('token'),
-                },
-            });
-            setRoom(data.room);
-        } catch (err) {
-            console.error(err);
-            Swal.fire({
-                title: `${err.response.data.message}`,
-                icon: 'error',
-                showConfirmButton: true,
-            });
-        }
-    };
 
+    const getHotelUser = async() =>{
+        if(user.role == 'ADMIN') {
+            const { data } = await axios(`http://localhost:3022/hotel/getAd`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': localStorage.getItem('token'),
+                    },
+                });
+                setHotelAdmin(data.existsHotel);
+        } 
+    }
+    
     const getRooms = async () => {
         try {
-            if (room != null && room != undefined) {
-                const { data } = await axios(`http://localhost:3022/room/get-by-hotel/${room.hotel._id}`, {
+            if (hotelAdmin != null && hotelAdmin != undefined) {
+                const { data } = await axios(`http://localhost:3022/room/get-by-hotel/${hotelAdmin._id}`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': localStorage.getItem('token'),
@@ -55,22 +48,25 @@ export const AddReservationPage = () => {
     const changeValues = () =>{
         if(room!= null && room!= undefined){
             document.getElementById('room').value=room._id
-            console.log(rooms);
-            console.log(room._id);
 
         }
     }
     
     const add = async() =>{
         //console.log(form);
-        form ={
+        form = {
             client: user.sub,
             room: document.getElementById('room').value,
             numberOfPeople: document.getElementById('nPeople').value,
             numberOfNight:  document.getElementById('nNights').value
         }
         try {
-            console.log(form.room);
+            form = {
+                client: user.sub,
+                room: document.getElementById('room').value,
+                numberOfPeople: document.getElementById('nPeople').value,
+                numberOfNight:  document.getElementById('nNights').value
+            }
             if (form.room != null && form.room != undefined) {
                 const { data } = await axios.post(`http://localhost:3022/reservation/add`, form, {
                     headers: {
@@ -96,20 +92,16 @@ export const AddReservationPage = () => {
     } 
 
     useEffect(() => {
-        getRoom()
-        //console.log(rooms,room,services,events);
+        getHotelUser()
     }, [])
 
     useEffect(() => {
         getRooms()
-        
-        //console.log(room);
-    }, [room])
+    }, [hotelAdmin])
 
-    useEffect(()=>{
-        changeValues()
-    },[rooms])
-
+    useEffect(() => {
+        console.log(rooms);
+    }, [])
 
     return (
         <div className="main-content">
@@ -139,9 +131,9 @@ export const AddReservationPage = () => {
                                                         <div className='col-md-6'>
                                                                 <h4 className='text-center'>Room</h4>
                                                                 <select className="form-control selectpicker show-menu-arrow" name='room' id='room'
-                                                                    data-style="form-control" data-live-search="true" disabled>
+                                                                    data-style="form-control" data-live-search="true" >
                                                                     {
-                                                                        rooms[0]._id != undefined/*&& additionalServices[0].service != undefined*/  ? rooms.map(({ _id, cod, hotel }, i) => {
+                                                                        rooms[0] != undefined/*&& additionalServices[0].service != undefined*/  ? rooms.map(({ _id, cod, hotel }, i) => {
                                                                             return (
                                                                                 <option key={i} value={_id}>{'Code:'+cod}</option>
                                                                             )
