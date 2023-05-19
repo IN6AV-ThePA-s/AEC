@@ -28,6 +28,7 @@ import { HotelPageClient } from './pages/Client/HotelPageClient'
 import { RoomPageClient } from './pages/Client/RoomPageClient'
 import { AddOrRemoveEventPage } from './pages/Reservation/AddOrRemoveEventPage'
 import { HistoryUserPage } from './pages/Reservation/HistoryUserPage'
+import { Estadistics } from './pages/Hotel/Estadistics'
 
 export const AuthContext = createContext();
 
@@ -164,6 +165,10 @@ export const Index = () => {
                         {
                             path:'addOrRemEvent/:idReserv',
                             element:<AddOrRemoveEventPage/>
+                        },
+                        {
+                            path: 'estadistics',
+                            element: <Estadistics/>
                         }
                     ]
                 }
