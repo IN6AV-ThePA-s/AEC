@@ -18,7 +18,7 @@ import { LoginPage } from './pages/Home/LoginPage'
 import { RegisterPage } from './pages/Home/RegisterPage'
 import { AboutUsPage } from './pages/Home/AboutUsPage'
 import { ReservationPage } from './pages/Reservation/ReservationPage'
-import { BillPage } from './pages/Bill/BillPage'
+import { BillPageAdmin } from './pages/Bill/BillPageAdmin'
 import { AddReservationPage } from './pages/Reservation/AddReservationPage'
 import { UpdateReservationPage } from './pages/Reservation/UpdateReservationPage'
 import { UpdateBillPage } from './pages/Bill/UpdateBillPage'
@@ -28,6 +28,8 @@ import { HotelPageClient } from './pages/Client/HotelPageClient'
 import { RoomPageClient } from './pages/Client/RoomPageClient'
 import { AddOrRemoveEventPage } from './pages/Reservation/AddOrRemoveEventPage'
 import { HistoryUserPage } from './pages/Reservation/HistoryUserPage'
+import { Estadistics } from './pages/Hotel/Estadistics'
+import { BillPageClient } from './pages/Bill/BillPageClient'
 
 export const AuthContext = createContext();
 
@@ -106,7 +108,7 @@ export const Index = () => {
                         },
                         {
                             path: 'billPage',
-                            element: <BillPage/>
+                            element: <BillPageClient/>
                         },
 
                     ]
@@ -172,11 +174,15 @@ export const Index = () => {
                         },
                         {
                             path: 'billPage',
-                            element: <BillPage/>
+                            element: <BillPageAdmin/>
                         },
                         {
                             path:'addOrRemEvent/:idReserv',
                             element:<AddOrRemoveEventPage/>
+                        },
+                        {
+                            path: 'estadistics',
+                            element: <Estadistics/>
                         }
                     ]
                 }

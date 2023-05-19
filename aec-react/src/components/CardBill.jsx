@@ -76,13 +76,6 @@ export const CardBill = ({numberBill, numberRes, client, room, numberOfPeople, n
                             </div>
                         </div>
                         </div>
-
-                        <div className='mt-3'>
-                            <Link to='/dashboard/updateBill'>
-                                <button className="btn btn-warning bi bi-pencil me-1" type="button"> Update</button>
-                            </Link>
-                        </div>
-
                     </div>
                 </div>
             </div>

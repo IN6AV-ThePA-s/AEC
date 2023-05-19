@@ -64,7 +64,7 @@ export const AddReservationPage = () => {
                         'Authorization': localStorage.getItem('token'),
                     },
                 });
-                console.log(data.services);
+                //console.log(data.services);
                 setServices(data.services);
             }
         } catch (err) {
@@ -109,7 +109,7 @@ export const AddReservationPage = () => {
     }
     
     const add = async() =>{
-        console.log(form);
+        //console.log(form);
         form ={
             client: user.sub,
             room: document.getElementById('room').value,
@@ -117,6 +117,7 @@ export const AddReservationPage = () => {
             numberOfNight:  document.getElementById('nNights').value
         }
         try {
+            console.log(form.room);
             if (form.room != null && form.room != undefined) {
                 const { data } = await axios.post(`http://localhost:3022/reservation/add`, form, {
                     headers: {

@@ -2,12 +2,13 @@
 
 const api = require('express').Router();
 const { ensureAdvance, isAdmin } = require('../services/authenticated');
-const { test, add, gets, get, upd, del, uploadImgs, getImg, getAdminsHotels, getOfHome } = require('./hotel.controller');
+const { test, add, gets, get, upd, del, uploadImgs, getImg, getAdminsHotels, getOfHome, getHotelPerAdmin } = require('./hotel.controller');
 const connect_Multimary = require('connect-multiparty');
 const upload = connect_Multimary({ uploadDir: './src/uploads/hotels' });
 
 /* ----- @admin ----- */
 api.get('/test', [ensureAdvance, isAdmin], test);
+api.get('/getAd', [ensureAdvance, isAdmin], getHotelPerAdmin);
 api.post('/save', [ensureAdvance, isAdmin], add);
 api.put('/update/:id', [ensureAdvance, isAdmin], upd);
 api.delete('/delete/:id', [ensureAdvance, isAdmin], del);
