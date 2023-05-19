@@ -60,7 +60,7 @@ exports.getsAvailable = async(req, res) => {
 exports.getByHotel = async(req, res) => {
     try {
         const hotelId = req.params.id;
-        const rooms = await Room.find({ hotel: hotelId }).populate('services.service');
+        const rooms = await Room.find({ hotel: hotelId,status:'AVAILABLE' }).populate('services.service');
         return res.send({ rooms });
     } catch (err) {
         console.error(err);

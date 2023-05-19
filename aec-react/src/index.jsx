@@ -30,6 +30,7 @@ import { AddOrRemoveEventPage } from './pages/Reservation/AddOrRemoveEventPage'
 import { HistoryUserPage } from './pages/Reservation/HistoryUserPage'
 import { Estadistics } from './pages/Hotel/Estadistics'
 import { BillPageClient } from './pages/Bill/BillPageClient'
+import { AddReservationPageAdmin } from './pages/Reservation/AddReservationPageAdmin'
 
 export const AuthContext = createContext();
 
@@ -166,7 +167,7 @@ export const Index = () => {
                         },
                         {
                             path: 'addReservation',
-                            element: <AddReservationPage/>
+                            element: <AddReservationPageAdmin/>
                         },
                         {
                             path: 'updateReservation/:id',
